@@ -32,12 +32,34 @@
 
     .cardscontainer{
         display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-rows: 1fr;
+        gap: 50px;
+        // align-self:center; 
+        justify-items: center;
+        width: 70%;
+        .cardbox{
+        }
         .imagebox{
-
+            border: 1px solid black;
+            padding: 3px 9px;
+            border-radius: 10px;
+            img{
+                margin-top: 5px;
+                height: 158px;
+                width: 231px;
+                border-radius: 7px;
+            }
         }
 
         .cardtext{
-            
+            display: flex;
+            flex-direction: column;
+            span{
+            color: black;
+            font-size: 16px;
+            font-weight: normal;
+            }
         }
     }
 
