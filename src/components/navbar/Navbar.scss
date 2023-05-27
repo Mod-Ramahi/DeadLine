@@ -1,0 +1,247 @@
+.contain{
+display: flex;
+flex-direction: column;
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 10;
+
+.navbar {
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+    background: transparent;
+    align-items: center;
+    transition: all 3s ease;
+
+    .searchontop{
+        display: none;
+    }
+    &.barcolor{
+        background: linear-gradient(to right, rgb(121, 134, 248), rgb(175, 121, 219));
+        
+        .searchontop{
+            display:block;
+        }
+    }
+
+    .logo {
+        margin-left: 30px;
+        margin-top: 12px;
+        margin-bottom: 4px;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        gap:35px;
+
+        @media only screen and (max-width:780px) {
+            margin-left: 18px;
+            margin-top: 8px;
+            margin-bottom: 2px;
+            padding: 5px;
+        }
+
+        img {
+            @media only screen and (max-width:780px) {
+                width: 150px;
+            }
+        }
+    }
+
+    .baroptions {
+        display: flex;
+        align-items: center;
+        margin-right: 30px;
+        gap: 50px;
+
+        @media only screen and (max-width:780px) {
+            margin-right: 15px;
+            gap: 30px;
+            font-size: 18px;
+        }
+
+        .barlinks {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+
+
+            .bartext {
+                text-decoration: none;
+                color: white;
+
+                &:hover {
+                    color: #4d2048;
+                }
+            }
+        }
+
+        .login {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 21px;
+
+            @media only screen and (max-width:780px) {
+                gap: 15px;
+                font-size: 18px;
+            }
+
+            .signlink {
+                font-weight: bold;
+                color: darkviolet;
+                transition: all 0.5s;
+
+                &:hover {
+                    color: rgb(193, 87, 239);
+                }
+
+            }
+
+            .joinbtn {
+                border: 0.5px solid white;
+                border-radius: 15px;
+                background-color: darkviolet;
+                color: white;
+                font-size: 21px;
+                font-weight: bold;
+                width: 80px;
+                height: 40px;
+                transition: all 0.5s;
+                cursor: pointer;
+
+                &:hover {
+                    border-radius: 12px;
+                    background-color: rgb(69, 3, 98);
+                }
+
+                @media only screen and (max-width:780px) {
+                    font-size: 18px;
+                    width: 60px;
+                    height: 30px;
+                }
+            }
+        }
+
+    }
+
+}
+.categorybar {
+    height: 102px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(96, 71, 123, 0.6);
+
+    .categoryoption {
+        cursor: pointer;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 35px;
+        transition: all 1s;
+
+        &:hover {
+            color: darkviolet;
+
+            .downicon {
+                height: 10px;
+                width: 13px;
+                background-color: rgba(148, 0, 211, 0.2);
+            }
+        }
+
+        .downicon {
+            transition: all 1s;
+        }
+    }
+}}
+
+.mobilebar {
+
+    .mobilelogo {
+        margin-left: 15px;
+        margin-top: 8px;
+        margin-bottom: 2px;
+        padding: 5px;
+
+        img {
+            width: 90px;
+        }
+    }
+
+    .mobilebaroptions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .mobilejoinbtn {
+            border: 0.5px solid white;
+            border-radius: 15px;
+            background-color: darkviolet;
+            color: white;
+            font-size: 14px;
+            width: 82px;
+            height: 25px;
+            transition: all 0.5s;
+            cursor: pointer;
+
+            &:hover {
+                border-radius: 12px;
+                background-color: rgb(69, 3, 98);
+            }
+        }
+
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            img {
+                cursor: pointer;
+                width: 40px;
+            }
+
+            .dropdownmenu {
+                position: absolute;
+                border: 1px solid white;
+                border-radius: 5px;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                right: 0;
+                top: 35px;
+                background-color: rgb(69, 3, 98);
+                width: 130px;
+
+                .menuoption {
+                    border-bottom: 1px solid white;
+                    text-align: center;
+                    color: white;
+                    text-decoration: none;
+                    padding: 4px;
+                    margin-top: 3px;
+                    font-size: 18px;
+                }
+
+            }
+        }
+    }
+
+}
+
+.language {
+    border: 1px solid rgb(249, 194, 252);
+    border-radius: 3px;
+    padding: 2px;
+    transition: all 0.5s;
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+        border-radius: 5px;
+        background-color: rgba($color: #4d2048, $alpha: 0.4);
+    }
+}

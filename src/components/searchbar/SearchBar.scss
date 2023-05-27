@@ -1,0 +1,35 @@
+.searchbar {
+
+    .input {
+        background-image: url(./Searchbar.png);
+        width: 565px;
+        height: 94px;
+        display: flex;
+        justify-content: space-between;
+
+        input {
+            position: relative;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            margin-left: 20px;
+            transform: translateY(-4%);
+            color: #ffffff;
+
+            &::placeholder {
+                color: #ffffff;
+            }
+
+        }
+
+        .iconbtn {
+            position: relative;
+            top: 50%;
+            transform: translateY(-55%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-right: 25px;
+        }
+    }
+}

@@ -1,0 +1,88 @@
+.head {
+    height: 769px;
+    background-color: #ffffff;
+    // position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+
+    .headbackground {
+        background-image: url(./HeadBg.png);
+        top: 0;
+        height: 769px;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+ 
+        .headsearch {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(300%);
+
+            // .input {
+            //     background-image: url(./Searchbar.png);
+            //     width: 565px;
+            //     height: 94px;
+            //     display: flex;
+            //     justify-content: space-between;
+                
+            //     input {
+            //         position: relative;
+            //         border: none;
+            //         outline: none;
+            //         background-color: transparent;
+            //         margin-left: 20px;
+            //         transform: translateY(-4%);
+            //         color: #ffffff;
+            //         &::placeholder {
+            //             color: #ffffff;
+            //           }
+                      
+            //     }
+
+            //     .iconbtn {
+            //         position: relative;
+            //         top: 50%;
+            //         transform: translateY(-55%);
+            //         background: none;
+            //         border: none;
+            //         cursor: pointer;
+            //         margin-right: 25px;
+            //     }
+            // }
+        }
+
+        .headtext{
+            margin-left: 130px;
+            margin-top: 300px;
+        }
+
+        .headthreebtns{
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            .headbtn{
+                    height: 76px;
+                    width: 208px;
+                    background-color: rgba(225, 174, 241, .7);
+                    box-shadow: 6px 6px 7px rgba(0, 0, 0, 0.5);
+                    border: none;
+                    color: white;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: all 1s;
+                    &:hover{
+                        background-color: rgba(225, 174, 241, .9);
+                        border-radius: 15px;
+                    }
+            }
+        }
+    }
+}
