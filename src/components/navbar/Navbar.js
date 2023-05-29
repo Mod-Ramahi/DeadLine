@@ -4,7 +4,7 @@ import LogoImg from './Logoimg.png';
 import DropMenu from './DropMenu.png'
 import DownMenu from './Downmenu.png'
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 
@@ -16,6 +16,7 @@ const Navbar = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [scrolledDown, setScrolledDown] = useState(false);
+    const {pathname} = useLocation()
 
     useEffect(() => {
 
@@ -80,7 +81,7 @@ const Navbar = () => {
                 (
                     <>
                         <div className='contain'>
-                            <div className={scrolledDown?'navbar barcolor' : 'navbar'} >
+                            <div className={pathname === "/category"?'navbar barcolor':scrolledDown?'navbar barcolor' : 'navbar'} >
                                 <div className='logo'>
                                     <Link to="/" ><img alt='homelogo' src={LogoImg} /> </Link>
                                     <div className='searchontop'>
