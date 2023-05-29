@@ -1,0 +1,38 @@
+.smallcontainer{
+    width: 100%;
+    height: 316px;
+    margin-top: 54px;
+    padding: 0;
+    .smallbackground{
+        // position: relative;
+        background-image: url(./Smallbackground.png);
+        height: 315px;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position:center;
+        background-size: cover;
+        // background-size: 100% 100%;
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        .smalltxt{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            color: white;
+            .firstline{
+                font-size: 35px;
+                font-weight: bold;
+            }
+            .secondline{
+                font-size: 44px;
+                font-weight: bold;
+            }
+            .thirdline{
+                font-size: 28px;
+                font-weight: normal;
+            }
+        }
+    }
+}

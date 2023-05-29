@@ -1,4 +1,5 @@
-import './MostPopular.scss'
+import React from 'react';
+import './MostPopular.scss';
 import { Cards } from '../../Cards';
 
 const MostPopular = ()=> {
