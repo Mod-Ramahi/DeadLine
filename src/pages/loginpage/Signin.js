@@ -1,7 +1,7 @@
-const Signin = () => {
+const SignIn = () => {
     return(
         'Sign In page'
     )
 }
 
-export default Signin;
+export default SignIn;
