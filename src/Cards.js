@@ -37,21 +37,21 @@ export const Cards = [
     {
         id:6,
         alt:'y',
-        src:'./images/Asseta.png',
+        src:'./images/Assetf.png',
         text:'AI generated art',
         price:'200 USD in 7 days'
     },
     {
         id:7,
         alt:'u',
-        src:'./images/Asseta.png',
+        src:'./images/Assetg.png',
         text:'AI generated art',
         price:'200 USD in 7 days'
     },
     {
         id:8,
         alt:'ai',
-        src:'./images/Asseta.png',
+        src:'./images/Asseth.png',
         text:'AI generated art',
         price:'200 USD in 7 days'
     }

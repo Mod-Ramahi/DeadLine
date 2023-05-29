@@ -82,7 +82,7 @@ const Navbar = () => {
                         <div className='contain'>
                             <div className={scrolledDown?'navbar barcolor' : 'navbar'} >
                                 <div className='logo'>
-                                    <img alt='homelogo' src={LogoImg} />
+                                    <Link to="/" ><img alt='homelogo' src={LogoImg} /> </Link>
                                     <div className='searchontop'>
                                         <SearchBar/>
                                     </div>
