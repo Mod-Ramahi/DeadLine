@@ -3,7 +3,7 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import Root from "./root";
-import SignIn from "../pages/loginpage/SignIn";
+import SignIn from "../pages/loginpage/Signin";
 import Home from "../pages/homepage/Home";
 import Category from "../pages/Category";
 
