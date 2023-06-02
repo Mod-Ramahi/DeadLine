@@ -1,131 +1,161 @@
 export const CategoryList = [
     {
         id:0,
-        category:'Tech & programming',
+        categoryname:'Tech & programming',
+        alt:'techicon',
+        src:'./images/Programming&Tech.png',
         subCategory:[
-            'Web development', 'Mobile Apps development', 'Software architecture'
+            'Web development',
+            'Mobile Apps development',
+            'Software engineering',
+            'Support & Computer engineering',
+            'Clouds',
+            'DevOps',
+            'CyberSecurity',
+            'Network'
         ]
     },
     {
         id:1,
-        category:'Online Coaching',
+        categoryname:'Design',
+        alt:'designicon',
+        src:'./images/DesignIcon.png',
         subCategory:[
-            'Web development', 'Mobile Apps development', 'Software architecture'
+            'Graphic design',
+            'Logo & Brands design',
+            'Architecture & Interior design',
+            '3D modeling',
+            'Character design',
+            'Web & App UI/UX design'
         ]
     },
     {
         id:2,
-        category:'Business',
+        categoryname:'Business',
+        alt:'businessicon',
+        src:'./images/BusinessIcon.png',
         subCategory:[
             'Web development', 'Mobile Apps development', 'Software architecture'
         ]
     },
     {
         id:3,
-        category:'E-marketing & Social-media',
+        categoryname:'E-marketing & Social-media',
+        alt:'e-marketingicon',
+        src:'./images/EmarketSocialmediaIcon.png',
         subCategory:[
             'Web development', 'Mobile Apps development', 'Software architecture'
         ]
     },
     {
         id:4,
-        category:'Writing & Translating',
+        categoryname:'Writing & Translating',
+        alt:'writetranslateicon',
+        src:'./images/Writing&TranslationIcon.png',
         subCategory:[
             'Web development', 'Mobile Apps development', 'Software architecture'
         ]
     },
     {
         id:5,
-        category:'Design',
+        categoryname:'Online Coaching',
+        alt:'onlinecoachicon',
+        src:'./images/OnlineCoachIcon.png',
         subCategory:[
             'Web development', 'Mobile Apps development', 'Software architecture'
         ]
     },
     {
         id:6,
-        category:'Video/audio & photo',
+        categoryname:'Video/audio & photo',
+        alt:'videoAudioPhotoicon',
+        src:'./images/VideoAudioIcon.png',
         subCategory:[
             'Web development', 'Mobile Apps development', 'Software architecture'
         ]
     },
     {
         id:7,
-        category:'Arts',
+        categoryname:'Arts',
+        alt:'artsicon',
+        src:'./images/ArtsIcon.png',
         subCategory:[
             'Web development', 'Mobile Apps development', 'Software architecture'
         ]
     },
     {
         id:8,
-        category:'Others',
+        categoryname:'Others',
+        alt:'othericon',
+        src:'./images/OthersIcon.png',
         subCategory:[
             'Web development', 'Mobile Apps development', 'Software architecture'
         ]
     }
 ];
 
-export const CategoryIcons = [
-    {
-        id:1,
-        name:'Design',
-        alt:'designicon',
-        src:'./images/DesignIcon.png'
+// export const CategoryIcons = [
+//     {
+//         id:1,
+//         name:'Design',
+//         alt:'designicon',
+//         src:'./images/DesignIcon.png'
 
-    },
-    {
-        id:2,
-        name:'Arts',
-        alt:'artsicon',
-        src:'./images/ArtsIcon.png'
+//     },
+//     {
+//         id:2,
+//         name:'Arts',
+//         alt:'artsicon',
+//         src:'./images/ArtsIcon.png'
 
-    },
-    {
-        id:3,
-        name:'Businesses',
-        alt:'businessicon',
-        src:'./images/BusinessIcon.png'
+//     },
+//     {
+//         id:3,
+//         name:'Businesses',
+//         alt:'businessicon',
+//         src:'./images/BusinessIcon.png'
 
-    },
-    {
-        id:4,
-        name:'Online Coaching',
-        alt:'onlinecoachicon',
-        src:'./images/OnlineCoachIcon.png'
+//     },
+//     {
+//         id:4,
+//         name:'Online Coaching',
+//         alt:'onlinecoachicon',
+//         src:'./images/OnlineCoachIcon.png'
 
-    },
-    {
-        id:5,
-        name:'Write & Translate',
-        alt:'writetranslateicon',
-        src:'./images/Writing&TranslationIcon.png'
+//     },
+//     {
+//         id:5,
+//         name:'Write & Translate',
+//         alt:'writetranslateicon',
+//         src:'./images/Writing&TranslationIcon.png'
 
-    },
-    {
-        id:6,
-        name:'Programming & Tech',
-        alt:'techicon',
-        src:'./images/Programming&Tech.png'
+//     },
+//     {
+//         id:6,
+//         name:'Programming & Tech',
+//         alt:'techicon',
+//         src:'./images/Programming&Tech.png'
 
-    },
-    {
-        id:7,
-        name:'Video/Audio & photo',
-        alt:'videoAudioPhotoicon',
-        src:'./images/VideoAudioIcon.png'
+//     },
+//     {
+//         id:7,
+//         name:'Video/Audio & photo',
+//         alt:'videoAudioPhotoicon',
+//         src:'./images/VideoAudioIcon.png'
 
-    },
-    {
-        id:8,
-        name:'E-Marketing & Social media',
-        alt:'e-marketingicon',
-        src:'./images/EmarketSocialmediaIcon.png'
+//     },
+//     {
+//         id:8,
+//         name:'E-Marketing & Social media',
+//         alt:'e-marketingicon',
+//         src:'./images/EmarketSocialmediaIcon.png'
 
-    },
-    {
-        id:9,
-        name:'Others',
-        alt:'othericon',
-        src:'./images/OthersIcon.png'
+//     },
+//     {
+//         id:9,
+//         name:'Others',
+//         alt:'othericon',
+//         src:'./images/OthersIcon.png'
 
-    }
-]
+//     }
+// ]

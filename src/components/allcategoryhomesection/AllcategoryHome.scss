@@ -10,9 +10,10 @@
     }
     .iconscontainer{
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
         grid-template-rows: 1fr;
-        width: 70%;
+        width: 80%;
+        // justify-items: center;
         justify-items: center;
         .categoryicon{
             // text-align: center;
@@ -21,12 +22,10 @@
             align-items: center;
             justify-content: center;
             margin-top: 54px;
-            .icon{
-
-                img{
-
+                .iconimg{
+                    width: 46px;
+                    height: 61px;
                 }
-            }
             .iconname{
                 span{
                     font-size: 20px;

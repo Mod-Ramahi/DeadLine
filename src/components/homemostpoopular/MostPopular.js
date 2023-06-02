@@ -4,7 +4,7 @@ import Card from '../Card';
 
 const MostPopular = ({title,cards, number})=> {
     const RenderCards = cards.slice(0,number).map((card)=>(
-        <Card card={card}/>
+        <Card key={card.id} card={card}/>
        
     ));
     

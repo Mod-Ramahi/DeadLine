@@ -16,7 +16,8 @@ const Navbar = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [scrolledDown, setScrolledDown] = useState(false);
-    const {pathname} = useLocation()
+    const {pathname} = useLocation();
+    const [categBarOpen, setCategBarOpen]=useState({});
 
     useEffect(() => {
 
@@ -28,7 +29,7 @@ const Navbar = () => {
         window.addEventListener('resize', screenSize);
 
         const PageDown = () => {
-            setScrolledDown(window.scrollY>210)
+            setScrolledDown(window.scrollY>350)
         };
 
         window.addEventListener('scroll', PageDown);
@@ -54,6 +55,13 @@ const Navbar = () => {
     const DownIcon = (
         <img className='downicon' alt='icon down' src={DownMenu} />
     );
+
+    const Dropmenuhandler = (itemId) => {
+        setCategBarOpen((prevState) => ({
+            ...prevState,
+            [itemId]:!prevState[itemId]
+        }))
+    }
 
     return (
         <>
@@ -102,9 +110,24 @@ const Navbar = () => {
                             </div>
                             <div className='categorybar'>
                                     {CategoryList.map((item) => (
-                                        <div className='categoryoption' key={item.id}>
-                                            <span>{item.category}</span>
-                                            {DownIcon}
+                                        <div className='categoryoption' key={item.id} onClick={() => Dropmenuhandler(item.id)}>
+                                            {/* <select>
+                                                <option>{item.categoryname}</option>
+                                                {item.subCategory.map((subc,idx) => (
+                                                            <option key={idx}>{subc}</option>
+                                                    ))}
+                                            </select> */}
+                                            <span>{item.categoryname}</span>
+                                           
+                                                {DownIcon}
+                                                {categBarOpen[item.id] &&(
+                                                    <div className='submenu'>
+                                                        {item.subCategory.map((subc,idx) => (
+                                                            <span key={idx}>{subc}</span>
+                                                    ))}
+                                                    </div>
+                                                )}     
+                                            
                                         </div>
                                     ))}
                                 </div>
