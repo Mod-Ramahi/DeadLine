@@ -1,25 +1,17 @@
 import React from 'react';
 import './MostPopular.scss';
-import { Cards } from '../../Cards';
+import Card from '../Card';
 
-const MostPopular = ()=> {
-    const RenderCards = Cards.slice(0,8).map((card)=>(
-        <div key={card.id} className='cardbox'>
-                <div className="imagebox">
-                    <img alt={card.alt} src={card.src}/>
-                </div>
-                <div className='cardtext'>
-                    <span className='txt1'>{card.text}</span>
-                    <span className='txt2'>{card.price}</span>
-                </div>
-        </div>
+const MostPopular = ({title,cards, number})=> {
+    const RenderCards = cards.slice(0,number).map((card)=>(
+        <Card card={card}/>
        
     ));
     
 
     return(
         <div className="mostpopular">
-            <span>Most Popular</span>
+            <span>{title}</span>
             <div className="mostpopularbtns">
                 <button className="jobbtn">Jobs</button>
                 <button className="freelancerbtn">Freelancers</button>

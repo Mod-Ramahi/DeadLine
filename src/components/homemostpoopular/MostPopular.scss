@@ -34,23 +34,31 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         grid-template-rows: 1fr;
-        gap: 50px;
+        // gap: 50px;
         // align-self:center; 
         justify-items: center;
         width: 70%;
         .cardbox{
+            display: flex;
+            flex-direction: column;
+            max-width: 90%;
+            margin-bottom: 2rem;
         }
+        
         .imagebox{
             border: 1px solid black;
             padding: 3px 9px;
             border-radius: 10px;
+            margin-bottom: 1rem;
             img{
                 margin-top: 5px;
                 height: 158px;
-                width: 231px;
+                width: 90%;
                 border-radius: 7px;
+                object-fit: contain;
             }
         }
+    }
 
         .cardtext{
             display: flex;
@@ -61,7 +69,7 @@
             font-weight: normal;
             }
         }
-    }
+    
 
     .morecards{
         font-size: 16px;

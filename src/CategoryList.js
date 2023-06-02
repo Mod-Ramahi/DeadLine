@@ -62,4 +62,70 @@ export const CategoryList = [
             'Web development', 'Mobile Apps development', 'Software architecture'
         ]
     }
+];
+
+export const CategoryIcons = [
+    {
+        id:1,
+        name:'Design',
+        alt:'designicon',
+        src:'./images/DesignIcon.png'
+
+    },
+    {
+        id:2,
+        name:'Arts',
+        alt:'artsicon',
+        src:'./images/ArtsIcon.png'
+
+    },
+    {
+        id:3,
+        name:'Businesses',
+        alt:'businessicon',
+        src:'./images/BusinessIcon.png'
+
+    },
+    {
+        id:4,
+        name:'Online Coaching',
+        alt:'onlinecoachicon',
+        src:'./images/OnlineCoachIcon.png'
+
+    },
+    {
+        id:5,
+        name:'Write & Translate',
+        alt:'writetranslateicon',
+        src:'./images/Writing&TranslationIcon.png'
+
+    },
+    {
+        id:6,
+        name:'Programming & Tech',
+        alt:'techicon',
+        src:'./images/Programming&Tech.png'
+
+    },
+    {
+        id:7,
+        name:'Video/Audio & photo',
+        alt:'videoAudioPhotoicon',
+        src:'./images/VideoAudioIcon.png'
+
+    },
+    {
+        id:8,
+        name:'E-Marketing & Social media',
+        alt:'e-marketingicon',
+        src:'./images/EmarketSocialmediaIcon.png'
+
+    },
+    {
+        id:9,
+        name:'Others',
+        alt:'othericon',
+        src:'./images/OthersIcon.png'
+
+    }
 ]
