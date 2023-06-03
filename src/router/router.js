@@ -6,6 +6,7 @@ import Root from "./root";
 import SignIn from "../pages/loginpage/Signin";
 import Home from "../pages/homepage/Home";
 import Category from "../pages/Category";
+import Search from "../pages/Search";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
         {
             path:"/category",
             element: <Category/>
+        }
+        ,
+        {
+            path:"/search",
+            element: <Search/>
         }
     ]
   },
