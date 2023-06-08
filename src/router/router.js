@@ -7,6 +7,7 @@ import SignIn from "../pages/loginpage/Signin";
 import Home from "../pages/homepage/Home";
 import Category from "../pages/Category";
 import Categories from "../pages/categorypage/Categories";
+import Search from "../pages/Search";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,16 @@ const router = createBrowserRouter([
         {
           path:"/categories",
           element: <Categories/>
+        }
+        ,
+        {
+            path:"/search",
+            element: <Search/>
+        }
+        ,
+        {
+            path:"/search",
+            element: <Search/>
         }
     ]
   },
