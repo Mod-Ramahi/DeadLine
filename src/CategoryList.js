@@ -13,6 +13,13 @@ export const CategoryList = [
             'DevOps',
             'CyberSecurity',
             'Network'
+        ],
+        skills:[
+            'HTML',
+            'CSS',
+            'Flutter',
+            'React',
+            'AWS',
         ]
     },
     {
@@ -27,6 +34,12 @@ export const CategoryList = [
             '3D modeling',
             'Character design',
             'Web & App UI/UX design'
+        ],
+        skills:[
+            'Photoshop',
+            'Illustrator',
+            'Figma',
+            'blender'
         ]
     },
     {

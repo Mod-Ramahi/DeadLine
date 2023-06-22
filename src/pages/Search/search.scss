@@ -8,7 +8,7 @@
 .category_wrapper{
     background-color: rgb(185, 185, 185);
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-around;
     flex-direction: column;
     padding: 2rem;
@@ -26,7 +26,7 @@
 .product_wrapper{
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     width: 70%;
     justify-content: space-between;
     height: 100%;

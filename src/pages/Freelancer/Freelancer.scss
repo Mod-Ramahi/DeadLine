@@ -1,0 +1,173 @@
+.userprofile {
+    margin-top: 10rem;
+    padding-top: 5rem;
+
+    .uppersection {
+        display: flex;
+        justify-content: center;
+        margin: 2rem;
+
+        .upper {
+            font-size: 60px;
+            font-weight: bold;
+            color: rgb(96, 71, 123);
+        }
+    }
+
+    .lowersection {
+        margin: 2.5rem;
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+
+        .leftsection {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 322px;
+            height: 611px;
+            border: 1px solid black;
+
+            .profilephoto {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap:1rem;
+                img {
+                    border: 1px solid;
+                    border-radius: 50%;
+                    height: 161px;
+                    width: 161px;
+                    padding: 3px;
+                }
+                .name{
+                    font-weight: bold;
+                    font-size: 25px;
+                }
+            }
+            .info{
+                .time{
+                    display: flex;
+                    gap: 5px;
+                    align-items: center;
+                    .timeicon{
+                        height: 27px;
+                        width: 27px;
+                    }
+                }
+                .joined{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    .joinedicon{
+                        height: 27px;
+                        width: 27px;
+                    }
+                }
+                .recommendation{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    .recommendationicon{
+                        height: 27px;
+                        width: 27px;
+                    }
+                }
+            }
+        }
+
+        .middlesection {
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            // justify-content: center;
+            align-items: flex-start;
+            padding: 15px;
+            gap: 10px;
+            width: 589px;
+            height: 990px;
+            .nickname{
+                display: flex;
+                gap:20px;
+                p{
+                    font-size: 34px;
+                }
+            }
+            .title_review{
+                p{
+                    font-size: 28px;
+                }
+                .review{
+                    display: flex;
+                    p{font-size: 28px;}
+                }
+            }
+            .userstatistic{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .stat{
+                    display: flex;
+                    gap:3rem;
+                    .job_complete{
+                        display: flex;
+                        align-items: center;
+                        gap:10px;
+                        font-size: 20px;
+                        .n{
+                            font-size: 30px;
+                            font-weight: bold;
+                            color: rgb(175, 128, 224)
+                        }
+                    }
+                }
+            }
+            .serviceinfo{
+                p{
+                    font-size: 25px;
+                }
+                ul{
+                    font-size: 25px;
+                }
+            }
+        }
+
+        .rightsection {
+            .upperbox {
+                width: 322px;
+                border: 1px solid black;
+                .hirebtn{
+                    display: flex;
+                    height: 76px;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    background-color: rgb(96, 71, 123);
+                }
+                .boxinfo{
+                    padding: 15px;
+                    span{
+                        font-size: 25px;
+                    }
+                    .pboxinfo{
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+        
+    }
+    .userprojects{
+        .userprojectsimage{
+            display: flex;
+            justify-content: center;
+            gap:7px;
+        img{
+            border:1px;
+            border-radius: 5px;
+            
+        }
+        }
+    }
+}

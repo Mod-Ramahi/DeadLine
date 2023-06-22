@@ -1,9 +1,9 @@
-import React from 'react'
-import './Categories.scss'
-import Head from '../../components/pagehead/Head'
-import CategCards from '../../components/CategCard'
+import React from 'react';
+import './Categories.scss';
+import CategCards from '../../components/CategCard';
 import { CategoryList } from '../../CategoryList';
-import seeAll from './seeAll.png'
+import seeAll from './seeAll.png';
+import { Link } from 'react-router-dom';
 
 export default function Categories () {
     const CategoryCardsList = CategoryList.map((categ)=>(
@@ -11,14 +11,13 @@ export default function Categories () {
     ));
     return(
         <>
-            <Head/>
             <div className='pagetitle'>
                 <span className='title'>
                     Category
                 </span>
             </div>
             <div className='categcontainer'>
-                {CategoryCardsList}
+                <Link to='/search'>{CategoryCardsList}</Link>
             </div>
         </>
     )

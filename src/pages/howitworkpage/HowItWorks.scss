@@ -1,0 +1,141 @@
+.howitworks {
+    padding-top: 120px;
+    background: linear-gradient(to right, rgb(121, 134, 248), rgb(175, 121, 219));
+
+    .howworkhead {
+        top: 0;
+        height: 428px;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .howworktitle {
+            padding: 2rem;
+            padding-bottom: 0;
+            margin-right: 8rem;
+            margin-top: 5rem;
+            width: 700px;
+            display: flex;
+            flex-direction: column;
+            color: white;
+
+            .titlespan {
+                font-size: 42px;
+                font-weight: bold;
+            }
+
+            .titlep {
+                font-size: 21px;
+            }
+        }
+
+        .howworkbtns {
+            margin-right: 8rem;
+            padding-bottom: 2rem;
+            width: 700px;
+            // height: 120px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+
+            button {
+                height: 76px;
+                width: 208px;
+                background-color: rgba(225, 174, 241, .7);
+                box-shadow: 6px 6px 7px rgba(0, 0, 0, 0.5);
+                border: none;
+                color: white;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 1s;
+
+                &:hover {
+                    background-color: rgba(225, 174, 241, .9);
+                    border-radius: 15px;
+                }
+            }
+        }
+    }
+
+    .howworkcontent {
+        background-color: white;
+        .howworktxt {
+            background-color: white;
+            padding: 3.5rem;
+
+            .txtspan {
+                font-size: 40px;
+                font-weight: bold;
+            }
+
+            .txtp {
+                font-size: 25px;
+            }
+        }
+
+        .howworkicon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+
+            .mapicons {
+                display: flex;
+                gap: 10rem;
+
+                .iconmap {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 1rem;
+                }
+
+                .spantitle {
+                    font-size: 25px;
+                    font-weight: bold;
+                    margin: 1rem 0;
+                }
+
+                .txt1span {
+                    font-size: 19px;
+                }
+            }
+
+            hr {
+                background-color: black;
+                border: 1px solid black;
+                width: 90%;
+                margin-top: 6rem;
+            }
+        }
+
+        .howdoesitwork {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            width: 60%;
+
+            .howdoes {
+                margin: 2rem 0;
+                font-size: 40px;
+                font-weight: bold;
+            }
+
+            .span1 {
+                font-size: 25px;
+                font-weight: bold;
+                margin-top: 2rem;
+            }
+
+            .scndp {
+                font-size: 21px;
+            }
+        }
+    }
+
+}

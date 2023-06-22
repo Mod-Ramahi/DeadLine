@@ -1,0 +1,26 @@
+.faq {
+    margin: 20rem 5rem;
+    margin-bottom: 4rem;
+
+    .title {
+        font-size: 40px;
+        margin-bottom: 3rem;
+    }
+
+    .Deadline_login {
+        font-size: 35px;
+        margin: 3rem 2rem;
+
+        hr {
+            width: 100%;
+        }
+
+        .span {
+            display: flex;
+            flex-direction: column;
+            margin-top: 3rem;
+            font-size: 25px;
+            gap: 10px;
+        }
+    }
+}

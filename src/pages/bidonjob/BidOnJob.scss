@@ -1,0 +1,105 @@
+.bid {
+    margin-top: 20rem;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 5rem;
+    gap: 2rem;
+
+    .title {
+        font-size: 60px;
+        font-weight: bold;
+        color: rgb(96, 71, 123);
+        margin-bottom: 3rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .budget {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 7px;
+
+        #price {
+            width: 580px;
+            height: 69px;
+        }
+
+        #currency {
+            width: 70px;
+            height: 74px;
+            padding: 3px;
+            color: white;
+            background-color: rgb(96, 71, 123);
+            border-radius: 5px;
+        }
+    }
+
+    .days {
+        display: flex;
+        flex-direction: column;
+
+        #time {
+            width: 642px;
+            height: 69px;
+        }
+    }
+
+    .text_description {
+        display: flex;
+        flex-direction: column;
+
+        .description_area {
+            width: 90%;
+            height: 160px;
+            resize: none;
+            border-radius: 5px;
+        }
+    }
+
+    .attachment {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add_milestone {
+        display: flex;
+        flex-direction: column;
+
+        #milestone{
+            width: 90%;
+            height: 100px;
+        }
+    }
+
+    .proposal_plan{
+        display: flex;
+        flex-direction: column;
+
+        #proposalplan{
+            width: 642px;
+        }
+    }
+
+    .submit{
+        display: flex;
+        justify-content: center;
+
+        .sub_btn{
+            background-color: rgb(96, 71, 123);
+            color:white;
+            width: 450px;
+            height: 76px;
+            font-size: 30px;
+            border-radius: 7px;
+        }
+    }
+}
+input{
+    border-radius: 5px;
+}
+label {
+    font-size: 20px;
+}

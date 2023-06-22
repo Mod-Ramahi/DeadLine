@@ -1,0 +1,25 @@
+.adcards{
+    height: 430px;
+    p{
+        margin-left: 4rem;
+        font-size: 40px;
+    }
+    .memberscards{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:2rem;
+        .adimg{
+            border: 1px solid black;
+            border-radius: 5px;
+            height: 174px;
+            width: 247px;
+        }
+    }
+}
+.results_render{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-self: center;
+    align-items: center;
+}
