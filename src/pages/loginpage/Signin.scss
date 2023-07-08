@@ -1,20 +1,124 @@
-.signincontainer {
-    height: 100vh;
+.sign_in_container {
     display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-    .signin {
-        padding-top: 6rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    margin-top: 15rem;
+    padding-top: 3rem;
+
+    .links {
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        gap: 15px;
+
+        button {
+            height: 70px;
+            width: 500px;
+            border-radius: 50px;
+            background-color: rgb(96, 71, 123);
+            border: none;
+            box-shadow: 3px 3px 7px gray;
+            color: white;
+            font-size: 30px;
+            font-weight: normal;
+        }
+
+        span {
+            font-size: 30px;
+        }
+
+        .google_button {
+            color: black;
+            background-color: rgb(242, 242, 242);
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        // align-items: center;
         gap: 2rem;
-        .signinform{
+        width: 800px;
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 500px;
+            height: 60px;
+        }
+
+        .user_name {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            gap: 1rem;
+            width: 650px;
+        }
+
+        .user_password {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 650px;
+        }
+
+        .remember_me {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            label {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                #checkbox {
+                    height: 30px;
+                    width: 30px;
+                }
+            }
+        }
+    }
+    .submit_links{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        .sbmtbtn{
+            width: 200px;
+            height: 60px;
+            color: white;
+            background-color: rgb(96, 71, 123);
+            border: none;
+            border-radius: 10px;
+            box-shadow: 2px 2px 6px gray;
+            font-weight: normal;
         }
     }
 }
+
+// .signincontainer {
+//     height: 100vh;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 100vh;
+//     .signin {
+//         padding-top: 6rem;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         gap: 2rem;
+//         .signinform{
+//             display: flex;
+//             flex-direction: column;
+//             align-items: center;
+//             gap: 1rem;
+//         }
+//     }
+// }

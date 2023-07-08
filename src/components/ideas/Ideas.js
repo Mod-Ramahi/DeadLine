@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import "../../pages/Search/search.scss"
+import "../../pages/getidea/GetIdea.scss"
 import {Cards} from '../../Cards'
 import Card from '../Card'
-export default function Filter() {
+export default function Ideas() {
     const [category, setCategory] = useState("Graphic Designing")
   return (
     <div className="search_wrapper">
@@ -47,8 +47,8 @@ export default function Filter() {
             <h1>{category}</h1>
             <div className="cardscontainer">
                 {
-                    Cards.map(e=>{
-                        return <Card card={e}/>
+                    Cards.slice(0,8).map((e, idx)=>{
+                        return <Card card={e} key={idx}/>
                     })
                 }
             </div>

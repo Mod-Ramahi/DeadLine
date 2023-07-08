@@ -33,6 +33,17 @@
                 font-size: 28px;
                 font-weight: normal;
             }
+            @media only screen and (max-width:900px){
+                .firstline{
+                    font-size: 17px;
+                }
+                .secondline{
+                    font-size: 22px;
+                }
+                .thirdline{
+                    font-size: 15px;
+                }
+            }
         }
     }
 }

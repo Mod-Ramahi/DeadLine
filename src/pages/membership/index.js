@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Membership.scss";
 import MembershipImg from "./Mmbrshp.png"
 import UserDashboard from "../../components/userDashboard/UserDashboard";
 
 export default function Membership() {
+    const [monthlyClicked, setMonthlyClicked]= useState(true)
+    const [annualClicked, setAnnualClicked]= useState(false)
+
+    const handleMonthlyCost = ()=> {
+        setMonthlyClicked(true);
+        setAnnualClicked(false);
+    }
+    const handleAnnualCost = () => {
+        setAnnualClicked(true)
+        setMonthlyClicked(false)
+    }
     return (
         <>
             <UserDashboard />
@@ -15,8 +26,8 @@ export default function Membership() {
                 </div>
             </div>
             <div className="plan_options">
-                <button className="monthly">Monthly plans</button>
-                <button className="yearly">Annual plans</button>
+                <button className={`monthly ${monthlyClicked ? "active" :""}`} onClick={handleMonthlyCost}>Monthly plans</button>
+                <button className={`yearly ${annualClicked ? "active" : ""}`} onClick={handleAnnualCost}>Annual plans</button>
             </div>
             <div className="plans_container">
                 <div className="plan">

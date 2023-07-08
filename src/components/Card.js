@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
-export default function Card({ card }) {
+export default function Card({card, CardId}) {
+  const GetCardId = () => {
+    CardId(card.id)
+  }
   return (
-    <div  className='cardbox'>
+    <div  className='cardbox' onClick={GetCardId}>
       <div className="imagebox">
         <img alt={card.alt} src={card.src} />
       </div>

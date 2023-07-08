@@ -7,7 +7,7 @@
     justify-content: center;
 
     .category_button {
-        width: 80%;
+        width: 100%;
         justify-self: center;
         align-self: center;
         text-align: center;
@@ -26,7 +26,8 @@
             font-size: 19px;
             font-weight: normal;
             transition: all 0.5s;
-            &:hover{
+
+            &:hover {
                 background-color: rgba($color: white, $alpha: 0.3);
                 // border-radius: 30px;
                 border: 1px solid rgb(102, 49, 94);
@@ -35,3 +36,90 @@
     }
 }
 
+@media only screen and (max-width:1200px) {
+    .category_head {
+        // margin-top: 3rem;
+        height: 22vh;
+        background: linear-gradient(to right, rgb(121, 134, 248), rgb(175, 121, 219));
+        padding-top: 7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .category_button {
+            .dashboard_button {
+                width: 180px;
+                height: 42px;
+                border: 1px solid rgb(255, 255, 255);
+                border-radius: 50px;
+                background-color: transparent;
+                display: inline-block;
+                justify-self: center;
+                align-self: center;
+                color: white;
+                font-size: 16px;
+                font-weight: normal;
+                transition: all 0.5s;
+            }
+        }
+    }
+
+    @media only screen and (max-width:1080px) {
+        .category_head {
+            // margin-top: 3rem;
+            height: 22vh;
+            background: linear-gradient(to right, rgb(121, 134, 248), rgb(175, 121, 219));
+            padding-top: 7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .category_button {
+                .dashboard_button {
+                    width: 140px;
+                    height: 42px;
+                    border: 1px solid rgb(255, 255, 255);
+                    border-radius: 50px;
+                    background-color: transparent;
+                    display: inline-block;
+                    justify-self: center;
+                    align-self: center;
+                    color: white;
+                    font-size: 12px;
+                    font-weight: normal;
+                    transition: all 0.5s;
+                }
+            }
+        }
+
+    }
+    @media only screen and (max-width:720px) {
+        .category_head {
+            // margin-top: 3rem;
+            height: auto;
+            background: linear-gradient(to right, rgb(121, 134, 248), rgb(175, 121, 219));
+            padding-top: 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .category_button {
+                .dashboard_button {
+                    width: 100px;
+                    height: 39px;
+                    border: 1px solid rgb(255, 255, 255);
+                    border-radius: 50px;
+                    background-color: transparent;
+                    display: inline-block;
+                    justify-self: center;
+                    align-self: center;
+                    color: white;
+                    font-size: 9px;
+                    font-weight: normal;
+                    transition: all 0.5s;
+                }
+            }
+        }
+
+    }
+}

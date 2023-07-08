@@ -4,9 +4,9 @@ import {
 } from "react-router-dom";
 import Root from "./root";
 import SignIn from "../pages/loginpage/Signin";
-import Home from "../pages/homepage/Home";
-import Categories from "../pages/categorypage/Categories";
-import Search from "../pages/Search";
+import Home from "../pages/homepage";
+import Categories from "../pages/categorypage";
+import GetIdea from "../pages/getidea";
 import HowItWorks from "../pages/howitworkpage/HowItWorks";
 import Freelancer from "../pages/Freelancer";
 import ResultSearch from "../pages/resultsearchpage";
@@ -16,6 +16,13 @@ import Faq from "../pages/faq";
 import Membership from "../pages/membership";
 import BidOnJob from "../pages/bidonjob";
 import Portfolio from "../pages/portfoliopage";
+import Register from "../pages/loginpage/Register";
+import PostJob from "../pages/postjobpage/index";
+import Job from "../pages/jobPage";
+import CompleteRegister from "../pages/completeregister";
+import MyProfile from "../pages/myprofile";
+import ProfileEdit from "../pages/profileedit";
+
 
 const router = createBrowserRouter([
   {
@@ -41,8 +48,8 @@ const router = createBrowserRouter([
         }
         ,
         {
-            path:"/search",
-            element: <Search/>
+            path:"/getidea",
+            element: <GetIdea/>
         },
         {
           path:"/howitworks",
@@ -73,8 +80,32 @@ const router = createBrowserRouter([
           element:<BidOnJob/>
         },
         {
-          path:"/portfoliopage",
+          path:"/portfoliopage/:CardId",
           element:<Portfolio/>
+        },
+        {
+          path:"/register",
+          element:<Register/>
+        },
+        {
+          path:"/postjob",
+          element:<PostJob/>
+        },
+        {
+          path:"/jobprofile/:JobID",
+          element:<Job/>
+        },
+        {
+          path:"/completeregister",
+          element: <CompleteRegister/>
+        },
+        {
+          path:"/myprofile",
+          element:<MyProfile/>
+        },
+        {
+          path:"/profileedit",
+          element:<ProfileEdit/>
         }
     ]
   },

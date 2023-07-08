@@ -12,6 +12,7 @@
         font-weight: bold;
         color: white;
     }
+
 }
 .categcontainer{
     margin: 1rem;
@@ -63,14 +64,98 @@
                 width: 100%;
                 margin-bottom: 3rem;
             }
-            .subcateglist{
-                width: 85%;
-                font-size: 28px;
-                margin-bottom: 3rem;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
-                gap: 2rem;
+        }
+    }
+    .subcateglist{
+        width: 85%;
+        font-size: 28px;
+        margin-bottom: 3rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
+        gap: 2rem;
+    }
+}
+@media only screen and (max-width:800px){
+    .pagetitle{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 3rem;
+        margin: 0;
+        width: 100%;
+        height: 15rem;
+        background: linear-gradient(to right, rgba(121, 134, 248, 0.8), rgba(175, 121, 219,0.8));
+        .title{
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+        }
+    
+    }
+    .categcontainer{
+        margin: 1rem;
+        margin-top: 2rem;
+        padding: 1rem;
+        padding-right: 5rem;
+        border: 2px solid rgb(96, 71, 123);
+        .categbox{
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            gap: 2rem;
+            width: 100%;
+            margin-bottom: 1rem;
+            .categlogo{
+                width: 10%;
+                display: flex;
+                justify-content: center;
+                .categlogoimg{
+                    height: 2rem;
+                    width: 3rem;
+                }
             }
+           
+            .categinfo{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 90%;
+                .categhead{
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1rem;
+                    .categtitle{
+                        font-size: 1rem;
+                        font-weight: bold;
+                    }
+                    .seeall{
+                        font-size: 1rem;
+                        font-weight: normal;
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        img{
+                            width: 0.6rem;
+                            height: 0.8rem;
+                        }
+                    }
+                }
+                hr{
+                    display: flex;
+                    border: 3px solid rgb(96, 71, 123);
+                    width: 100%;
+                    margin-bottom: 2rem;
+                }
+            }
+        }
+        .subcateglist{
+            width: 85%;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
+            gap: 2rem;
         }
     }
 }

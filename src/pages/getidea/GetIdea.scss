@@ -1,0 +1,182 @@
+.search_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .category_wrapper {
+        background-color: rgb(185, 185, 185);
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-around;
+        flex-direction: column;
+        padding: 2rem;
+        padding-left: 2rem;
+        border-radius: 0 15px 15px 0;
+        width: 20%;
+
+        p {
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: rgb(61, 61, 61)
+        }
+    }
+
+    .product_wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 97%;
+        padding-left: 4px;
+        justify-content: center;
+
+        h1 {
+            font-size: 2rem;
+            font-weight: bolder;
+            margin-bottom: 4rem;
+            color: rgb(121, 134, 248)
+        }
+
+        .cardscontainer::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cardscontainer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+
+            .cardbox {
+                display: flex;
+                flex-direction: column;
+                max-width: 90%;
+                margin-right: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .imagebox {
+                border: 1px solid black;
+                padding: 3px 9px;
+                border-radius: 10px;
+                margin-bottom: 1rem;
+
+                img {
+                    margin-top: 5px;
+                    height: 158px;
+                    width: 90%;
+                    border-radius: 7px;
+                    object-fit: contain;
+                }
+            }
+        }
+
+        .cardtext {
+            display: flex;
+            flex-direction: column;
+
+            span {
+                color: black;
+                font-size: 16px;
+                font-weight: normal;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:1000px) {
+    .search_wrapper {
+        align-items: flex-start;
+        padding-top: 1rem;
+
+        .category_wrapper {
+            padding: 1rem;
+            padding-left: 1rem;
+            width: 40%;
+            height: 100%;
+            align-items: flex-start;
+            margin-top: 8rem;
+            p {
+                cursor: pointer;
+                font-size: 16px;
+            }
+        }
+
+        .product_wrapper {
+            h1 {
+                font-size: 1.5rem;
+                font-weight: bolder;
+                margin-bottom: 3rem;
+            }
+
+            .cardscontainer {
+                grid-template-columns: repeat(2, 1fr);
+
+                .cardbox {
+                    max-width: 90%;
+                    margin-right: 1rem;
+                    margin-bottom: 1rem;
+                }
+
+                .imagebox {
+                    padding: 2px 7px;
+                    margin-bottom: 1rem;
+
+                    img {
+                        margin-top: 3px;
+                        height: 138px;
+                    }
+                }
+            }
+
+            .cardtext {
+                span {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:700px) {
+    .search_wrapper {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .category_wrapper {
+            margin-top: 6rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 2rem;
+            padding-left: 2rem;
+            border-radius: 0 15px 15px 0;
+            width: 40%;
+            p {
+                font-size: 12px;
+            }
+        }
+
+        .product_wrapper {
+
+            h1 {
+                font-size: 1.3rem;
+                font-weight: bold;
+                margin-bottom: 2rem;
+            }
+
+            .cardscontainer {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .cardtext {
+                span {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

@@ -93,7 +93,7 @@ export const Users = [
         },
         country:'Jordan',
         timezone:'+3',
-        avgRate:'4.8',
+        avgRate:'4.7',
         portfolio:[
             {
                 name:'drink brand',
@@ -148,7 +148,7 @@ export const Users = [
         },
         country:'USA',
         timezone:'+5',
-        avgRate:'4.8',
+        avgRate:'4.5',
         portfolio:[
             {
                 name:'BookShop project',
@@ -205,7 +205,7 @@ export const Users = [
         },
         country:'USA',
         timezone:'+5',
-        avgRate:'4.8',
+        avgRate:'4',
         portfolio:[
             {
                 name:'Taxi App',

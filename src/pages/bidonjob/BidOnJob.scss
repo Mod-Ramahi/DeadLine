@@ -68,28 +68,28 @@
         display: flex;
         flex-direction: column;
 
-        #milestone{
+        #milestone {
             width: 90%;
             height: 100px;
         }
     }
 
-    .proposal_plan{
+    .proposal_plan {
         display: flex;
         flex-direction: column;
 
-        #proposalplan{
+        #proposalplan {
             width: 642px;
         }
     }
 
-    .submit{
+    .submit {
         display: flex;
         justify-content: center;
 
-        .sub_btn{
+        .sub_btn {
             background-color: rgb(96, 71, 123);
-            color:white;
+            color: white;
             width: 450px;
             height: 76px;
             font-size: 30px;
@@ -97,9 +97,87 @@
         }
     }
 }
-input{
+
+input {
     border-radius: 5px;
 }
+
 label {
     font-size: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+    .bid {
+        margin-top: 10rem;
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        margin-left: 1rem;
+        gap: 1rem;
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(96, 71, 123);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+
+        .text_description {
+            display: flex;
+            flex-direction: column;
+
+            .description_area {
+                width: 90%;
+                height: 100px;
+                resize: none;
+                border-radius: 5px;
+            }
+        }
+
+        .budget {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2px;
+
+            #price {
+                width: 80%;
+                // height: 10%;
+            }
+
+            #currency {
+                width: 2rem;
+                // height: 8rem;
+                padding: 1px;
+                color: white;
+                background-color: rgb(96, 71, 123);
+                border-radius: 5px;
+            }
+        }
+
+        .days {
+            #time {
+                width: 80%;
+            }
+
+        }
+        .proposal_plan{
+            #proposalplan{
+                width: 80%;
+            }
+        }
+        .submit {    
+            .sub_btn {
+                width: 70%;
+                height: 4rem;
+                font-size:15px;
+                border-radius: 7px;
+            }
+        }
+    }
+
 }

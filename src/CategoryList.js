@@ -1,7 +1,7 @@
 export const CategoryList = [
     {
         id:0,
-        categoryname:'Tech & programming',
+        categoryname:`Tech / programming`,
         alt:'techicon',
         src:'./images/Programming&Tech.png',
         subCategory:[
@@ -48,25 +48,25 @@ export const CategoryList = [
         alt:'businessicon',
         src:'./images/BusinessIcon.png',
         subCategory:[
-            'Web development', 'Mobile Apps development', 'Software architecture'
+            'B', 'B1', 'B2'
         ]
     },
     {
         id:3,
-        categoryname:'E-marketing & Social-media',
+        categoryname:'E-marketing / Social-media',
         alt:'e-marketingicon',
         src:'./images/EmarketSocialmediaIcon.png',
         subCategory:[
-            'Web development', 'Mobile Apps development', 'Software architecture'
+            'EM', 'EM1', 'EM2'
         ]
     },
     {
         id:4,
-        categoryname:'Writing & Translating',
+        categoryname:'Writing / Translating',
         alt:'writetranslateicon',
         src:'./images/Writing&TranslationIcon.png',
         subCategory:[
-            'Web development', 'Mobile Apps development', 'Software architecture'
+            'W', 'W1', 'W2'
         ]
     },
     {
@@ -75,16 +75,16 @@ export const CategoryList = [
         alt:'onlinecoachicon',
         src:'./images/OnlineCoachIcon.png',
         subCategory:[
-            'Web development', 'Mobile Apps development', 'Software architecture'
+            'O', 'O1', 'O2'
         ]
     },
     {
         id:6,
-        categoryname:'Video/audio & photo',
+        categoryname:'Video/audio / photo',
         alt:'videoAudioPhotoicon',
         src:'./images/VideoAudioIcon.png',
         subCategory:[
-            'Web development', 'Mobile Apps development', 'Software architecture'
+            'V', 'V2', 'V3'
         ]
     },
     {
@@ -93,7 +93,7 @@ export const CategoryList = [
         alt:'artsicon',
         src:'./images/ArtsIcon.png',
         subCategory:[
-            'Web development', 'Mobile Apps development', 'Software architecture'
+            'A', 'A1', 'A2'
         ]
     },
     {
@@ -102,7 +102,7 @@ export const CategoryList = [
         alt:'othericon',
         src:'./images/OthersIcon.png',
         subCategory:[
-            'Web development', 'Mobile Apps development', 'Software architecture'
+            'Other', 'Other1'
         ]
     }
 ];

@@ -28,6 +28,7 @@
             width: 322px;
             height: 611px;
             border: 1px solid black;
+            border-radius: 7px;
 
             .profilephoto {
                 display: flex;
@@ -168,6 +169,167 @@
             border-radius: 5px;
             
         }
+        }
+    }
+}
+
+@media only screen and (max-width:1000px){
+    .userprofile {
+        margin-top: 7rem;
+        padding-top: 3rem;
+    
+        .uppersection {
+            margin: 2rem;
+    
+            .upper {
+                font-size: 3rem;
+            }
+        }
+    
+        .lowersection {
+            margin: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+    
+            .leftsection {
+                padding: 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 80%;
+                height: auto;
+    
+                .profilephoto {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap:1rem;
+                    img {
+                        border: 1px solid;
+                        border-radius: 50%;
+                        height: 7rem;
+                        width: 7rem;
+                        padding: 3px;
+                    }
+                    .name{
+                        font-weight: bold;
+                        font-size: 1.5rem;
+                    }
+                }
+                .info{
+                    .time{
+                        display: flex;
+                        gap: 5px;
+                        align-items: center;
+                        .timeicon{
+                            height: 1.5rem;
+                            width: 1.5rem;
+                        }
+                    }
+                    .joined{
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        .joinedicon{
+                            height: 1.5rem;
+                            width: 1.5rem;
+                        }
+                    }
+                    .recommendation{
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        .recommendationicon{
+                            height: 1.5rem;
+                            width: 1.5rem;
+                        }
+                    }
+                }
+            }
+    
+            .middlesection {
+                padding: 0.7rem;
+                width: 95%;
+                height: auto;
+                .nickname{
+                    display: flex;
+                    gap:1rem;
+                    p{
+                        font-size: 1.5rem;
+                    }
+                }
+                .title_review{
+                    p{
+                        font-size: 1.5rem;
+                    }
+                    .review{
+                        display: flex;
+                        p{font-size: 1.5rem;}
+                    }
+                }
+                .userstatistic{
+                    .stat{
+                        display: flex;
+                        gap:2rem;
+                        .job_complete{
+                            display: flex;
+                            align-items: center;
+                            gap:10px;
+                            font-size: 1rem;
+                            .n{
+                                font-size: 1.5rem;
+                                font-weight: bold;
+                                color: rgb(175, 128, 224)
+                            }
+                        }
+                    }
+                }
+                .serviceinfo{
+                    p{
+                        font-size: 1.2rem;
+                    }
+                    ul{
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+    
+            .rightsection {
+                .upperbox {
+                    .hirebtn{
+                        display: flex;
+                        height: 3rem;
+                        padding: 0.2rem;
+                    }
+                    .boxinfo{
+                        padding: 0.7rem;
+                        span{
+                            font-size: 1.2rem;
+                        }
+                        .pboxinfo{
+                            font-size: 1rem;
+                        }
+                    }
+                }
+            }
+            
+        }
+        .userprojects{
+            .userprojectsimage{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap:7px;
+            img{
+                border:1px;
+                border-radius: 5px;
+                
+            }
+            }
         }
     }
 }

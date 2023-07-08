@@ -1,15 +1,18 @@
-.adcards{
-    height: 430px;
-    p{
+.adcards {
+    height: 380px;
+
+    p {
         margin-left: 4rem;
         font-size: 40px;
     }
-    .memberscards{
+
+    .memberscards {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap:2rem;
-        .adimg{
+        gap: 2rem;
+
+        .adimg {
             border: 1px solid black;
             border-radius: 5px;
             height: 174px;
@@ -17,9 +20,94 @@
         }
     }
 }
-.results_render{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-self: center;
+.mostpopularbtns {
+    display: flex;
+    justify-content: center;
     align-items: center;
+    margin:3rem 0;
+    button {
+        height: 42px;
+        width: 168px;
+        border: 1px solid rgb(96, 71, 123)
+    }
+
+    .jobbtn {
+        color: rgb(96, 71, 123);
+        background-color: white;
+        border-radius: 50px 0 0 50px;
+    }
+
+    .freelancerbtn {
+        color: rgb(96, 71, 123);
+        background-color: white;
+        border-radius: 0 50px 50px 0;
+    }
+    .active{
+        color: white;
+        background-color: rgb(96, 71, 123);
+    }
+}
+
+.results_render {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+@media only screen and (max-width:1130px) {
+
+    .adcards {
+        height: 300px;
+
+        p {
+            margin-left: 4rem;
+            font-size: 30px;
+        }
+
+        .memberscards {
+            gap: 1rem;
+
+            .adimg {
+                height: 154px;
+                width: 200px;
+            }
+        }
+    }
+
+}
+
+@media only screen and (max-width:830px) {
+
+    .adcards {
+        height: auto;
+
+        p {
+            margin-left: 4rem;
+            font-size: 30px;
+        }
+
+        .memberscards {
+            gap: 1rem;
+
+            .adimg {
+                height: 154px;
+                width: 200px;
+            }
+        }
+    }
+
+    .remove{
+        display: none;
+    }
+    
+}
+@media only screen and (max-width: 750px){
+    .results_render {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        justify-content: center;
+        align-items: center;
+    }
 }

@@ -42,8 +42,8 @@
     }
 
     .monthly {
-        color: white;
-        background-color: rgb(96, 71, 123);
+        color: rgb(96, 71, 123);
+        background-color: white;
         border-radius: 50px 0 0 50px;
     }
 
@@ -51,6 +51,11 @@
         color: rgb(96, 71, 123);
         background-color: white;
         border-radius: 0 50px 50px 0;
+    }
+
+    .active {
+        color: white;
+        background-color: rgb(96, 71, 123);
     }
 }
 
@@ -114,36 +119,153 @@
                     border-radius: 7px;
                 }
             }
-            .features{
+
+            .features {
                 margin-left: 1rem;
             }
         }
     }
 }
-hr{
+
+hr {
     width: 90%;
     margin: 4rem auto;
 }
-.faq_section{
+
+.faq_section {
     margin-left: 5rem;
-    .faqs{
+
+    .faqs {
         font-size: 40px;
         margin-bottom: 2rem;
         font-weight: bold;
     }
-    .q{
+
+    .q {
         margin-top: 1rem;
-        span{
+
+        span {
             font-size: 25px;
             font-weight: bold;
         }
-        .a{
+
+        .a {
             margin-top: 1rem;
             margin-bottom: 2rem;
-            span{
+
+            span {
                 font-size: 21px;
                 font-weight: normal;
             }
         }
     }
+}
+
+@media only screen and (max-width:1270px) {
+    .memberhead {
+        .insidetxt {
+            padding: 1rem;
+
+            .headspan {
+                font-size: 2.3rem;
+                font-weight: bold;
+            }
+
+            .txtspan {
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    .plan_options {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+
+        button {
+            height: 2.3rem;
+            width: 8rem;
+            border: 1px solid rgb(96, 71, 123);
+            font-size: 1rem;
+        }
+    }
+
+    .plans_container {
+        padding: 1rem;
+    }
+
+}
+
+@media only screen and (max-width:770px) {
+    .memberhead {
+        .insidetxt {
+            .headspan {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+
+            .txtspan {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .plan_options {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+
+        button {
+            height: 2.1rem;
+            width: 4.9rem;
+            border: 1px solid rgb(96, 71, 123);
+            font-size: 0.7rem;
+            font-weight: normal;
+        }
+    }
+
+    .plans_container {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .plan {
+            height: auto;
+            width: 70%;
+            padding: 5px;
+
+            .plan_box {
+
+                .planName {
+                    height: 3rem;
+                    width: 200px;
+                    font-size: 1.4rem;
+                    font-weight: bold;
+                }
+
+                .price {
+                    font-size: 1.4rem;
+
+                    .per {
+                        font-size: 1.2rem;
+                    }
+                }
+
+                .subscribe {
+
+                    button {
+                        width: 7rem;
+
+                    }
+                }
+
+                .features {
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+
 }

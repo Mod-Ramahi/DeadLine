@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Navbar.scss';
-
 import LogoImg from './Logoimg.png';
 import DropMenu from './DropMenu.png';
 import DownMenu from './Downmenu.png';
@@ -26,11 +25,12 @@ const Navbar = () => {
     const [userOpen, setUserOpen] = useState(false);
     const [mngrCaseOpen, setMngrCaseOpen] = useState(false);
     const menuRef = useRef(null);
+    // const location = useLocation()
 
     useEffect(() => {
 
         const screenSize = () => {
-            setIsMobile(window.innerWidth <= 595);
+            setIsMobile(window.innerWidth <= 1200);
         };
 
         screenSize();
@@ -89,26 +89,24 @@ const Navbar = () => {
     return (
         <>
             {isMobile ?
-                (
-                    <div className='navbar mobilebar'>
-                        <div className='mobilelogo'><img alt='mhomelogo' src={LogoImg} /></div>
-                        <div className='mobilebaroptions'>
-                            {languageDiv}
-                            <button className='mobilejoinbtn'>Join/Log in</button>
-                            <div className="dropdown">
-                                <img alt='a' src={DropMenu} className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)} />
-                                {isOpen && (
-                                    <div className="dropdownmenu">
-                                        <Link className='menuoption' to="/page1">Post a job</Link>
-                                        <Link className='menuoption' to="/howitworks">How it Works?</Link>
-                                        <Link className='menuoption' to="/page3">membership plans</Link>
-                                    </div>
-                                )}
-                            </div>
+                (<div className='navbar mobilebar'>
+                    <div className='mobilelogo'><Link to='/'><img alt='mhomelogo' src={LogoImg} /></Link></div>
+                    <div className='mobilebaroptions'>
+                        {languageDiv}
+                        <div className="dropdown">
+                            <img alt='a' src={DropMenu} className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)} />
+                            {isOpen && (
+                                <div className="dropdownmenu">
+                                    <Link className='menuoption' to="/postjob">Post a job</Link>
+                                    <Link className='menuoption' to="/resultssearch">Find freelancer</Link>
+                                    <Link className='menuoption' to="/howitworks">How it Works?</Link>
+                                    <Link className='menuoption' to="/categories">categories</Link>
+                                    <Link className='menuoption' to="/membership">membership plans</Link>
+                                </div>
+                            )}
                         </div>
                     </div>
-                )
-                :
+                </div>) :
                 (
                     <>
                         <div className='contain'>
@@ -131,19 +129,17 @@ const Navbar = () => {
                                                 />
                                                 {mngrCaseOpen && (
                                                     <div style={{
-                                                        // display: "flex",
-                                                        // flexDirection: "column",
-                                                        // minWidth:"7em",
                                                         backgroundColor: "rgba(255,255,255, 0.8)",
                                                         boxShadow: "1px 1px 5px black",
                                                         cursor: "pointer",
                                                         position: "absolute",
                                                         minWidth: "8em",
                                                         top: "40px",
-                                                        right:"3px",
-                                                        padding:"6px"
+                                                        right: "3px",
+                                                        padding: "6px",
+                                                        zIndex: "1"
                                                     }}>
-                                                        <p>option one</p> <p>transaction history</p> <p>add funds</p> <p>Withdraw Request</p>
+                                                         <p>transaction history</p> <p>add funds</p> <p>Withdraw Request</p>
                                                     </div>
                                                 )}
                                             </div>
@@ -154,9 +150,6 @@ const Navbar = () => {
                                             <img alt='usericon' src={UserIcon} onClick={() => setUserOpen(!userOpen)} />
                                             {userOpen && (
                                                 <div style={{
-                                                    // display: "flex",
-                                                    // flexDirection: "column",
-                                                    // minWidth:"7em",
                                                     backgroundColor: "rgba(255,255,255, 0.8)",
                                                     boxShadow: "1px 1px 5px black",
                                                     cursor: "pointer",
@@ -164,9 +157,11 @@ const Navbar = () => {
                                                     minWidth: "8em",
                                                     top: "50px",
                                                     right: "4px",
-                                                    padding:"6px"
+                                                    padding: "6px"
                                                 }}>
-                                                    <p>Profile</p> <p>Membership</p> <p>Invite friend</p> <p>Settings</p> <p>Help</p> <p>Log out</p>
+                                                    <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/myprofile"><p>Profile</p></Link>
+                                                    <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/membership"><p>Membership</p></Link>
+                                                    <p>Invite friend</p> <p>Settings</p> <p>Help</p> <p>Log out</p>
                                                 </div>
                                             )}
                                         </div>
@@ -180,7 +175,7 @@ const Navbar = () => {
                                         </div>
                                         <div className='login'>
                                             <Link className='signlink' to='/signin'>Sign In</Link>
-                                            <Link to='/category'><button className='joinbtn'>{t('register')}</button></Link>
+                                            <Link to='/register'><button className='joinbtn'>{t('register')}</button></Link>
                                         </div>
                                     </div>)}
                             </div>
@@ -195,7 +190,10 @@ const Navbar = () => {
                                         {categBarOpen[item.id] && (
                                             <div className='submenu'>
                                                 {item.subCategory.map((subc, idx) => (
-                                                    <span key={idx}>{subc}</span>
+                                                    <Link style={{ textDecoration: 'none', color: 'inherit' }} to={{
+                                                        pathname: '/resultssearch',
+                                                        search: `category=${item.categoryname}&subCategory=${subc}`,
+                                                    }} key={idx}><span className='link'>{subc}</span></Link>
                                                 ))}
                                             </div>
                                         )}
@@ -208,6 +206,31 @@ const Navbar = () => {
 
                     </>
                 )
+            }
+            {isMobile && SignedUser && pathname !== "/" &&
+                <div className='navbar mobilebar'>
+                    <div className='mobilelogo'><Link to='/'><img alt='mhomelogo' src={LogoImg} /></Link></div>
+                    <div className='mobilebaroptions'>
+                        {languageDiv}
+                        <div className="dropdown">
+                            <img alt='a' src={DropMenu} className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)} />
+                            {isOpen && (
+                                <div className="dropdownmenu">
+                                    <Link className='menuoption' to="/myprofile">Profile</Link>
+                                    <Link className='menuoption' to="/postjob">Post a job</Link>
+                                    <Link className='menuoption' to="/resultspage">Find freelancer</Link>
+                                    <Link className='menuoption' to="/howitworks">How it Works?</Link>
+                                    <Link className='menuoption' to="/categories">categories</Link>
+                                    <Link className='menuoption' to="/membership">membership plans</Link>
+                                    <Link className='menuoption' to="/page3">Settings</Link>
+                                    <Link className='menuoption' to="/page3">Help</Link>
+                                    <Link className='menuoption' to="/page3">Invite friend</Link>
+                                    <Link className='menuoption' to="/page3">Log out</Link>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
             }
         </>
     );

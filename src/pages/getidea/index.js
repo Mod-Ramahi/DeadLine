@@ -1,13 +1,12 @@
 import React from 'react'
 import Head from '../../components/pagehead/Head'
-import Filter from '../../components/Search/Filter'
-import "./search.scss"
+import Ideas from '../../components/ideas/Ideas'
 import HeadBg from '../homepage/headimages/HeadBg.png'
-export default function Search() {
+export default function GetIdea() {
   return (
     <>
         <Head backgroundImg={HeadBg}/>
-        <Filter />
+        <Ideas />
     </>
   )
 }

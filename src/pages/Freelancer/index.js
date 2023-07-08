@@ -19,7 +19,6 @@ export default function Freelancer () {
 
     return (
         <>
-        <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa{UserID}</p>
         <UserProfile user={clickedUser} />
         
         </>

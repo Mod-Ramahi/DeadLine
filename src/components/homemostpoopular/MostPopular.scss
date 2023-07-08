@@ -1,36 +1,48 @@
-.mostpopular{
+.mostpopular {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 54px;
-    gap:40px;
-    span{
+    gap: 40px;
+
+    span {
         color: rgb(96, 71, 123);
         font-size: 60px;
         font-weight: bold;
     }
-    
-    .mostpopularbtns{
-        button{
-        height: 42px;
-        width: 168px;
-        border: 1px solid rgb(96, 71, 123)
+
+    .mostpopularbtns {
+        button {
+            height: 42px;
+            width: 168px;
+            border: 1px solid rgb(96, 71, 123)
         }
-        
-        .jobbtn{
-            color: white;
-            background-color: rgb(96, 71, 123);
+
+        .jobbtn {
+            color: rgb(96, 71, 123);
+            background-color: white;
             border-radius: 50px 0 0 50px;
         }
 
-        .freelancerbtn{
+        .freelancerbtn {
             color: rgb(96, 71, 123);
             background-color: white;
             border-radius: 0 50px 50px 0;
         }
+        .active{
+            color: white;
+            background-color: rgb(96, 71, 123);
+        }
     }
-
-    .cardscontainer{
+    .jobscontainer{
+        margin-right: 3rem;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        gap: 4rem;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .cardscontainer {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         // grid-template-rows: 1fr;
@@ -38,40 +50,46 @@
         // align-self:center; 
         justify-items: center;
         width: 85%;
-        .cardbox{
+
+        .cardbox {
             display: flex;
             flex-direction: column;
             max-width: 90%;
             margin-bottom: 2rem;
         }
-        
-        .imagebox{
+
+        .imagebox {
             border: 1px solid black;
-            padding: 1px;
+            padding:0.4rem;
             border-radius: 10px;
             margin-bottom: 1rem;
-            img{
-                margin-top: 5px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+
+            img {
+                margin: 5px;
                 height: 158px;
-                width: 231px;
+                width: 222px;
                 border-radius: 7px;
                 object-fit: contain;
             }
         }
     }
 
-        .cardtext{
-            display: flex;
-            flex-direction: column;
-            span{
+    .cardtext {
+        display: flex;
+        flex-direction: column;
+
+        span {
             color: black;
             font-size: 16px;
             font-weight: normal;
-            }
         }
-    
+    }
 
-    .morecards{
+
+    .morecards {
         font-size: 16px;
         font-weight: normal;
         width: 192px;
@@ -79,5 +97,61 @@
         color: white;
         background-color: rgb(96, 71, 123);
         border-radius: 10px;
+    }
+
+    @media only screen and (max-width:900px) {
+        margin-top: 5px;
+        gap: 10px;
+
+        span {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .mostpopularbtns {
+            button {
+                height: 30px;
+                width: 90px;
+                font-size: 13px;
+            }
+        }
+        .jobscontainer{
+            margin-right: 1rem;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            grid-template-columns: repeat(1,1fr);
+        }
+        .cardscontainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            // grid-template-rows: 1fr;
+            // gap: 50px;
+            // align-self:center; 
+            justify-items: center;
+            width: 85%;
+
+            .imagebox {
+
+                img {
+                    margin-top: 5px;
+                    height: 135px;
+                    width: 190px;
+                    border-radius: 7px;
+                    object-fit: contain;
+                }
+            }
+        }
+
+        .morecards {
+            font-size: 14px;
+            font-weight: normal;
+            width: 160px;
+            height: 40px;
+            color: white;
+            background-color: rgb(96, 71, 123);
+            border-radius: 10px;
+        }
     }
 }
