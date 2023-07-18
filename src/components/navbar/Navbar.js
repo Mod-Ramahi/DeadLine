@@ -8,7 +8,7 @@ import MsgIcon from './Icn4.png';
 import NotificationIcon from './Icn3.png';
 import MngmtnCaseIcon from './Icn2.png';
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 
@@ -25,6 +25,10 @@ const Navbar = () => {
     const [userOpen, setUserOpen] = useState(false);
     const [mngrCaseOpen, setMngrCaseOpen] = useState(false);
     const menuRef = useRef(null);
+    const [popOpen, setPopOpen] = useState(false)
+    const [fundAdd, setFundAdd] = useState(0)
+    const [requestWithdraw, setRequestWithdraw] = useState(0)
+    const navigate = useNavigate()
     // const location = useLocation()
 
     useEffect(() => {
@@ -85,6 +89,26 @@ const Navbar = () => {
     // const MngCaseIsOpen = () => {
     //     setMngrCaseOpen(!MngCaseIsOpen)
     // }
+    const ClosePopUp = () => {
+        setPopOpen(!popOpen)
+    }
+    const HandleFundChange = (event) => {
+        const fund = event.target.value;
+        setFundAdd(fund)
+    }
+    const HandleWithdrawChange = (event) => {
+        const withdraw = event.target.value
+        setRequestWithdraw(withdraw)
+    }
+    const AddFund = () => {
+        console.log(fundAdd)
+        navigate('/payment')
+        ClosePopUp();
+    }
+    const Withdraw = () => {
+        console.log(requestWithdraw)
+        ClosePopUp();
+    }
 
     return (
         <>
@@ -139,7 +163,7 @@ const Navbar = () => {
                                                         padding: "6px",
                                                         zIndex: "1"
                                                     }}>
-                                                         <p>transaction history</p> <p>add funds</p> <p>Withdraw Request</p>
+                                                        <p>transaction history</p> <p onClick={ClosePopUp}>add funds</p> <p onClick={ClosePopUp}>Withdraw Request</p>
                                                     </div>
                                                 )}
                                             </div>
@@ -161,7 +185,11 @@ const Navbar = () => {
                                                 }}>
                                                     <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/myprofile"><p>Profile</p></Link>
                                                     <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/membership"><p>Membership</p></Link>
-                                                    <p>Invite friend</p> <p>Settings</p> <p>Help</p> <p>Log out</p>
+                                                    <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/settings"><p>Settings</p></Link>
+                                                    <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/help"><p>Help</p></Link>
+                                                    <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/invitefriend"><p>Invite friend</p></Link>
+
+                                                    <p>Log out</p>
                                                 </div>
                                             )}
                                         </div>
@@ -222,12 +250,31 @@ const Navbar = () => {
                                     <Link className='menuoption' to="/howitworks">How it Works?</Link>
                                     <Link className='menuoption' to="/categories">categories</Link>
                                     <Link className='menuoption' to="/membership">membership plans</Link>
-                                    <Link className='menuoption' to="/page3">Settings</Link>
-                                    <Link className='menuoption' to="/page3">Help</Link>
-                                    <Link className='menuoption' to="/page3">Invite friend</Link>
+                                    <Link className='menuoption' to="/settings">Settings</Link>
+                                    <Link className='menuoption' to="/help">Help</Link>
+                                    <span style={{ cursor: 'pointer', width: '99%' }} className='menuoption' onClick={ClosePopUp}>Add fund</span>
+                                    <Link className='menuoption' to="/invitefriend">Invite friend</Link>
                                     <Link className='menuoption' to="/page3">Log out</Link>
                                 </div>
                             )}
+                        </div>
+                    </div>
+                </div>
+            }
+            {popOpen &&
+                <div className='pop_container'>
+                    <div className='pop_up'>
+                        <div className='close_pop_up'>
+                            <span>Close</span>
+                            <button className='btn_closepopup' onClick={ClosePopUp}>X</button>
+                        </div>
+                        <div className='pop_window'>
+                            <span>Add Fund</span>
+                            <input type='number' placeholder='enter amount' min={15} max={5000} onChange={HandleFundChange} />
+                            <button onClick={AddFund}>Add</button>
+                            <span>Request Withdraw</span>
+                            <input type='number' placeholder='enter amount' min={15} max={5000} onChange={HandleWithdrawChange} />
+                            <button onClick={Withdraw}>Withdraw</button>
                         </div>
                     </div>
                 </div>

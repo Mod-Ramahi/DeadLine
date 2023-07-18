@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-  createBrowserRouter, 
+  createBrowserRouter,
 } from "react-router-dom";
 import Root from "./root";
 import SignIn from "../pages/loginpage/Signin";
@@ -22,93 +22,122 @@ import Job from "../pages/jobPage";
 import CompleteRegister from "../pages/completeregister";
 import MyProfile from "../pages/myprofile";
 import ProfileEdit from "../pages/profileedit";
-
+import Settings from "../pages/settings";
+import Help from "../pages/helpcontactus";
+import InviteFriend from "../pages/inviteFriend";
+import Payment from "../pages/payment";
+import AboutUs from "../pages/aboutuspage";
+import Myjobs from "../pages/myjobs";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root/>,
-    children:[
-        {
-            path:"/",
-            element: <Home/>
-        },
-        {
-            path:"/signIn",
-            element: <SignIn/>
-        }
-        ,
-        {
-            path:"/userhome",
-            element: <UserHome/>
-        },
-        {
-          path:"/categories",
-          element: <Categories/>
-        }
-        ,
-        {
-            path:"/getidea",
-            element: <GetIdea/>
-        },
-        {
-          path:"/howitworks",
-          element: <HowItWorks/>
-        },
-        {
-          path:"/freelancer/:UserID",
-          element:<Freelancer/>
-        },
-        {
-          path:"/resultssearch",
-          element:<ResultSearch/>
-        },
-        {
-          path:"/terms&conditions",
-          element:<Terms/>
-        },
-        {
-          path:"/faq",
-          element:<Faq/>
-        },
-        {
-          path:"/membership",
-          element:<Membership/>
-        },
-        {
-          path:"/bidproposal",
-          element:<BidOnJob/>
-        },
-        {
-          path:"/portfoliopage/:CardId",
-          element:<Portfolio/>
-        },
-        {
-          path:"/register",
-          element:<Register/>
-        },
-        {
-          path:"/postjob",
-          element:<PostJob/>
-        },
-        {
-          path:"/jobprofile/:JobID",
-          element:<Job/>
-        },
-        {
-          path:"/completeregister",
-          element: <CompleteRegister/>
-        },
-        {
-          path:"/myprofile",
-          element:<MyProfile/>
-        },
-        {
-          path:"/profileedit",
-          element:<ProfileEdit/>
-        }
-    ]
-  },
+      {
+        path: "/",
+        element: <Root />,
+        children: [
+          {
+            path: "/",
+            element: <Home />
+          },
+          {
+            path: "/signIn",
+            element: <SignIn />
+          }
+          ,
+          {
+            path: "/userhome",
+            element: <UserHome />
+          },
+          {
+            path: "/categories",
+            element: <Categories />
+          }
+          ,
+          {
+            path: "/getidea",
+            element: <GetIdea />
+          },
+          {
+            path: "/howitworks",
+            element: <HowItWorks />
+          },
+          {
+            path: "/freelancer/:UserID",
+            element: <Freelancer />
+          },
+          {
+            path: "/resultssearch",
+            element: <ResultSearch />
+          },
+          {
+            path: "/terms&conditions",
+            element: <Terms />
+          },
+          {
+            path: "/faq",
+            element: <Faq />
+          },
+          {
+            path: "/membership",
+            element: <Membership />
+          },
+          {
+            path: "/bidproposal",
+            element: <BidOnJob />
+          },
+          {
+            path: "/portfoliopage/:CardId",
+            element: <Portfolio />
+          },
+          {
+            path: "/register",
+            element: <Register />
+          },
+          {
+            path: "/postjob",
+            element: <PostJob />
+          },
+          {
+            path: "/jobprofile/:JobID",
+            element: <Job />
+          },
+          {
+            path: "/completeregister",
+            element: <CompleteRegister />
+          },
+          {
+            path: "/myprofile",
+            element: <MyProfile />
+          },
+          {
+            path: "/profileedit",
+            element: <ProfileEdit />
+          },
+          {
+            path: "/settings",
+            element: <Settings />
+          },
+          {
+            path: "/help",
+            element: <Help />
+          },
+          {
+            path: "/invitefriend",
+            element: <InviteFriend />
+          },
+          {
+            path: "/payment",
+            element: <Payment />
+          },
+          {
+            path: "/aboutus",
+            element: <AboutUs />
+          },
+          {
+            path:"/myjobs",
+            element:<Myjobs/>
+          }
+        ]
+      },
 ]);
 
 export default router;

@@ -77,7 +77,7 @@ export default function Footer() {
                             <Link style={{color:'inherit', textDecoration:'none'}} to={'/aboutus'}>
                                 <span>About Us</span>
                             </Link>
-                            <Link style={{color:'inherit', textDecoration:'none'}} to={'/contactus'}>
+                            <Link style={{color:'inherit', textDecoration:'none'}} to={'/help'}>
                             <span>Contact Us</span>
                             </Link>
                             <div className="messagebox">

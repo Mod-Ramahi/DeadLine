@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
+import ScrollTop from "../components/scrollToTop/ScrollTop";
 
 export default function Root() {
     return (
@@ -8,6 +9,7 @@ export default function Root() {
         <Navbar />
         <Outlet />
         <Footer/>
+        <ScrollTop/>
       </>
     );
 }

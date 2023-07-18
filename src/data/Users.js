@@ -52,7 +52,8 @@ export const Users = [
                 service:['logo esign', 'brand design']
             }
         ],
-        online:false
+        online:false,
+        balance:10
     },
     {
         id:2,
@@ -107,7 +108,8 @@ export const Users = [
                 service:['logo esign', 'brand design']
             }
         ],
-        online:true
+        online:true,
+        balance:150
     },
     {
         id:3,
@@ -164,7 +166,8 @@ export const Users = [
 
             }
         ],
-        online:true
+        online:true,
+        balance:100
     },
     {
         id:4,
@@ -221,7 +224,8 @@ export const Users = [
 
             }
         ],
-        online:true
+        online:true,
+        balance:0
     },
 
 ]
