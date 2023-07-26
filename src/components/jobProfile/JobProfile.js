@@ -3,9 +3,10 @@ import Joined from './Joined.png'
 import Time from './Time.png'
 import Recommendation from './Recommendation.png'
 import { Users } from "../../data/Users";
+import { Link } from "react-router-dom";
 
-export default function ({job}) {
-    const user= Users.find(user => user.id === job.userPostedId)
+export default function JobProfile({ job }) {
+    const user = Users.find(user => user.id === job.userPostedId)
     return (
         <div className="userprofile">
             <div className="uppersection">
@@ -70,9 +71,11 @@ export default function ({job}) {
                 </div>
                 <div className="rightsection">
                     <div className="upperbox">
-                        <div className="hirebtn">
-                            <span>Hire</span>
-                        </div>
+                        <Link to='/bidproposal' style={{ color: 'inherit', textDecoration: 'none' }}>
+                            <div className="hirebtn">
+                                <span>bid On Job</span>
+                            </div>
+                        </Link>
                         <div className="boxinfo">
                             <span>Top Skills</span>
                             <div className="pboxinfo">
@@ -98,9 +101,16 @@ export default function ({job}) {
                     </div>
                 </div>
             </div>
-                <hr />
+            <hr />
             <div className="reviewssection">
                 <span>Reviews</span>
+                <div>
+                    {/* {Reviews} */}
+                </div>
+            </div>
+            <hr />
+            <div className="reviewssection">
+                <span>Proposals</span>
                 <div>
                     {/* {Reviews} */}
                 </div>

@@ -1,39 +1,62 @@
-.post_job {
+.post-job {
     margin-top: 20rem;
     display: flex;
     flex-direction: column;
-    width: 90%;
-    margin-left: 5rem;
+    align-items: center;
+    width: 99.5%;
     gap: 2rem;
+    background-color: #fff;
 
+    // padding: 1rem;
     .title {
-        font-size: 60px;
+        font-size: 3.8rem;
         font-weight: bold;
         color: rgb(96, 71, 123);
-        margin-bottom: 3rem;
         display: flex;
         justify-content: center;
     }
 
-    .job_title{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 90%;
+    .job-title {
         height: 4rem;
-        #titlejob{
+
+        #titlejob {
             height: 75%;
             width: 50%;
             border-radius: 0;
         }
     }
 
-    .select_category {
+    .color-a {
+        background-color: rgba(96, 71, 123, 0.8);
+        color: #fff;
+    }
+
+    .color-b {
+        background-color: rgba(96, 71, 123, 0.3);
+    }
+
+    .job-description {
+        display: flex;
+        flex-direction: column;
+        height: 10rem;
+
+        .description-area {
+            width: 90%;
+            height: 160px;
+            resize: none;
+            border-radius: 5px;
+        }
+    }
+
+    hr {
+        width: 100%;
+        border: 2px solid rgb(96, 71, 123);
+    }
+
+    .select-category {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 90%;
-        height: 69px;
 
         #categlist {
             height: 75%;
@@ -45,46 +68,26 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 90%;
-        // height: 69px;
+        width: 80%;
+        height: 8rem;
 
         #skill {
             height: 75%;
             width: 50%;
         }
-
-        ul {
-            height: auto;
-
-            li {
-                height: auto;
-            }
-        }
     }
 
-    .job_description {
-        display: flex;
-        flex-direction: column;
-
-        .description_area {
-            width: 90%;
-            height: 160px;
-            resize: none;
-            border-radius: 5px;
-        }
-    }
-
-    .file_attach {
+    .file-attach {
         display: flex;
         flex-direction: column;
     }
 
-    .pay_method {
+    .pay-method {
         display: flex;
         flex-direction: column;
         justify-content: center;
         width: 90%;
-        height: 69px;
+        height: 5rem;
 
         #method {
             height: 75%;
@@ -97,24 +100,45 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        gap: 7px;
+        gap: 0.5rem;
+        height: auto;
+        width: 100%;
 
-        #price {
-            width: 580px;
-            height: 69px;
-        }
-
-        #currency {
-            width: 70px;
-            height: 74px;
-            padding: 3px;
-            color: white;
-            background-color: rgb(96, 71, 123);
+        .budget-options {
+            width: 100%;
+            height: auto;
+            display: flex;
+            // width: 80%;
+            font-size: 1.1rem;
+            font-weight: bold;
+            gap: 0.5rem;
             border-radius: 5px;
+            padding: 0.5rem;
+
+            .price-input {
+                width: 80%;
+                height: auto;
+
+                #price {
+                    width: 40%;
+                    height: 4rem;
+                }
+
+                #currency {
+                    width: 5%;
+                    height: 4rem;
+                    padding: 3px;
+                    color: white;
+                    background-color: rgb(96, 71, 123);
+                    border-radius: 5px;
+                }
+            }
         }
+
     }
 
     .post_type {
+        width: 100%;
         margin: 2rem 0;
         font-weight: bold;
         display: flex;
@@ -165,33 +189,81 @@
         border-radius: 5px;
     }
 
+    .job-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 80%;
+        font-size: 1.1rem;
+        font-weight: bold;
+        gap: 0.5rem;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
+
     font-size: 20px;
 }
 
 @media only screen and (max-width: 700px) {
-    .post_job {
-        margin-top: 10rem;
+    .post-job {
+        margin-top: 8rem;
         display: flex;
         flex-direction: column;
-        width: 85%;
-        margin-left: 1rem;
-        gap: 1rem;
+        align-items: center;
+        width: 99%;
+        gap: 1.5rem;
+        background-color: #fff;
 
+        // padding: 1rem;
         .title {
-            font-size: 20px;
+            font-size: 1.8rem;
             font-weight: bold;
             color: rgb(96, 71, 123);
-            margin-bottom: 1rem;
             display: flex;
             justify-content: center;
         }
 
-        .select_category {
+        .job-title {
+            height: 4rem;
+
+            #titlejob {
+                height: 75%;
+                width: 50%;
+                border-radius: 0;
+            }
+        }
+
+        .color-a {
+            background-color: rgba(96, 71, 123, 0.8);
+            color: #fff;
+        }
+
+        .color-b {
+            background-color: rgba(96, 71, 123, 0.3);
+        }
+
+        .job-description {
+            display: flex;
+            flex-direction: column;
+            height: 10rem;
+
+            .description-area {
+                width: 90%;
+                height: 160px;
+                resize: none;
+                border-radius: 5px;
+            }
+        }
+
+        hr {
+            width: 100%;
+            border: 2px solid rgb(96, 71, 123);
+        }
+
+        .select-category {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            width: 90%;
-            height: 3rem;
 
             #categlist {
                 height: 75%;
@@ -199,15 +271,34 @@
             }
         }
 
-        .job_description {
+        .skills {
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            width: 80%;
+            height: 8rem;
 
-            .description_area {
-                width: 90%;
-                height: 100px;
-                resize: none;
-                border-radius: 5px;
+            #skill {
+                height: 75%;
+                width: 50%;
+            }
+        }
+
+        .file-attach {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pay-method {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 90%;
+            height: 5rem;
+
+            #method {
+                height: 75%;
+                width: 50%;
             }
         }
 
@@ -216,29 +307,87 @@
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            gap: 2px;
+            gap: 0.5rem;
+            height: 100%;
 
             #price {
-                width: 80%;
-                // height: 10%;
+                width: 580px;
+                height: 69px;
             }
 
             #currency {
-                width: 2rem;
-                // height: 8rem;
-                padding: 1px;
+                width: 70px;
+                height: 74px;
+                padding: 3px;
                 color: white;
                 background-color: rgb(96, 71, 123);
                 border-radius: 5px;
             }
         }
-        .post_type{
-            .submit{
-                width: 70%;
-                height: 4rem;
-                font-size:15px;
-            }
-        }
-    }
 
+        .post_type {
+            margin: 2rem 0;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+
+            .type {
+                display: flex;
+                flex-direction: column;
+                border: 4px double rgb(96, 71, 123);
+                border-radius: 5px;
+
+                .vip {
+                    border: 3px solid rgb(96, 71, 123);
+                    border-radius: 4px;
+                    margin: 1rem 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    background-color: rgba(96, 71, 123, 0.7);
+                    ;
+
+                    #checkbox {
+                        height: 1.5rem;
+                        width: 1.5rem;
+                    }
+                }
+            }
+
+            .submit {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(96, 71, 123);
+                color: white;
+                width: 450px;
+                height: 76px;
+                font-size: 30px;
+                border-radius: 7px;
+            }
+
+        }
+
+        input {
+            border-radius: 5px;
+        }
+
+        .job-title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 80%;
+            font-size: 1.1rem;
+            font-weight: bold;
+            gap: 0.5rem;
+            border-radius: 5px;
+            padding: 0.5rem;
+        }
+
+        font-size: 20px;
+    }
 }

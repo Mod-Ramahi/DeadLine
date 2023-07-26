@@ -28,6 +28,17 @@ import InviteFriend from "../pages/inviteFriend";
 import Payment from "../pages/payment";
 import AboutUs from "../pages/aboutuspage";
 import Myjobs from "../pages/myjobs";
+import AdminSignin from "../administrators/adminSignin";
+import AdminDashnoard from "../administrators/adminDashboard";
+import AdminUser from "../administrators/adminUsers";
+import AdminJobs from "../administrators/adminJobs";
+import AdminProposals from "../administrators/adminProposals";
+import AdminMemberships from "../administrators/adminMemberships";
+import AdminReports from "../administrators/adminReports";
+import AdminPayments from "../administrators/adminPayments";
+import AdminChat from "../administrators/adminChat";
+import AdminSingleUser from "../administrators/adminSingleUser";
+import HireFreelancer from "../pages/hireFreelancer";
 
 const router = createBrowserRouter([
       {
@@ -135,6 +146,54 @@ const router = createBrowserRouter([
           {
             path:"/myjobs",
             element:<Myjobs/>
+          },
+          {
+            path:"/hire-freelancer",
+            element: <HireFreelancer/>
+          },
+          {
+            path:"/administration",
+            element:<AdminSignin/>
+          },
+          {
+            path:"/administration/home",
+            element:<AdminDashnoard/>
+          },
+          {
+            path:"/administration/users",
+            element:<AdminUser/>
+          },
+          {
+            path:"/administration/jobs",
+            element:<AdminJobs/>
+          },
+          {
+            path:"/administration/proposals",
+            element:<AdminProposals/>
+          },
+          {
+            path:"/administration/membership",
+            element:<AdminMemberships/>
+          },
+          {
+            path:"/administration/reports",
+            element:<AdminReports/>
+          },
+          {
+            path:"/administration/payments",
+            element:<AdminPayments/>
+          },
+          {
+            path:"/administration/chat",
+            element:<AdminChat/>
+          },
+          {
+            path: "*",
+            element: <Root />,
+          },
+          {
+            path: "/administration/single-user",
+            element: <AdminSingleUser/>
           }
         ]
       },

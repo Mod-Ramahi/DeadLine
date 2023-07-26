@@ -112,7 +112,7 @@ const Navbar = () => {
 
     return (
         <>
-            {isMobile ?
+            {isMobile && pathname !== '/' ?
                 (<div className='navbar mobilebar'>
                     <div className='mobilelogo'><Link to='/'><img alt='mhomelogo' src={LogoImg} /></Link></div>
                     <div className='mobilebaroptions'>

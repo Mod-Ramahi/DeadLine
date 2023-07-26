@@ -74,11 +74,11 @@ export default function Footer() {
                     <div className="flex">
                         <FooterContent />
                         <div className="about">
-                            <Link style={{color:'inherit', textDecoration:'none'}} to={'/aboutus'}>
+                            <Link style={{ color: 'inherit', textDecoration: 'none' }} to={'/aboutus'}>
                                 <span>About Us</span>
                             </Link>
-                            <Link style={{color:'inherit', textDecoration:'none'}} to={'/help'}>
-                            <span>Contact Us</span>
+                            <Link style={{ color: 'inherit', textDecoration: 'none' }} to={'/help'}>
+                                <span>Contact Us</span>
                             </Link>
                             <div className="messagebox">
                                 <span>Send your message</span>

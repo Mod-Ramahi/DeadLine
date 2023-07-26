@@ -20,7 +20,6 @@ export default function Job (){
     return (
         <>
         <JobProfile job={clickedJob} />
-        
         </>
     )
 }
