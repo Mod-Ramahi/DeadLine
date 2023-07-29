@@ -1,15 +1,16 @@
 import { useState } from "react";
 import "./Signin.scss"
 import { Link, useNavigate } from "react-router-dom";
+import { registerRequest } from "../../api";
 
 const Register = () => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [rePassword, setRePassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
     const navigate = useNavigate()
     const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
+        setEmail(event.target.value);
     }
 
     const handlePasswordChange = (event) => {
@@ -27,17 +28,19 @@ const Register = () => {
         // localStorage.setItem('rememberMe', newRememberMeValue);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (password !== rePassword) {
             alert('passwords doesnt match');
             return;
         }
-        setUsername("");
-        setPassword("");
-        setRePassword("");
-        setRememberMe(false);
-        navigate('/completeregister')
+        try {
+            const response = await registerRequest({email,password})
+            navigate('/completeregister')
+        } catch (error) {
+            
+        }
+        
     }
 
     return (
@@ -52,12 +55,12 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
                 <div className="user_name">
                     <label htmlFor="username">
-                        UserName or Email
+                        Email
                     </label>
                     <input
-                        id="username"
+                        id="email"
                         type="text"
-                        value={username}
+                        value={email}
                         onChange={handleUsernameChange}
                         required
                     />

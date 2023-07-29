@@ -1,14 +1,15 @@
 import { useState } from "react";
 import "./Signin.scss"
 import { Link } from "react-router-dom";
+import { loginRequest } from "../../api";
 
 const SignIn = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+    setEmail(event.target.value);
   }
 
   const handlePasswordChange = (event) => {
@@ -22,11 +23,10 @@ const SignIn = () => {
     // localStorage.setItem('rememberMe', newRememberMeValue);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setUsername("");
-    setPassword("");
-    setRememberMe(false);
+    const response = await loginRequest({email,password})
+    console.log(response)
   }
 
   return (
@@ -39,12 +39,12 @@ const SignIn = () => {
       <form onSubmit={handleSubmit}>
         <div className="user_name">
           <label htmlFor="username">
-            UserName or Email
+            Email
           </label>
           <input
-            id="username"
+            id="email"
             type="text"
-            value={username}
+            value={email}
             onChange={handleUsernameChange}
             required
           />
