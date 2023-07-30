@@ -3,6 +3,7 @@ import Joined from './Joined.png'
 import Time from './Time.png'
 import Recommendation from './Recommendation.png'
 import Asseta from "./Asseta.png"
+import { Link } from "react-router-dom"
 
 export default function UserProfile({user}){
     return (
@@ -87,9 +88,11 @@ export default function UserProfile({user}){
                 </div>
                 <div className="rightsection">
                     <div className="upperbox">
+                        <Link to='/hire-freelancer'>
                         <div className="hirebtn">
                             <span>Hire</span>
                         </div>
+                        </Link>
                         <div className="boxinfo">
                             <span>Top Skills</span>
                             <div className="pboxinfo">

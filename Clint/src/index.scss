@@ -9,5 +9,39 @@ body {
     font-weight: bold;
     cursor: pointer;
   }
+
+  //for some administration pages
+  .user-result-box{
+    p{ color: white; font-weight: bold; font-size: 1.2rem;}
+    display: flex;
+    flex-direction: column;
+    .user-result-top-box{
+      display: flex;
+      .user-result-left-box{
+        width: 85%;
+        height: 80vh;
+        background-color: black;
+        padding: 1rem;
+        .user-result-profile{
+          background-color: purple;
+          height: 75%;
+        }
+        .user-result-info{
+          background-color:darkorange;
+          height: 17%;
+        }
+      }
+      .user-result-right-box{
+        background-color: dimgrey;
+      }
+    }
+    .user-result-bottom-box{
+      background-color: tomato;
+      .user-related{
+
+      }
+    }
+
+  }
 }
 

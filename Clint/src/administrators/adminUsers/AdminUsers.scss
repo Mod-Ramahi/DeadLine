@@ -1,0 +1,43 @@
+.user-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .search-user {
+        padding: 1rem;
+        width: 80%;
+        background-color: rgb(221, 221, 221);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        .search-field {
+            padding: 1rem;
+            min-width: 30%;
+            display: flex;
+            justify-content: space-between;
+            span{
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .users-result{
+        width: 90%;
+        padding: 5rem;
+        margin: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px,3fr));
+        .result-user{
+            display: flex;
+            flex-direction: column;
+            color: white;
+            background-color: black;
+            padding: 2rem;
+            margin: 1rem;
+        }
+    }
+}

@@ -6,8 +6,6 @@ import './CompleteRegister.scss'
 export default function CompleteRegister() {
     const [businessType, setBusinesstype] = useState()
     const [maincategory, setMainCategory] = useState()
-    const [secondCategory, setSecondCategory] = useState()
-    const [anotherCategory, setAnotherCategory] = useState(false)
     const [skillsSelected, setSkillsSelected] = useState([])
     const navigate = useNavigate()
 
@@ -21,17 +19,15 @@ export default function CompleteRegister() {
     const handleMaincategory = (event) => {
         setMainCategory(event.target.value)
     }
-    const handleSecondcategory = (event) => {
-        setSecondCategory(event.target.value)
-    }
-    const addAnotherCategory = () => {
-        setAnotherCategory(!anotherCategory)
-    }
+
     const handleSkillsSelection = (event) => {
         const selectedskill = (event.target.value);
-        if (selectedskill != '' && !skillsSelected.includes(selectedskill)) {
+        if (selectedskill !== '' && !skillsSelected.includes(selectedskill)) {
             const skillsArray = [...skillsSelected, selectedskill].slice(0, 4)
             setSkillsSelected(skillsArray)
+        }
+        if( selectedskill === 'reset'){
+            setSkillsSelected([])
         }
         // setSkillsSelected([...skillsSelected, selectedskill].slice(0,4))
     }
@@ -54,27 +50,24 @@ export default function CompleteRegister() {
                             <option key={idx} value={item.categoryname}>{item.categoryname}</option>
                         ))}
                     </select>
-                    <div className="add_another">
-                        <span className="add" onClick={addAnotherCategory} style={{ cursor: 'pointer' }}>Add Another category?</span>
-                        {anotherCategory && <select id="category2" onChange={handleSecondcategory}>
-                            {CategoryList.map((item, idx) => (
-                                <option key={idx} value={item.categoryname}>{item.categoryname}</option>
-                            ))}
-                        </select>}
-                    </div>
                     <div className="select_skills">
-                        <span className="add_skills"> Choose at least 2 skills</span>
+                        <span className="add_skills"> Choose at least 2 skills and up to 5</span>
                         <select id="skill" onChange={handleSkillsSelection}>
                             <option value=''>Select</option>
+                            <option value='reset'>Reset</option>
                             <option value='skill1'>Skill one</option>
                             <option value='skill2'>Skill two</option>
                             <option value='skill3'>Skill three</option>
                             <option value='skill4'>Skill four</option>
                             <option value='skill5'>Skill five</option>
+                            <option value='skill6'>Skill six</option>
+                            <option value='skill7'>Skill seven</option>
+                            <option value='skill8'>Skill eight</option>
                         </select>
                         <div className="skills box">
+                            <span>Your selected skills: </span>
                             {skillsSelected.map((skill, idx) => (
-                                < span key={idx} > {skill}</span>
+                                < span key={idx} > {skill},</span>
                             ))}
                         </div>
                     </div>
