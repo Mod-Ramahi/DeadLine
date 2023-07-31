@@ -1,11 +1,10 @@
-import './Home.scss';
 import Head from '../../components/pagehead/Head';
 import MostPopular from '../../components/homemostpoopular/MostPopular';
 import SmallAboutUs from '../../components/smallaboutussection/SmallAboutUs';
 import {Cards} from "../../Cards"
 import AllcategoryHome from '../../components/allcategoryhomesection/AllcategoryHome';
 import HeadBg from './headimages/HeadBg.png'
-const Home = () => {
+export default function Home () {
     
     return(
         <>
@@ -16,5 +15,3 @@ const Home = () => {
         </>
     )
 }
-
-export default Home;

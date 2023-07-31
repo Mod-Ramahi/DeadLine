@@ -1,4 +1,4 @@
-.mostpopular {
+.most-popular {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,20 +11,20 @@
         font-weight: bold;
     }
 
-    .mostpopularbtns {
+    .most-popular-btns {
         button {
             height: 42px;
             width: 168px;
             border: 1px solid rgb(96, 71, 123)
         }
 
-        .jobbtn {
+        .job-btn {
             color: rgb(96, 71, 123);
             background-color: white;
             border-radius: 50px 0 0 50px;
         }
 
-        .freelancerbtn {
+        .freelancer-btn {
             color: rgb(96, 71, 123);
             background-color: white;
             border-radius: 0 50px 50px 0;
@@ -34,7 +34,7 @@
             background-color: rgb(96, 71, 123);
         }
     }
-    .jobscontainer{
+    .jobs-container{
         margin-right: 3rem;
         display: grid;
         justify-content: center;
@@ -42,7 +42,7 @@
         gap: 4rem;
         grid-template-columns: repeat(2,1fr);
     }
-    .cardscontainer {
+    .cards-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         // grid-template-rows: 1fr;
@@ -51,14 +51,14 @@
         justify-items: center;
         width: 85%;
 
-        .cardbox {
+        .card-box {
             display: flex;
             flex-direction: column;
             max-width: 90%;
             margin-bottom: 2rem;
         }
 
-        .imagebox {
+        .image-box {
             border: 1px solid black;
             padding:0.4rem;
             border-radius: 10px;
@@ -77,7 +77,7 @@
         }
     }
 
-    .cardtext {
+    .card-text {
         display: flex;
         flex-direction: column;
 
@@ -89,7 +89,7 @@
     }
 
 
-    .morecards {
+    .more-cards {
         font-size: 16px;
         font-weight: normal;
         width: 192px;
@@ -108,14 +108,14 @@
             font-weight: bold;
         }
 
-        .mostpopularbtns {
+        .most-popular-btns {
             button {
                 height: 30px;
                 width: 90px;
                 font-size: 13px;
             }
         }
-        .jobscontainer{
+        .jobs-container{
             margin-right: 1rem;
             display: grid;
             justify-content: center;
@@ -123,7 +123,7 @@
             gap: 4rem;
             grid-template-columns: repeat(1,1fr);
         }
-        .cardscontainer {
+        .cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             // grid-template-rows: 1fr;
@@ -132,7 +132,7 @@
             justify-items: center;
             width: 85%;
 
-            .imagebox {
+            .image-box {
 
                 img {
                     margin-top: 5px;
@@ -144,7 +144,7 @@
             }
         }
 
-        .morecards {
+        .more-cards {
             font-size: 14px;
             font-weight: normal;
             width: 160px;

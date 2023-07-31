@@ -9,21 +9,21 @@ export default function JobCardResult({ job, onJobClick }) {
     }
     const user = Users.find(user => user.id === job.userPostedId)
     return (
-        <div className="job_card" onClick={GetJobID}>
+        <div className="job-card" onClick={GetJobID}>
             <div className="up">
-                <div className="job_title">
-                    <span className="j_title">(Project) {job.jobTitle}</span>
+                <div className="job-title">
+                    <span className="j-title">(Project) {job.jobTitle}</span>
                 </div>
-                <div className="job_price">
+                <div className="job-price">
                     <span>{job.jobPrice}</span>
                     <span>{job.paymentMethod}</span>
                 </div>
             </div>
             <div className="down">
-                <span className="job_category">{job.jobCategory}</span>
+                <span className="job-category">{job.jobCategory}</span>
             </div>
-            <div className="card_title">
-                <span className="real_name">Job Posted By: {user.name}</span>
+            <div className="card-title">
+                <span className="real-name">Job Posted By: {user.name}</span>
                 <span className="reviews">{user.avgRate}</span>
             </div>
         </div>

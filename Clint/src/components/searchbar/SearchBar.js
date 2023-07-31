@@ -2,7 +2,7 @@ import './SearchBar.scss';
 import { useState } from 'react';
 import  SearchIcon  from './Searchicon.png';
 
-const SearchBar = () => {
+export default function SearchBar () {
     const [SearchString, setSearchString]= useState('');
 
     const HandleSearchChange = (event) => {
@@ -15,8 +15,8 @@ const SearchBar = () => {
         setSearchString('')
     };
     return (
-        <div className='searchbar'>
-            <form onSubmit={SearchHandle}>
+        <div className='search-bar'>
+            <form className='search-form' onSubmit={SearchHandle}>
                 <div className='input'>
                     <input
                         type='text'
@@ -24,11 +24,9 @@ const SearchBar = () => {
                         value={SearchString}
                         onChange={HandleSearchChange}
                     />
-                    <button type='submit' className='iconbtn'><img alt='srchicon' src={SearchIcon} /></button>
+                    <button type='submit' className='icon-btn'><img alt='srchicon' src={SearchIcon} /></button>
                 </div>
             </form>
         </div>
     )
 }
-
-export default SearchBar;

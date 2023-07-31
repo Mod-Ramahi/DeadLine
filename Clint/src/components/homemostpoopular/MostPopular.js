@@ -33,7 +33,7 @@ const MostPopular = ({ title, cards, number }) => {
             <Card card={card}  CardId={handleIdCard} />
         </Link>
     ));
-    const RenderJobs = Jobs.map((job) => (
+    const RenderJobs = Jobs.slice(0, number).map((job) => (
         <Link to={`/jobprofile/${job.id}`} style={{color:'inherit', textDecoration:'none'}} key={job.id}>
             <JobCardResult  job={job} onJobClick={handleIdJob}/>
         </Link>
@@ -42,24 +42,24 @@ const MostPopular = ({ title, cards, number }) => {
 
 
     return (
-        <div className="mostpopular">
+        <div className="most-popular">
             <span>{title}</span>
-            <div className="mostpopularbtns">
-                <button className={`jobbtn ${jobClicked ? "active" : ""}`}
+            <div className="most-popular-btns">
+                <button className={`job-btn ${jobClicked ? "active" : ""}`}
                     onClick={handleJobClicked}>Jobs</button>
-                <button className={`freelancerbtn ${freelancerClicked ? "active" : ""}`}
+                <button className={`freelancer-btn ${freelancerClicked ? "active" : ""}`}
                     onClick={handleFreelancerClicked}>Freelancers</button>
             </div>
-            {jobClicked ? (<div className='jobscontainer'>{RenderJobs}</div>)
+            {jobClicked ? (<div className='jobs-container'>{RenderJobs}</div>)
                 :
-                (<div className="cardscontainer">
+                (<div className="cards-container">
                     {RenderCards}
                 </div>)
             }
 
             <Link style={{ color: 'inherit', textDecoration: 'none' }}
                 to={'/resultssearch'}>
-                <button className='morecards'>View more popular</button>
+                <button className='more-cards'>View more popular</button>
             </Link>
         </div>
     )

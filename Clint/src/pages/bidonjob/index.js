@@ -63,7 +63,11 @@ export default function BidOnJob() {
             </div>
             <div className="text_description">
                 <label htmlFor="description">Proposal Description</label>
-                <textarea className="description_area" placeholder="description . . ." onChange={handleBidDescription}></textarea>
+                <textarea className="description_area" maxLength={700} placeholder="description . . ." onChange={handleBidDescription}></textarea>
+            </div>
+            <div className="text_description">
+                <label htmlFor="description">short Description</label>
+                <textarea className="description_area" maxLength={200} placeholder="description . . ." onChange={handleBidDescription}></textarea>
             </div>
             <div className="attachment">
                 <label htmlFor="attach">File Attachment</label>

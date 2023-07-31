@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 
 const AllcategoryHome = () => {
     return (
-        <div className="allcategoryhome">
+        <div className="all-category-home">
             <span>All Category</span>
-            <div className="iconscontainer">
+            <div className="icons-container">
                 {CategoryList.map((item) => (
-                    <div className='categoryicon' key={item.id}>
-                        <Link className='categoryicon' to={{pathname:'/resultssearch', search:`?category=${item.categoryname}`}}
+                    <div className='category-icon' key={item.id}>
+                        <Link className='category-icon' to={{pathname:'/resultssearch', search:`?category=${item.categoryname}`}}
                         style={{color:'inherit', textDecoration:'none'}}>
                             <div className='icon'>
-                                <img className='iconimg' alt={item.alt} src={item.src} />
+                                <img className='icon-img' alt={item.alt} src={item.src} />
                             </div>
-                            <div className='iconname'>
+                            <div className='icon-name'>
                                 <span>{item.categoryname}</span>
                             </div>
                         </Link>

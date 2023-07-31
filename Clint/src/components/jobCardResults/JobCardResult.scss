@@ -8,7 +8,7 @@
     color: inherit;
 }
 
-.job_card {
+.job-card {
     margin: 0.5rem;
     padding: 1rem;
     // border: 1px solid black;
@@ -33,21 +33,21 @@
         width: 100%;
         height: 4.2rem;
 
-        .job_title {
+        .job-title {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 5px;
             width: 60%;
 
-            .j_title {
+            .j-title {
                 font-size: 1.6rem;
                 font-weight: bold;
                 color: rgb(96, 71, 123)
             }
         }
 
-        .job_price {
+        .job-price {
             display: flex;
             gap: 1rem;
 
@@ -65,7 +65,7 @@
         width: 100%;
         height: 5rem;
 
-        .job_category {
+        .job-category {
             color: rgb(96, 71, 123);
             font-size: 1.5rem;
             font-weight: bold;
@@ -73,7 +73,7 @@
         }
     }
 
-    .card_title {
+    .card-title {
         width: 100%;
         background-color: rgb(96, 71, 123);
         display: flex;
@@ -92,22 +92,22 @@
 
 @media only screen and (max-width:900px) {
 
-    .job_card {
+    .job-card {
         margin-left: 2rem;
         width: 80%;
         height: 95%;
 
         .up {
 
-            .job_title {
+            .job-price {
                 padding: 5px;
 
-                .j_title {
+                .j-title {
                     font-size: 1.1rem;
                 }
             }
 
-            .job_price {
+            .job-price {
 
                 span {
                     font-size: 0.8rem;
@@ -117,12 +117,12 @@
 
         .down {
 
-            .job_category {
+            .job-category {
                 font-size: 1.2rem;
             }
         }
 
-        .card_title {
+        .card-title {
 
             span {
                 font-size: 1rem;

@@ -15,14 +15,13 @@
         transition: all 3s ease;
         background: linear-gradient(to right, rgba(121, 134, 248, 0.6), rgba(175, 121, 219, 0.6));
 
-        .searchontop {
+        .search-on-top {
             display: none;
         }
 
         &.barcolor {
-            // background: linear-gradient(to right, rgba(121, 134, 248, 0.6), rgba(175, 121, 219,0.6));
 
-            .searchontop {
+            .search-on-top {
                 display: block;
 
                 img {
@@ -55,7 +54,7 @@
             }
         }
 
-        .baroptions {
+        .bar-options {
             display: flex;
             align-items: center;
             margin-right: 30px;
@@ -67,19 +66,44 @@
                 font-size: 18px;
             }
 
-            .barlinks {
+            .bar-links {
                 display: flex;
                 align-items: center;
                 gap: 20px;
 
-
-
-                .bartext {
+                .bar-text {
                     text-decoration: none;
                     color: white;
 
                     &:hover {
                         color: #4d2048;
+                    }
+                }
+
+                .management-options {
+                    position: relative;
+                    z-index: 5;
+
+                    .user-bar-options {
+                        box-shadow: 1px 1px 5px black;
+                        position: absolute;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        top: 40px;
+                        padding-top: 0.7rem;
+                        width: 10rem;
+                        background-color: rgb(96, 71, 123);
+                        right: 1px;
+
+                        span {
+                            height: 100%;
+                            width: 100%;
+                            border: 2px solid rgb(96, 71, 123);
+                            background-color: white;
+                            padding: 10px 5px;
+                            box-sizing: border-box;
+                        }
                     }
                 }
             }
@@ -95,7 +119,7 @@
                     font-size: 18px;
                 }
 
-                .signlink {
+                .sign-link {
                     font-weight: bold;
                     color: darkviolet;
                     transition: all 0.5s;
@@ -106,7 +130,7 @@
 
                 }
 
-                .joinbtn {
+                .join-btn {
                     border: 0.5px solid white;
                     border-radius: 15px;
                     background-color: darkviolet;
@@ -131,19 +155,74 @@
                 }
             }
 
+            .user-menu {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+
+                .main-user-bar-options {
+                    box-shadow: 1px 1px 5px black;
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    top: 40px;
+                    padding-top: 0.7rem;
+                    width: 10rem;
+                    background-color: rgb(96, 71, 123);
+                    right: 1px;
+                    z-index: 5;
+                }
+
+                span {
+                    height: 100%;
+                    width: 100%;
+                    border: 2px solid rgb(96, 71, 123);
+                    background-color: white;
+                    padding: 10px 5px;
+                    box-sizing: border-box;
+                }
+            }
         }
 
     }
 
-    .categorybar {
+    .hide-bar {
+        height: 1.2rem;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(96, 71, 123, 0.3);
+        transition: all 1s;
+
+        span {
+            cursor: pointer;
+            background-color: rgba(96, 71, 123, 0.7);
+            border: 1px solid black;
+            color: white;
+            border-radius: 3px;
+            transition: all 1s;
+
+            &:hover {
+                background-color: rgb(96, 71, 123);
+                font-weight: bold;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .category-bar {
+        transition: all 1s;
         height: 102px;
         padding: 0 30px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         background-color: rgba(96, 71, 123, 0.6);
+        transition: all 1s;
 
-        .categoryoption {
+        .category-option {
             cursor: pointer;
             color: white;
             display: flex;
@@ -153,37 +232,47 @@
             position: relative;
 
             &:hover {
-                .categonamespan {
+                .catego-name-span {
                     color: black;
                 }
 
-                .downicon {
-                    height: 10px;
-                    width: 13px;
+                .down-icon {
                     background-color: black;
                 }
             }
 
-            .downicon {
+            .down-icon {
                 transition: all 1s;
             }
 
-            .submenu {
-                background-color: rgba(255, 255, 255, 0.7);
+            .sub-menu {
+                background-color: rgba(255, 255, 255, 0.9);
                 box-shadow: 1px 1px 5px black;
                 position: absolute;
                 display: flex;
                 flex-direction: column;
-                top: 40px;
                 align-items: flex-start;
-                min-width: 11rem;
+                top: 40px;
+                padding-top: 0.7rem;
+                width: 16rem;
+                background-color: rgb(96, 71, 123);
 
-                .link {
-                    color: black;
-                    padding: 5px;
+                .link-box {
+                    width: 100%;
+                    border: 2px solid rgb(96, 71, 123);
+                    background-color: white;
+                    padding: 10px 5px;
+                    box-sizing: border-box;
 
-                    &:hover {
-                        color: rgb(85, 2, 74);
+                    .link {
+                        color: black;
+
+                        font-size: 1.3rem;
+                        font-weight: bold;
+
+                        &:hover {
+                            color: rgb(85, 2, 74);
+                        }
                     }
                 }
             }
@@ -191,7 +280,7 @@
             @media only screen and (max-width:1435px) {
                 gap: 20px;
 
-                .categonamespan {
+                .catego-name-span {
                     font-size: 14px;
                 }
             }
@@ -204,7 +293,7 @@
     }
 }
 
-.mobilebar {
+.mobile-bar {
     background: linear-gradient(to right, rgba(121, 134, 248, 0.6), rgba(175, 121, 219, 0.6));
     position: fixed;
     top: 0;
@@ -214,7 +303,7 @@
     justify-content: space-between;
     align-items: center;
 
-    .mobilelogo {
+    .mobile-logo {
         margin-left: 15px;
         margin-top: 2px;
         margin-bottom: 2px;
@@ -225,12 +314,12 @@
         }
     }
 
-    .mobilebaroptions {
+    .mobile-bar-options {
         display: flex;
         align-items: center;
         gap: 1rem;
 
-        .mobilejoinbtn {
+        .mobile-join-btn {
             border: 0.5px solid white;
             border-radius: 15px;
             background-color: darkviolet;
@@ -251,13 +340,14 @@
             position: relative;
             display: flex;
             align-items: center;
+            padding-right: 0.5rem;
 
             img {
                 cursor: pointer;
                 width: 35px;
             }
 
-            .dropdownmenu {
+            .drop-down-menu {
                 position: absolute;
                 border: 1px solid white;
                 border-radius: 5px;
@@ -265,21 +355,29 @@
                 flex-direction: column;
                 gap: 4px;
                 right: 0;
-                margin: 0.3rem;
+                margin: 0;
                 top: 2rem;
                 background-color: rgb(69, 3, 98);
-                width: 130px;
+                width: 11rem;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                height: 18rem;
 
-                .menuoption {
+                .menu-option {
                     border-bottom: 1px solid white;
                     text-align: center;
                     color: white;
                     text-decoration: none;
                     padding: 4px;
                     margin-top: 3px;
-                    font-size: 14px;
+                    font-size: 1rem;
+                    font-weight: bold;
                 }
+            }
 
+            .smaller {
+                overflow-y: hidden;
+                height: auto;
             }
         }
     }
@@ -308,15 +406,16 @@ p {
 
 .pop_container {
     z-index: 2;
-    width:95%;
+    width: 95%;
     height: 90%;
     background-color: rgb(96, 71, 123);
     position: fixed;
-        margin-top: 10rem;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 3%;
+    margin-top: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3%;
+
     .pop_up {
         background-color: rgb(229, 220, 240);
         border: 3px solid black;
@@ -327,7 +426,8 @@ p {
         padding: 1rem;
         gap: 2rem;
         width: 50%;
-        @media only screen and (max-width: 600px){
+
+        @media only screen and (max-width: 600px) {
             width: 90%;
         }
 
@@ -337,12 +437,14 @@ p {
             display: flex;
             justify-content: flex-end;
             padding: 0.3rem;
-            span{
+
+            span {
                 margin: 0 0.5rem;
-                color:white;
+                color: white;
                 font-weight: bold;
             }
-            button{
+
+            button {
                 border: 1px solid black;
                 border-radius: 3px;
                 box-shadow: 1px 1px 2px black;
@@ -370,12 +472,12 @@ p {
                 width: 40%;
             }
 
-            @media only screen and (max-width:800px){
+            @media only screen and (max-width:800px) {
                 button {
                     width: 65%;
                     border-radius: 5px;
                 }
-    
+
                 input {
                     height: 1.3rem;
                     width: 70%;

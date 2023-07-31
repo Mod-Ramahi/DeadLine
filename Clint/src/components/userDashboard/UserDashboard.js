@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import './UserDashboard.scss'
 
 export default function UserDashboard() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const navigate = useNavigate();
   const [popTitle, setPopTitle] = useState()
   const [isPopOpen, setIsPopOpen] = useState(false)
 
   useEffect(() => {
     const screenSize = () => {
-      setIsMobile(window.innerWidth <= 880)
+      setIsSmallScreen(window.innerWidth <= 880)
     }
     screenSize();
     window.addEventListener('resize', screenSize);
@@ -24,87 +24,77 @@ export default function UserDashboard() {
     navigate('/myjobs')
     ClosePopUp()
   }
+
   const handlePopUp = (event) => {
     const title = (event.target.value)
     setPopTitle(title)
     setIsPopOpen(!isPopOpen)
     ClosePopUp()
   }
-  const ClosePopUp = ()=>{
+
+  const ClosePopUp = () => {
     setIsPopOpen(!isPopOpen)
   }
+
+  const SmallScreenDashboard = (
+    <>
+      <button className="dashboard-button" onClick={MyJobsClicked}>
+        My Jobs
+      </button>
+      <button className="dashboard-button" onClick={MyJobsClicked}>
+        My proposal/orders
+      </button>
+      <button className="dashboard-button" value='Number of following' onClick={handlePopUp}>
+        Number of following
+      </button>
+      <button className="dashboard-button" onClick={MyJobsClicked}>
+        My reportst
+      </button>
+      <button className="dashboard-button" onClick={MyJobsClicked}>
+        My follow Post's
+      </button>
+      <button className="dashboard-button" onClick={MyJobsClicked}>
+        My favorite list
+      </button>
+      <button className="dashboard-button" value='Balance' onClick={handlePopUp}>
+        Balance
+      </button>
+    </>
+  )
   return (
     <>
-      {isMobile ? (
-        <div className="category_head">
-          <div className="category_button">
-            <button className="dashboard_button" onClick={MyJobsClicked}>
-              My Jobs
-            </button>
-            <button className="dashboard_button" onClick={MyJobsClicked}>
-              My proposal/orders
-            </button>
-            <button className="dashboard_button" value='Number of following' onClick={handlePopUp}>
-              Number of following
-            </button>
-            <button className="dashboard_button" onClick={MyJobsClicked}>
-              My reportst
-            </button>
-            <button className="dashboard_button" onClick={MyJobsClicked}>
-              My follow Post's
-            </button>
-            <button className="dashboard_button" onClick={MyJobsClicked}>
-              My favorite list
-            </button>
-            <button className="dashboard_button" value='Balance' onClick={handlePopUp}>
-              Balance
-            </button>
+      {isSmallScreen ?
+        (
+          <div className="category-head">
+            <div className="category-button">
+              {SmallScreenDashboard}
+            </div>
           </div>
-        </div>
-      )
+        )
         :
         (
-          <div className="category_head">
-            <div className="category_button">
-              <button className="dashboard_button" onClick={MyJobsClicked}>
-                My Jobs
-              </button>
-              <button className="dashboard_button" onClick={MyJobsClicked}>
-                My proposal/orders
-              </button>
-              <button className="dashboard_button" value='Number of following' onClick={handlePopUp}>
-                Number of following
-              </button>
-              <button className="dashboard_button" onClick={MyJobsClicked}>
-                My reportst
-              </button>
-              {/* <button className="dashboard_button">
-          Tournaments
-        </button> */}
-              <button className="dashboard_button" onClick={MyJobsClicked}>
-                My favorite list
-              </button>
-              <button className="dashboard_button" value='Balance' onClick={handlePopUp}>
-                Balance
-              </button>
-              <button className="dashboard_button" onClick={() => navigate('/resultssearch')}>
+          <div className="category-head">
+            <div className="category-button">
+              {SmallScreenDashboard}
+              <button className="dashboard-button" onClick={() => navigate('/resultssearch')}>
                 Hire freelancer
               </button>
-              <button className="dashboard_button" onClick={() => navigate('/resultssearch')}>
+              <button className="dashboard-button" onClick={() => navigate('/resultssearch')}>
                 Find a job
               </button>
-              <button className="dashboard_button" onClick={() => navigate('/getidea')}>
+              <button className="dashboard-button" onClick={() => navigate('/getidea')}>
                 Get idea
               </button>
             </div>
           </div>
-        )}
+        )
+      }
       {isPopOpen &&
-        <div className="pop_up2">
-          <div className='close_pop_up2'>
-            <button className='btn_closepopup2' onClick={ClosePopUp}>X</button>
+        <div className="pop-up2">
+          <div className='close-pop-up2'>
+            <button className='btn-closepopup2' onClick={ClosePopUp}>X</button>
           </div>
-          <div className="pop_window2">
+          <div className="pop-window2">
             <span>{popTitle} : </span>
             <span>0</span>
           </div>
@@ -112,7 +102,5 @@ export default function UserDashboard() {
 
       }
     </>
-
-
   )
 }

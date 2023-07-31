@@ -7,15 +7,12 @@ import UserIcon from './Icn1.png';
 import MsgIcon from './Icn4.png';
 import NotificationIcon from './Icn3.png';
 import MngmtnCaseIcon from './Icn2.png';
-
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-
 import { CategoryList } from '../../CategoryList';
 import SearchBar from '../searchbar/SearchBar';
 
-const Navbar = () => {
+export default function Navbar() {
     const { t, i18n } = useTranslation();
     const [isMobile, setIsMobile] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +26,14 @@ const Navbar = () => {
     const [fundAdd, setFundAdd] = useState(0)
     const [requestWithdraw, setRequestWithdraw] = useState(0)
     const navigate = useNavigate()
-    // const location = useLocation()
+    const [hideBar, setHideBar] = useState()
+    const barLastOpenScrollY = useRef(0)
+    const mngRef = useRef(null)
+    const msgsRef = useRef(null)
+    const ntfRef = useRef(null)
+    const userRef = useRef(null);
+    const [notificationsMenu, setNotificationsMenu] = useState(false)
+    const [messageMenu, setMessageMenu] = useState(false)
 
     useEffect(() => {
 
@@ -43,12 +47,40 @@ const Navbar = () => {
         const PageDown = () => {
             setScrolledDown(window.scrollY > 350)
         };
+        const HideBar = () => {
+            SubBarHideOnScroll();
+        }
 
         window.addEventListener('scroll', PageDown);
 
+        window.addEventListener('scroll', HideBar);
+        // setHideBar(window.scrollY > 300)
+
         const OutsideClickHandler = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setCategBarOpen({});
+                if (!event.target.closest('.category-option')) {
+                    setCategBarOpen({});
+                }
+            }
+            if (mngRef.current && !mngRef.current.contains(event.target)) {
+                if (!event.target.closest('.mng-opt')) {
+                    setMngrCaseOpen(false)
+                }
+            }
+            if (ntfRef.current && !ntfRef.current.contains(event.target)) {
+                if (!event.target.closest('.ntf-mnu')) {
+                    setNotificationsMenu(false)
+                }
+            }
+            if (msgsRef.current && !msgsRef.current.contains(event.target)) {
+                if (!event.target.closest('.msg-mnu')) {
+                    setMessageMenu(false)
+                }
+            }
+            if (userRef.current && !userRef.current.contains(event.target)) {
+                if (!event.target.closest('.user-menu')) {
+                    setUserOpen(false)
+                }
             }
         };
 
@@ -57,38 +89,36 @@ const Navbar = () => {
         return () => {
             window.removeEventListener('resize', screenSize);
             window.removeEventListener('scroll', PageDown);
+            window.removeEventListener('scroll', HideBar);
             document.removeEventListener('click', OutsideClickHandler);
         };
     }, []);
 
-    const languageDiv =
-        (
-            <>
-                {i18n.language === 'en' && <Link className='language' onClick={() => {
-                    i18n.changeLanguage('ar')
-                }}> عر </Link>}
-                {i18n.language === 'ar' && <Link className='language' onClick={() => {
-                    i18n.changeLanguage('en')
-                }}> EN </Link>}
-            </>
-        );
+    const SubBarHideOnScroll = () => {
+        const currentScroll = window.scrollY
+        if (window.scrollY > 350) {
+            setHideBar(currentScroll > barLastOpenScrollY.current || currentScroll < barLastOpenScrollY.current)
+            barLastOpenScrollY.current = currentScroll
+        } else {
+            setHideBar(false)
+        }
 
-    const DownIcon = (
-        <img className='downicon' alt='icon down' src={DownMenu} />
-    );
+
+    };
 
     const Dropmenuhandler = (itemId) => {
-        setCategBarOpen((prevState) => ({
-            ...prevState,
-            [itemId]: !prevState[itemId]
-        }))
+        if (categBarOpen[itemId]) {
+            setCategBarOpen({})
+        } else {
+            setCategBarOpen({})
+            setCategBarOpen((prevState) => ({
+                ...prevState,
+                [itemId]: !prevState[itemId]
+            }))
+        }
+
     }
 
-    const SignedUser = true;
-
-    // const MngCaseIsOpen = () => {
-    //     setMngrCaseOpen(!MngCaseIsOpen)
-    // }
     const ClosePopUp = () => {
         setPopOpen(!popOpen)
     }
@@ -110,179 +140,271 @@ const Navbar = () => {
         ClosePopUp();
     }
 
-    return (
+    const HandleSubBar = () => {
+        setHideBar(!hideBar)
+    }
+
+    const languageDiv =
+        (
+            <>
+                {i18n.language === 'en' && <Link className='language' onClick={() => {
+                    i18n.changeLanguage('ar')
+                }}> عر </Link>}
+                {i18n.language === 'ar' && <Link className='language' onClick={() => {
+                    i18n.changeLanguage('en')
+                }}> EN </Link>}
+            </>
+        );
+
+    const DownIcon = (
+        <img className='down-icon' alt='icondown' src={DownMenu} />
+    );
+
+
+    const SignedInMobile = (
         <>
-            {isMobile && pathname !== '/' ?
-                (<div className='navbar mobilebar'>
-                    <div className='mobilelogo'><Link to='/'><img alt='mhomelogo' src={LogoImg} /></Link></div>
-                    <div className='mobilebaroptions'>
-                        {languageDiv}
-                        <div className="dropdown">
-                            <img alt='a' src={DropMenu} className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)} />
-                            {isOpen && (
-                                <div className="dropdownmenu">
-                                    <Link className='menuoption' to="/postjob">Post a job</Link>
-                                    <Link className='menuoption' to="/resultssearch">Find freelancer</Link>
-                                    <Link className='menuoption' to="/howitworks">How it Works?</Link>
-                                    <Link className='menuoption' to="/categories">categories</Link>
-                                    <Link className='menuoption' to="/membership">membership plans</Link>
+            <div className='navbar mobile-bar'>
+                <div className='mobile-logo'><Link to='/'><img alt='mhomelogo' src={LogoImg} /></Link></div>
+                <div className='mobile-bar-options'>
+                    {languageDiv}
+                    <div className="dropdown">
+                        <img alt='a' src={DropMenu} className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)} />
+                        {isOpen && (
+                            <div className="drop-down-menu">
+                                <Link className='menu-option' to="/myprofile">Profile</Link>
+                                <Link className='menu-option' to="/postjob">Post a job</Link>
+                                <Link className='menu-option' to="/resultspage">Find freelancer</Link>
+                                <Link className='menu-option' to="/howitworks">How it Works?</Link>
+                                <Link className='menu-option' to="/categories">categories</Link>
+                                <Link className='menu-option' to="/membership">membership plans</Link>
+                                <Link className='menu-option' to="/settings">Settings</Link>
+                                <Link className='menu-option' to="/help">Help</Link>
+                                <span style={{ cursor: 'pointer', width: '99%' }} className='menu-option' onClick={ClosePopUp}>Add fund</span>
+                                <Link className='menu-option' to="/invitefriend">Invite friend</Link>
+                                <Link className='menu-option' to="/page3">Log out</Link>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+
+    const HideSecondBar = (
+        <>
+            {hideBar ?
+                (
+                    <div className='hide-bar' ref={menuRef}>
+                        <span onClick={HandleSubBar}> Down Categories Menu {DownIcon} </span>
+                    </div>
+                )
+                :
+                (
+                    <div className='category-bar' ref={menuRef}>
+                        {CategoryList.map((item) => (
+                            <div className='category-option' key={item.id} onClick={() => Dropmenuhandler(item.id)}>
+                                <span className='catego-name-span' >
+                                    {item.categoryname}
+                                </span>
+                                {DownIcon}
+                                {categBarOpen[item.id] && (
+                                    <div className='sub-menu'>
+                                        {item.subCategory.map((subc, idx) => (
+                                            <Link className='link-box' style={{ textDecoration: 'none', color: 'inherit' }} to={{
+                                                pathname: '/resultssearch',
+                                                search: `category=${item.categoryname}&subCategory=${subc}`,
+                                            }} key={idx}><span className='link'>{subc}</span></Link>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )
+
+            }
+        </>
+    )
+
+    const SignedInNotMobile = (
+        <>
+            <div className={pathname === "/category" || pathname === "/howitwork" || scrolledDown ? 'navbar barcolor' : 'navbar'} >
+                <div className='logo'>
+                    <Link to="/" ><img alt='homelogo' src={LogoImg} /> </Link>
+                    <div className='search-on-top'>
+                        <SearchBar />
+                    </div>
+                </div>
+                {pathname !== "/" ?
+                    (<div className='bar-options'>
+                        <div className='bar-links'>
+                            <Link className='bar-text' to='/postjob'>Post a Job</Link>
+                            {languageDiv}
+                            <div ref={mngRef} className='management-options mng-opt' style={{ position: "relative", display: "flex", flexDirection: "column" }}>
+                                <img alt='mngcaseicon' className='bar-text' src={MngmtnCaseIcon}
+                                    onClick={() => setMngrCaseOpen(!mngrCaseOpen)}
+                                />
+                                {mngrCaseOpen && (
+                                    <div className='user-bar-options'>
+                                        <span>transaction history</span> <span onClick={ClosePopUp}>add funds</span> <span onClick={ClosePopUp}>Withdraw Request</span>
+                                    </div>
+                                )}
+                            </div>
+                            <div ref={ntfRef} className='management-options ntf-mnu' style={{ position: "relative", display: "flex", flexDirection: "column" }}>
+                                <img alt='notificicon' className='bar-text' src={NotificationIcon}
+                                    onClick={() => setNotificationsMenu(!notificationsMenu)}
+                                />
+                                {notificationsMenu && (
+                                    <div className='user-bar-options' >
+                                        <span>transaction history</span> <span onClick={ClosePopUp}>add funds</span> <span onClick={ClosePopUp}>Withdraw Request</span>
+                                    </div>
+                                )
+                                }
+                            </div>
+                            <div ref={msgsRef} className='management-options msg-mnu' style={{ position: "relative", display: "flex", flexDirection: "column" }}>
+                                <img alt='msgicon' className='bar-text' src={MsgIcon}
+                                    onClick={() => setMessageMenu(!messageMenu)}
+                                />
+                                {messageMenu && (
+                                    <div className='user-bar-options'>
+                                        <span>transaction history</span> <span onClick={ClosePopUp}>add funds</span> <span onClick={ClosePopUp}>Withdraw Request</span>
+                                    </div>
+                                )
+                                }
+                            </div>
+                        </div>
+                        <div ref={userRef} className='user-menu' style={{ position: "relative", display: "flex", flexDirection: "column" }}>
+                            <img alt='usericon' src={UserIcon} onClick={() => setUserOpen(!userOpen)} />
+                            {userOpen && (
+                                <div className='main-user-bar-options'>
+                                    <span onClick={() => { navigate('/myprofile') }}>Profile</span>
+                                    <span onClick={() => { navigate('/membership') }}>Membership</span>
+                                    <span onClick={() => { navigate('/settings') }}>Settings</span>
+                                    <span onClick={() => { navigate('/help') }}>Help</span>
+                                    <span onClick={() => { navigate('/invitefriend') }}>Invite Friend</span>
+                                    <span>Log Out</span>
                                 </div>
                             )}
                         </div>
+                    </div>)
+                    :
+                    (<div className='bar-options'>
+                        <div className='bar-links'>
+                            {languageDiv}
+                            <Link className='bar-text' to='/howitworks'>How it Works?</Link>
+                            <Link className='bar-text' to='/postjob'>Post a Job</Link>
+                        </div>
+                        <div className='login'>
+                            <Link className='sign-link' to='/signin'>Sign In</Link>
+                            <Link to='/register'><button className='join-btn'>{t('register')}</button></Link>
+                        </div>
+                    </div>)}
+            </div>
+        </>
+    )
+
+    const VisitorMobile = (
+        <>
+            <div className='navbar mobile-bar' >
+                <div className='mobile-logo'><Link to='/'><img alt='mhomelogo' src={LogoImg} /></Link></div>
+                <div className='mobile-bar-options'>
+                    {languageDiv}
+                    <div className="dropdown">
+                        <img alt='a' src={DropMenu} className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)} />
+                        {isOpen && (
+                            <div className="drop-down-menu smaller">
+                                <Link className='menu-option' to="/postjob">Post a job</Link>
+                                <Link className='menu-option' to="/resultssearch">Find freelancer</Link>
+                                <Link className='menu-option' to="/howitworks">How it Works?</Link>
+                                <Link className='menu-option' to="/categories">categories</Link>
+                                <Link className='menu-option' to="/membership">membership plans</Link>
+                            </div>
+                        )}
                     </div>
-                </div>) :
+                </div>
+            </div >
+        </>
+    )
+
+    const VisitorNotMobile = (
+        <>
+            <div className={pathname === "/category" || pathname === "/howitwork" || scrolledDown ? 'navbar barcolor' : 'navbar'} >
+                <div className='logo'>
+                    <Link to="/" ><img alt='homelogo' src={LogoImg} /> </Link>
+                    <div className='search-on-top'>
+                        <SearchBar />
+                    </div>
+                </div>
+                <div className='bar-options'>
+                    <div className='bar-links'>
+                        {languageDiv}
+                        <Link className='bar-text' to='/howitworks'>How it Works?</Link>
+                        <Link className='bar-text' to='/postjob'>Post a Job</Link>
+                    </div>
+                    <div className='login'>
+                        <Link className='sign-link' to='/signin'>Sign In</Link>
+                        <Link to='/register'><button className='join-btn'>{t('register')}</button></Link>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+
+
+    const SignedUser = true;
+
+    return (
+        <>
+            {SignedUser ?
                 (
                     <>
-                        <div className='contain'>
-                            <div className={pathname === "/category" || pathname === "/howitwork" || scrolledDown ? 'navbar barcolor' : 'navbar'} >
-                                <div className='logo'>
-                                    <Link to="/" ><img alt='homelogo' src={LogoImg} /> </Link>
-                                    <div className='searchontop'>
-                                        <SearchBar />
+                        {isMobile ?
+                            (
+                                <>
+                                    {SignedInMobile}
+                                </>
+                            ) :
+                            (
+                                <>
+                                    <div className='contain'>
+                                        {SignedInNotMobile}
+                                        {HideSecondBar}
                                     </div>
-                                </div>
-                                {SignedUser && pathname !== "/" ?
-                                    (<div className='baroptions'>
-                                        <div className='barlinks'>
-                                            <Link className='bartext' to='/postjob'>Post a Job</Link>
-                                            {languageDiv}
-                                            <div style={{ position: "relative", display: "flex", flexDirection: "column" }}>
-                                                <img alt='mngcaseicon' className='bartext' src={MngmtnCaseIcon}
-                                                    // ref={menuRef}
-                                                    onClick={() => setMngrCaseOpen(!mngrCaseOpen)}
-                                                />
-                                                {mngrCaseOpen && (
-                                                    <div style={{
-                                                        backgroundColor: "rgba(255,255,255, 0.8)",
-                                                        boxShadow: "1px 1px 5px black",
-                                                        cursor: "pointer",
-                                                        position: "absolute",
-                                                        minWidth: "8em",
-                                                        top: "40px",
-                                                        right: "3px",
-                                                        padding: "6px",
-                                                        zIndex: "1"
-                                                    }}>
-                                                        <p>transaction history</p> <p onClick={ClosePopUp}>add funds</p> <p onClick={ClosePopUp}>Withdraw Request</p>
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <img alt='notificicon' className='bartext' src={NotificationIcon} />
-                                            <img alt='msgicon' className='bartext' src={MsgIcon} />
-                                        </div>
-                                        <div style={{ position: "relative", display: "flex", flexDirection: "column" }}>
-                                            <img alt='usericon' src={UserIcon} onClick={() => setUserOpen(!userOpen)} />
-                                            {userOpen && (
-                                                <div style={{
-                                                    backgroundColor: "rgba(255,255,255, 0.8)",
-                                                    boxShadow: "1px 1px 5px black",
-                                                    cursor: "pointer",
-                                                    position: "absolute",
-                                                    minWidth: "8em",
-                                                    top: "50px",
-                                                    right: "4px",
-                                                    padding: "6px"
-                                                }}>
-                                                    <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/myprofile"><p>Profile</p></Link>
-                                                    <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/membership"><p>Membership</p></Link>
-                                                    <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/settings"><p>Settings</p></Link>
-                                                    <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/help"><p>Help</p></Link>
-                                                    <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/invitefriend"><p>Invite friend</p></Link>
+                                </>
+                            )
+                        }
+                    </>
+                )
+                :
+                (
+                    <>
+                        {
+                            isMobile ?
+                                (
+                                    <>
+                                        {VisitorMobile}
+                                    </>
 
-                                                    <p>Log out</p>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>)
-                                    :
-                                    (<div className='baroptions'>
-                                        <div className='barlinks'>
-                                            {languageDiv}
-                                            <Link className='bartext' to='/howitworks'>How it Works?</Link>
-                                            <Link className='bartext' to='/postjob'>Post a Job</Link>
-                                        </div>
-                                        <div className='login'>
-                                            <Link className='signlink' to='/signin'>Sign In</Link>
-                                            <Link to='/register'><button className='joinbtn'>{t('register')}</button></Link>
-                                        </div>
-                                    </div>)}
-                            </div>
-                            <div className='categorybar' ref={menuRef}>
-                                {CategoryList.map((item) => (
-                                    <div className='categoryoption' key={item.id}
-                                        onClick={() => Dropmenuhandler(item.id)}
-                                    >
-                                        <span className='categonamespan'>{item.categoryname}</span>
+                                ) :
+                                (
+                                    <>
+                                        <div className='contain'>
+                                            {VisitorNotMobile}
+                                            {HideSecondBar}
 
-                                        {DownIcon}
-                                        {categBarOpen[item.id] && (
-                                            <div className='submenu'>
-                                                {item.subCategory.map((subc, idx) => (
-                                                    <Link style={{ textDecoration: 'none', color: 'inherit' }} to={{
-                                                        pathname: '/resultssearch',
-                                                        search: `category=${item.categoryname}&subCategory=${subc}`,
-                                                    }} key={idx}><span className='link'>{subc}</span></Link>
-                                                ))}
-                                            </div>
-                                        )}
+                                        </div>
 
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
 
+                                    </>
+                                )
+
+
+                        }
 
                     </>
                 )
             }
-            {isMobile && SignedUser && pathname !== "/" &&
-                <div className='navbar mobilebar'>
-                    <div className='mobilelogo'><Link to='/'><img alt='mhomelogo' src={LogoImg} /></Link></div>
-                    <div className='mobilebaroptions'>
-                        {languageDiv}
-                        <div className="dropdown">
-                            <img alt='a' src={DropMenu} className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)} />
-                            {isOpen && (
-                                <div className="dropdownmenu">
-                                    <Link className='menuoption' to="/myprofile">Profile</Link>
-                                    <Link className='menuoption' to="/postjob">Post a job</Link>
-                                    <Link className='menuoption' to="/resultspage">Find freelancer</Link>
-                                    <Link className='menuoption' to="/howitworks">How it Works?</Link>
-                                    <Link className='menuoption' to="/categories">categories</Link>
-                                    <Link className='menuoption' to="/membership">membership plans</Link>
-                                    <Link className='menuoption' to="/settings">Settings</Link>
-                                    <Link className='menuoption' to="/help">Help</Link>
-                                    <span style={{ cursor: 'pointer', width: '99%' }} className='menuoption' onClick={ClosePopUp}>Add fund</span>
-                                    <Link className='menuoption' to="/invitefriend">Invite friend</Link>
-                                    <Link className='menuoption' to="/page3">Log out</Link>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            }
-            {popOpen &&
-                <div className='pop_container'>
-                    <div className='pop_up'>
-                        <div className='close_pop_up'>
-                            <span>Close</span>
-                            <button className='btn_closepopup' onClick={ClosePopUp}>X</button>
-                        </div>
-                        <div className='pop_window'>
-                            <span>Add Fund</span>
-                            <input type='number' placeholder='enter amount' min={15} max={5000} onChange={HandleFundChange} />
-                            <button onClick={AddFund}>Add</button>
-                            <span>Request Withdraw</span>
-                            <input type='number' placeholder='enter amount' min={15} max={5000} onChange={HandleWithdrawChange} />
-                            <button onClick={Withdraw}>Withdraw</button>
-                        </div>
-                    </div>
-                </div>
-            }
         </>
-    );
-
+    )
 
 }
-
-export default Navbar;
