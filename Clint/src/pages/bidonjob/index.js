@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./BidOnJob.scss"
+import { postProposalRequest } from "../../api";
+import { useParams } from "react-router";
 
 export default function BidOnJob() {
+    const {id} = useParams()
     const [price, setPrice] = useState(0);
-    const [currency, setCurrency] = useState("USdollar");
-    const [time, setTime] = useState(0);
+    const [file, setFile] = useState("USdollar");
+    const [deliveryTime , setTime] = useState(0);
     const [description, setDescription] = useState("");
     const [milestone, setMilestone] = useState("");
     const [plan, setPlan] = useState("public");
@@ -12,9 +15,6 @@ export default function BidOnJob() {
 
     const handlePrice = (event) => {
         setPrice(event.target.value)
-    };
-    const handleCurrency = (event) => {
-        setCurrency(event.target.value);
     };
     const handleTime = (event) => {
         setTime(event.target.value)
@@ -39,8 +39,14 @@ export default function BidOnJob() {
     const handleProposalPlan = (event) => {
         setPlan(event.target.value);
     };
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        try {
+            const response = postProposalRequest({price,description,milestone,plan,deliveryTime,jobId:id})
+            console.log(response)
+        } catch (error) {
+            
+        }
         
     }
 
@@ -51,10 +57,10 @@ export default function BidOnJob() {
                 <label htmlFor="price">Bid Price</label>
                 <div className="price_input">
                     <input type="number" id="price" onChange={handlePrice}></input>
-                    <select id="currency" onChange={handleCurrency}>
+                    {/* <select id="currency" onChange={handleCurrency}>
                         <option value="USdollar">$</option>
                         <option value="JOD">JOD</option>
-                    </select>
+                    </select> */}
                 </div>
             </div>
             <div className="days">

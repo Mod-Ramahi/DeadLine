@@ -36,7 +36,6 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
-// Routes
 app.use("/api/v1", router);
 
 app.use((req, res, next) => {
@@ -46,6 +45,7 @@ app.use((error, req, res, next) => {
   if (error.status) {
     res.status(error.status).json(error.message);
   } else {
+    console.log(error)
     res.status(500).json("interval server error");
   }
 });

@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
-const { boolean } = require('yup');
-
 const jobSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   category: { type: String, required: true },
   salary: { type: Number },
   paymentMethod:{type: String},
-  location: { type: String },
-  experience: { type: String },
+  payByHour: { type: Boolean },
+  vipPost: { type: Boolean },
+  currency: { type: String },
   skills: { type: [String] },
-//   vip:{type:boolean}
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Freelancer', required: true },
+  status:{type:String}
 }, { timestamps: true });
 
 const Job = mongoose.model('Job', jobSchema);

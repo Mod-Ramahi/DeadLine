@@ -48,10 +48,9 @@ const signup = async (req, res) => {
       bio,
       avatar
     });
-
     await newFreelancer.save();
     const user = await Freelancer.findOne({ email });
-    const token = jwtUtils.generateToken({ id: user._id, email: user.email });
+    const token = await jwtUtils.generateToken({ id: user._id, email: user.email });
     res.status(201).json({id:user._id, email:user.email, token});
   } catch (err) {
     res.status(500).json({ message: 'Error signing up', error: err.message });

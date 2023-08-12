@@ -27,15 +27,8 @@ const freelancerSchema = new mongoose.Schema({
     ref: 'Project',
   }],
   reviews: [{
-    client: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    rating: {
-      type: Number,
-      required: true,
-    },
-    comment: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Review', // Reference to the Review model
   }],
 });
 
