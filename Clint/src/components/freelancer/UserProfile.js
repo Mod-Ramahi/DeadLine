@@ -41,6 +41,7 @@ export default function UserProfile({user}){
                         <p>{user.name}</p>
                         <p>{user.nickname}</p>
                     </div>
+                    <hr/>
                     <div className="title_review">
                         <p>{user.headline}</p>
                         <div className="review">

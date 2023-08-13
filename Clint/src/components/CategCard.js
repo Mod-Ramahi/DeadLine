@@ -13,24 +13,25 @@ export default function CategCards({ categ, seeAllImg, category }) {
     }, [category])
     
     return (
-        <div key={categ.id} className="categbox">
-            <div className="categlogo">
-                <img className="categlogoimg" alt={categ.alt} src={categ.src} />
+        <div key={categ.id} className="categ-box">
+            <div className="categ-logo">
+                <img className="categ-logo-img" alt={categ.alt} src={categ.src} />
             </div>
-            <div className="categinfo">
-                <div className="categhead">
+            <div className="categ-info">
+                <div className="categ-head">
                     <Link style={{ textDecoration: 'none', color: 'inherit' }} to={{
                         pathname: '/resultssearch',
                         search: `?category=${categorySelected}`,
                     }}>
-                        <span className="categtitle">{categ.categoryname}</span>
+                        <span className="categ-title">{categ.categoryname}</span>
                     </Link>
-                    <div className="seeall">
-                        <span>See all</span>
-                        <Link style={{ textDecoration: 'none', color: 'inherit' }} to={{
+                    <div className="see-all">
+                        
+                        <Link className="see-all" style={{ textDecoration: 'none', color: 'inherit' }} to={{
                             pathname: '/resultssearch',
                             search: `?category=${categorySelected}`,
                         }}>
+                            <span>See all</span>
                             <img alt="seeall" src={seeAllImg} />
                         </Link>
                     </div>

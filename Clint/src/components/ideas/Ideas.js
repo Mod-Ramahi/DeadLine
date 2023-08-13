@@ -5,8 +5,8 @@ import Card from '../Card'
 export default function Ideas() {
     const [category, setCategory] = useState("Graphic Designing")
   return (
-    <div className="search_wrapper">
-        <div className='category_wrapper'>
+    <div className="search-wrapper">
+        <div className='category-wrapper'>
             <p onClick={(e)=>{
                 e.preventDefault()
                 console.log(e)
@@ -43,9 +43,9 @@ export default function Ideas() {
             }}>&gt;  Busnisse Card
             </p>
         </div>
-        <div className='product_wrapper'>
+        <div className='product-wrapper'>
             <h1>{category}</h1>
-            <div className="cardscontainer">
+            <div className="cards-container">
                 {
                     Cards.slice(0,8).map((e, idx)=>{
                         return <Card card={e} key={idx}/>

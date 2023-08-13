@@ -9,7 +9,7 @@ export default function Categories() {
     const CategoryCardsList = CategoryList.map((categ) => (
         <div key={categ.id}>
             <CategCards categ={categ} seeAllImg={seeAll} category={categ.categoryname} />
-            <div className="subcateglist">
+            <div className="sub-categ-list">
                 {categ.subCategory.map((subCateg, idx) => (
                     <Link key={idx}
                         style={{ textDecoration: 'none', color: 'inherit' }}
@@ -18,7 +18,7 @@ export default function Categories() {
                             search: `?category=${categ.categoryname}&subCategory=${subCateg}`,
                         }}
                     >
-                        <span key={idx} className="subcategspan"> {'>'} &nbsp;{subCateg}</span>
+                        <span key={idx} className="sub-categ-span"> {'>'} &nbsp;{subCateg}</span>
                     </Link>
                 ))
                 }
@@ -28,12 +28,12 @@ export default function Categories() {
     ));
     return (
         <>
-            <div className='pagetitle'>
+            <div className='page-title'>
                 <span className='title'>
                     Category
                 </span>
             </div>
-            <div className='categcontainer'>
+            <div className='categ-container'>
                 {/* <Link to='/search'> */}
                 {CategoryCardsList}
                 {/* </Link> */}

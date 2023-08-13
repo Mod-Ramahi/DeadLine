@@ -1,8 +1,8 @@
-.howitworks {
+.how-it-works {
     padding-top: 120px;
     background: linear-gradient(to right, rgb(121, 134, 248), rgb(175, 121, 219));
 
-    .howworkhead {
+    .how-work-head {
         top: 0;
         height: 428px;
         width: 100%;
@@ -13,7 +13,7 @@
         flex-direction: column;
         align-items: flex-end;
 
-        .howworktitle {
+        .how-work-title {
             padding: 2rem;
             padding-bottom: 0;
             margin-right: 8rem;
@@ -23,17 +23,17 @@
             flex-direction: column;
             color: white;
 
-            .titlespan {
+            .title-span {
                 font-size: 42px;
                 font-weight: bold;
             }
 
-            .titlep {
+            .title-p {
                 font-size: 21px;
             }
         }
 
-        .howworkbtns {
+        .how-work-btns {
             margin-right: 8rem;
             padding-bottom: 2rem;
             width: 700px;
@@ -61,46 +61,50 @@
         }
     }
 
-    .howworkcontent {
+    .how-work-content {
         background-color: white;
-        .howworktxt {
+        .how-work-txt {
             background-color: white;
             padding: 3.5rem;
 
-            .txtspan {
+            .txt-span {
                 font-size: 40px;
                 font-weight: bold;
             }
 
-            .txtp {
+            .txt-p {
                 font-size: 25px;
             }
         }
 
-        .howworkicon {
+        .how-work-icon {
             display: flex;
             flex-direction: column;
             align-items: center;
             background-color: white;
 
-            .mapicons {
+            .map-icons {
                 display: flex;
                 gap: 10rem;
 
-                .iconmap {
+                @media only screen and (max-width: 1100px){
+                    flex-direction: column;
+                }
+
+                .icon-map {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 1rem;
                 }
 
-                .spantitle {
+                .span-title {
                     font-size: 25px;
                     font-weight: bold;
                     margin: 1rem 0;
                 }
 
-                .txt1span {
+                .txt-1span {
                     font-size: 19px;
                 }
             }
@@ -113,14 +117,14 @@
             }
         }
 
-        .howdoesitwork {
+        .how-does-it-work {
             padding: 3rem;
             display: flex;
             flex-direction: column;
             background-color: white;
             width: 60%;
 
-            .howdoes {
+            .how-does {
                 margin: 2rem 0;
                 font-size: 40px;
                 font-weight: bold;
@@ -132,7 +136,7 @@
                 margin-top: 2rem;
             }
 
-            .scndp {
+            .second-p {
                 font-size: 21px;
             }
         }

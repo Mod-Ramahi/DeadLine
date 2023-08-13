@@ -1,4 +1,4 @@
-.pagetitle{
+.page-title{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,47 +14,48 @@
     }
 
 }
-.categcontainer{
+.categ-container{
     margin: 1rem;
     margin-top: 5rem;
     padding: 1rem;
     padding-right: 9rem;
     border: 2px solid rgb(96, 71, 123);
-    .categbox{
+    .categ-box{
         background-color: rgb(255, 255, 255);
         display: flex;
         width: 100%;
         margin-bottom: 3rem;
-        .categlogo{
+        .categ-logo{
             width: 10%;
             display: flex;
             justify-content: center;
-            .categlogoimg{
+            .categ-logo-img{
                 height: 61px;
                 width: 46px;
             }
         }
        
-        .categinfo{
+        .categ-info{
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             width: 90%;
-            .categhead{
+            .categ-head{
                 display: flex;
                 width: 100%;
                 justify-content: space-between;
                 align-items: center;
                 margin-bottom: 1rem;
-                .categtitle{
+                .categ-title{
                     font-size: 30px;
                     font-weight: bold;
                 }
-                .seeall{
+                .see-all{
                     font-size: 25;
                     font-weight: normal;
                     display: flex;
                     align-items: center;
+                    justify-content: center;
                     gap: 2rem;
                 }
             }
@@ -66,17 +67,21 @@
             }
         }
     }
-    .subcateglist{
+    .sub-categ-list{
         width: 85%;
         font-size: 28px;
         margin-bottom: 3rem;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
         gap: 2rem;
+
+        .sub-categ-span{
+            margin-left: 1rem;
+        }
     }
 }
 @media only screen and (max-width:800px){
-    .pagetitle{
+    .page-title{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -92,44 +97,45 @@
         }
     
     }
-    .categcontainer{
+    .categ-container{
         margin: 1rem;
         margin-top: 2rem;
         padding: 1rem;
         padding-right: 5rem;
         border: 2px solid rgb(96, 71, 123);
-        .categbox{
+        .categ-box{
             background-color: rgb(255, 255, 255);
             display: flex;
             gap: 2rem;
             width: 100%;
             margin-bottom: 1rem;
-            .categlogo{
+            .categ-logo{
                 width: 10%;
                 display: flex;
                 justify-content: center;
-                .categlogoimg{
-                    height: 2rem;
-                    width: 3rem;
+                .categ-logo-img{
+                    height: 50%;
+                    width: 100%;
+                    // padding: 0.5rem;
                 }
             }
            
-            .categinfo{
+            .categ-info{
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
-                width: 90%;
-                .categhead{
+                width: 88%;
+                .categ-head{
                     display: flex;
                     width: 100%;
                     justify-content: space-between;
                     align-items: center;
                     margin-bottom: 1rem;
-                    .categtitle{
+                    .categ-title{
                         font-size: 1rem;
                         font-weight: bold;
                     }
-                    .seeall{
+                    .see-all{
                         font-size: 1rem;
                         font-weight: normal;
                         display: flex;
@@ -149,7 +155,7 @@
                 }
             }
         }
-        .subcateglist{
+        .sub-categ-list{
             width: 85%;
             font-size: 1.2rem;
             margin-bottom: 3rem;

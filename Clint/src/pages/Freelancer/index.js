@@ -20,7 +20,6 @@ export default function Freelancer () {
     return (
         <>
         <UserProfile user={clickedUser} />
-        
         </>
     )
 }
