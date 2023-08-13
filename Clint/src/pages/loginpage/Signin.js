@@ -1,13 +1,14 @@
 import { useState } from "react";
 import "./Signin.scss"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginRequest } from "../../api";
+import { setItem } from "../../utils/localStorge";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-
+  const navigate = useNavigate()
   const handleUsernameChange = (event) => {
     setEmail(event.target.value);
   }
@@ -25,8 +26,17 @@ const SignIn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await loginRequest({email,password})
-    console.log(response)
+    try {
+      const response = await loginRequest({email,password})
+            console.log(response)
+            if(response.status === 200){
+                setItem(response.data.token)
+                navigate('/')
+            }
+    } catch (error) {
+      
+    }
+    
   }
 
   return (

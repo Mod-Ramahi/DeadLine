@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import './PostJob.scss';
 import { CategoryList } from "../../CategoryList";
+import { postJobRequest } from "../../api";
 
 export default function PostJob() {
-    const [jobDescription, setJobDescription] = useState("");
-    const [jobCategory, setJobCategory] = useState("");
-    const [selectedSkill, setSelectedSkill] = useState([]);
+    const [description, setJobDescription] = useState("");
+    const [category, setJobCategory] = useState("");
+    const [Skills, setSelectedSkill] = useState([]);
     const [paymentMethod, setPaymentMethod] = useState("");
-    const [price, setPrice] = useState(0);
+    const [salary, setPrice] = useState(0);
     const [currency, setCurrency] = useState("USdollar");
     const [vipPost, setVipPost] = useState(false);
-    const [jobTitle, setJobtitle] = useState("");
+    const [title, setJobtitle] = useState("");
     const [payByHour, setPayByHour] = useState(false)
 
     const handleJobTitle = (event) => {
@@ -27,14 +28,14 @@ export default function PostJob() {
 
     const handleSkillList = (event) => {
         const skillSelected = (event.target.value)
-        if (skillSelected !== '' && !selectedSkill.includes(skillSelected)) {
-            const skillArray = [...selectedSkill, skillSelected].slice(0, 3)
+        if (skillSelected !== '' && !Skills.includes(skillSelected)) {
+            const skillArray = [...Skills, skillSelected].slice(0, 3)
             setSelectedSkill(skillArray)
         }
         if (skillSelected === 'reset') {
             setSelectedSkill([])
         }
-        console.log(selectedSkill)
+        console.log(Skills)
     };
 
     const handleFileUpload = (event) => {
@@ -69,8 +70,15 @@ export default function PostJob() {
         setVipPost(!vipPost);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        try {
+            console.log(21)
+            const response = await postJobRequest({description,title,salary,Skills,payByHour,paymentMethod,category,currency})
+            console.log(response)
+        } catch (error) {
+            
+        }
     }
 
     return (
@@ -108,7 +116,7 @@ export default function PostJob() {
                     <option value='optionThree'>Option 3</option>
                     <option value='optionFour'>Option 4</option>
                 </select>
-                <p>You selected: {selectedSkill.join(', ')}</p>
+                <p>You selected: {Skills.join(', ')}</p>
             </div>
             <div className="file-attach job-title color-b">
                 <label htmlFor="attach">Attach File</label>
@@ -161,7 +169,7 @@ export default function PostJob() {
                         <div className="vip"> <span>Select the VIP posting plan : 10.99$</span> <input type="checkbox" id="checkbox" checked={vipPost}
                             onChange={handlePostingPlan}></input></div>
                     </div>
-                    <button className="submit" type="submit">Post The Job</button>
+                    <button onClick={(e)=>handleSubmit(e)} className="submit" type="submit">Post The Job</button>
                 </div>
             </div>
         </form>

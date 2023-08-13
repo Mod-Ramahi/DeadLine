@@ -1,13 +1,9 @@
 import React from "react";
 import './CardsResults.scss'
 
-export default function CardsResults({ user, onUserClick }) {
-    
-    const GetUserID = () => {
-        onUserClick(user.id)
-    }
+export default function CardsResults({ user }) {
     return (
-        <div className="user_card" onClick={GetUserID}>
+        <div className="user_card" >
             <div className="up">
                 <div className="user_photo">
                     <img alt={user.name} src={user.profilephoto} />

@@ -92,7 +92,7 @@ const router = createBrowserRouter([
             element: <Membership />
           },
           {
-            path: "/bidproposal",
+            path: "/bidproposal/:id",
             element: <BidOnJob />
           },
           {

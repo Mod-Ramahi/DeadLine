@@ -1,26 +1,23 @@
-const express = require('express');
-const router = express.Router();
 const Job = require('../models/job');
+const Proposal = require('../models/proposal');
 
-
-// Route: POST /jobs
 const postJob = async (req, res) =>{
   try {
-    const { title, description, company, salary, location, experience, skills } = req.body;
-
-    // Create a new job instance
-    const newJob = new Job({
+    const { title, description, category, salary, Skills,currency,payByHour,paymentMethod,vipPost } = req.body.data;
+    console.log(req.user)
+      const newJob = new Job({
       title,
       description,
-      company,
       salary,
-      location,
-      experience,
-      skills,
-      // Add other fields as needed
+      skills:Skills,
+      category,
+      currency,
+      paymentMethod,
+      payByHour,
+      vipPost,
+      createdBy:req.user.id,
     });
 
-    // Save the job to the database
     await newJob.save();
 
     res.json({ message: 'Job posted successfully', job: newJob });
@@ -63,9 +60,14 @@ const jobs = async (req, res) => {
     }
 
     // Fetch jobs from the database based on the filter
-    const jobs = await Job.find(filter);
-
-    res.json(jobs);
+    const jobs = await Job.find(filter).populate('createdBy', 'name email');
+    const jobsWithProposals = await Promise.all(
+      jobs.map(async (job) => {
+        const proposals = await Proposal.find({ jobId: job._id });
+        return { ...job.toObject(), proposals }; 
+      })
+    );
+    res.json(jobsWithProposals);
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving jobs', error: error.message });
   }

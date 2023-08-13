@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Signin.scss"
 import { Link, useNavigate } from "react-router-dom";
 import { registerRequest } from "../../api";
+import { setItem } from "../../utils/localStorge";
 
 const Register = () => {
     const [email, setEmail] = useState("");
@@ -36,7 +37,11 @@ const Register = () => {
         }
         try {
             const response = await registerRequest({email,password})
-            navigate('/completeregister')
+            console.log(response)
+            if(response.status === 201){
+                setItem(response.data.token)
+                navigate('/completeregister')
+            }
         } catch (error) {
             
         }
