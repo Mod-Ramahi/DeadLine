@@ -1,5 +1,7 @@
+const Freelancer = require('../models/freeelancer');
 const Job = require('../models/job');
 const Proposal = require('../models/proposal');
+
 
 const postJob = async (req, res) =>{
   try {
@@ -73,7 +75,39 @@ const jobs = async (req, res) => {
   }
 };
 
+const singleJob = async (req, res) => {
+  try {
+    const jobId = req.params.id;
+
+    // Fetch the job by ID
+    const job = await Job.findById(jobId);
+
+    if (!job) {
+      return res.status(404).json({ message: 'Job not found' });
+    }
+
+    // Fetch the user who created the job (creator)
+    console.log(33)
+    const creator = await Freelancer.findById(job.createdBy._id);
+    if (!creator) {
+      return res.status(404).json({ message: 'Job creator not found' });
+    }
+
+    // Fetch related proposals for the job
+    const proposals = await Proposal.find({ jobId });
+
+    // Combine the job data with the creator's user data and proposals
+    const jobWithCreatorAndProposals = {
+      ...job.toObject(),
+      creator: creator.toObject(),
+      proposals: proposals.map(proposal => proposal.toObject()), // Convert each proposal to plain object
+    };
+
+    res.json(jobWithCreatorAndProposals);
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving job', error: error.message });
+  }
+}
 
 
-
-module.exports = {postJob, jobs};
+module.exports = {postJob, jobs, singleJob};

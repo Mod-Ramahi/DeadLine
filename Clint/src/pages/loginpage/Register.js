@@ -6,6 +6,7 @@ import { setItem } from "../../utils/localStorge";
 
 const Register = () => {
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [rePassword, setRePassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
@@ -20,6 +21,9 @@ const Register = () => {
 
     const handleReEnterPasswordChange = (event) => {
         setRePassword(event.target.value);
+    }
+    const handleReEnterNameChange = (event) => {
+        setName(event.target.value);
     }
 
     const handleRemembermeChange = () => {
@@ -36,7 +40,7 @@ const Register = () => {
             return;
         }
         try {
-            const response = await registerRequest({email,password})
+            const response = await registerRequest({email,password,name})
             console.log(response)
             if(response.status === 201){
                 setItem(response.data.token)
@@ -58,6 +62,18 @@ const Register = () => {
                 <button className="google_button">Continue with Google</button>
             </div>
             <form onSubmit={handleSubmit}>
+                <div className="user_name">
+                    <label htmlFor="username">
+                        User Name
+                    </label>
+                    <input
+                        id="name"
+                        type="text"
+                        value={name}
+                        onChange={handleReEnterNameChange}
+                        required
+                    />
+                </div>
                 <div className="user_name">
                     <label htmlFor="username">
                         Email

@@ -29,9 +29,13 @@ const login = async (req, res) => {
     }
 }
 const signup = async (req, res) => {
-  try {
-      const { name, email, password, skills, hourlyRate, bio, avatar } = req.body;
-        await registerSchema.validate({ email,password });
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1; // Months are zero-indexed, so adding 1
+  const day = currentDate.getDate();
+    try {
+      const { name, email, password, skills, hourlyRate, bio, avatar,country,countryFlag,type } = req.body;
+        await registerSchema.validate({ email,password, name });
         console.log(email,password)
         const existingFreelancer = await Freelancer.findOne({ email });
         if (existingFreelancer) {
@@ -46,7 +50,12 @@ const signup = async (req, res) => {
       skills,
       hourlyRate,
       bio,
-      avatar
+      avatar,
+      timezone:Intl.DateTimeFormat().resolvedOptions().timeZone,
+      joined:`${year}-${month}-${day}`,
+      country,
+      countryFlag,
+      type
     });
     await newFreelancer.save();
     const user = await Freelancer.findOne({ email });
