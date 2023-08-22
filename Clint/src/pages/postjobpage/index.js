@@ -12,7 +12,8 @@ export default function PostJob() {
     const [currency, setCurrency] = useState("USdollar");
     const [vipPost, setVipPost] = useState(false);
     const [title, setJobtitle] = useState("");
-    const [payByHour, setPayByHour] = useState(false)
+    const [payByHour, setPayByHour] = useState(false);
+    const [expectedTime, setExpectedTime] = useState(0)
 
     const handleJobTitle = (event) => {
         setJobtitle(event.target.value);
@@ -54,7 +55,9 @@ export default function PostJob() {
         const payMethod = event.target.value;
         setPaymentMethod(event.target.value);
         if (payMethod === 'ByHour') {
-            setPayByHour(!payByHour);
+            setPayByHour(true);
+        }else{
+            setPayByHour(false)
         }
     };
 
@@ -66,6 +69,9 @@ export default function PostJob() {
         setCurrency(event.target.value)
     };
 
+    const handleExpectedTime = (event) => {
+        setExpectedTime(event.target.value)
+    }
     const handlePostingPlan = () => {
         setVipPost(!vipPost);
     };
@@ -150,7 +156,7 @@ export default function PostJob() {
                             <>
                                 <label htmlFor="price">Project Price {`(min: 30$`}</label>
                                 <div className="price-input">
-                                    <input type="number" id="price" onChange={handlePrice}></input>
+                                    <input type="number" id="price" min='30' onChange={handlePrice}></input>
                                     <select id="currency" onChange={handleCurrency}>
                                         <option value="USdollar">$</option>
                                         <option value="JOD">JOD</option>
@@ -160,8 +166,10 @@ export default function PostJob() {
                         )
                     }
                 </div>
-
-
+                <div className="expected-time">
+                    <label htmlFor="timeDeliver">Expected delivery time</label>
+                    <input type="number" id="timeDeliver" min='1' onChange={handleExpectedTime}/>
+                </div>
                 <div className="post_type">
                     <div className="type">
                         <span>Yor job post now is on the Free Standard posting: your job post will be live and you'll recieve proposals </span>

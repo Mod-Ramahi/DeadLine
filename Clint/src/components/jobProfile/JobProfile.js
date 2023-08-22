@@ -6,7 +6,8 @@ import { Users } from "../../data/Users";
 import { Link } from "react-router-dom";
 
 export default function JobProfile({ job }) {
-    const user = Users.find(user => user.id === job.userPostedId)
+    // const user = Users.find(user => user.id === job.userPostedId)
+    const user = Users.find(user => user.id === job.createdBy)
     return (
         <div className="userprofile">
             <div className="uppersection">
@@ -15,21 +16,22 @@ export default function JobProfile({ job }) {
             <div className="lowersection">
                 <div className="leftsection">
                     <div className="profilephoto">
-                        <img className="photo" alt="profilephoto" src={job.jobPhoto} />
-                        <p className="name">{user.name}</p>
+                        {/* <img className="photo" alt="profilephoto" src={job.jobPhoto} /> */}
+                        {/* <p className="name">{user.name}</p> */}
+                        <p className="name">{job?.createdBy?.email}</p>
                     </div>
                     <div className="info">
                         <div className="country">
                             {/* <img className="countryimage" alt="" src={CountryFlag} /> */}
-                            <p className="countryname">{user.country}</p>
+                            {/* <p className="countryname">{user.country}</p> */}
                         </div>
                         <div className="time">
                             <img className="timeicon" alt="time" src={Time} />
-                            <p className="timezone">TimeZone:{user.timezone}</p>
+                            {/* <p className="timezone">TimeZone:{user.timezone}</p> */}
                         </div>
                         <div className="joined">
                             <img className="joinedicon" alt="" src={Joined} />
-                            <p className="joinedtime">{user.joined}</p>
+                            {/* <p className="joinedtime">{user.joined}</p> */}
                         </div>
                         <div className="recommendation">
                             <img className="recommendationimage" alt="" src={Recommendation} />
@@ -39,12 +41,13 @@ export default function JobProfile({ job }) {
                 </div>
                 <div className="middlesection">
                     <div className="nickname">
-                        <p>{job.jobTitle}</p>
-                        <p>{user.nickname}</p>
+                        {/* <p>{job.jobTitle}</p> */}
+                        <p>{job.title}</p>
+                        {/* <p>{user.nickname}</p> */}
                     </div>
                     <div className="title_review">
                         <div className="review">
-                            <p>{user.avgRate}</p>
+                            {/* <p>{user.avgRate}</p> */}
                             <p>(4 reviews)</p>
                         </div>
                     </div>
@@ -58,15 +61,17 @@ export default function JobProfile({ job }) {
                     </div>
                     <div className="serviceinfo">
                         <p className="myoffers">
-                            {job.jobDescription}
+                            {/* {job.jobDescription} */}
+                            {job.description}
                         </p>
                         <ul>
-                            {job.jobSkills.map((skill, idx) => {
+                            {/* {job.jobSkills.map((skill, idx) => { */}
+                            {/* {job.Skills.map((skill, idx) => {
                                 return (
                                     <li key={idx}>{skill}</li>
                                 )
-                            })}
-                        </ul>
+                            })} */}
+                        </ul> 
                     </div>
                 </div>
                 <div className="rightsection">
@@ -80,7 +85,8 @@ export default function JobProfile({ job }) {
                             <span>Top Skills</span>
                             <div className="pboxinfo">
                                 <ul>
-                                    {job.jobSkills.map((skill, idx) => {
+                                    {/* {job.jobSkills.map((skill, idx) => { */}
+                                    {job.skills.map((skill, idx) => {
                                         return (
                                             <li key={idx}>{skill}</li>
                                         )
@@ -89,7 +95,8 @@ export default function JobProfile({ job }) {
                             </div>
                             <span>Category</span>
                             <div className="pboxinfo">
-                                <p>{job.jobCategory}</p>
+                                {/* <p>{job.jobCategory}</p> */}
+                                <p>{job.category}</p>
                             </div>
                         </div>
                     </div>

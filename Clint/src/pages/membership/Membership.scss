@@ -1,11 +1,9 @@
-.memberhead {
-    padding: 0;
+.membership-head {
     margin: 0;
     height: 545px;
     width: 100%;
     background: url(./Mmbrshp.png) no-repeat center center;
-    // background-repeat: no-repeat;
-    // background-position: center;
+    // padding: 1rem;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -13,24 +11,24 @@
     align-items: center;
     overflow: hidden;
 
-    .insidetxt {
+    .inside-txt {
         display: flex;
         flex-direction: column;
         align-items: center;
         color: white;
 
-        .headspan {
+        .head-span {
             font-size: 40px;
             font-weight: bold;
         }
 
-        .txtspan {
+        .txt-span {
             font-size: 21px;
         }
     }
 }
 
-.plan_options {
+.plan-options {
     margin-top: 2rem;
     display: flex;
     justify-content: center;
@@ -59,27 +57,27 @@
     }
 }
 
-.plans_container {
+.plans-container {
     display: flex;
-    gap: 2rem;
+    gap: 1.7rem;
     justify-content: center;
     margin-top: 3rem;
 
     .plan {
-        height: 590px;
-        width: 290px;
+        height: 45rem;
+        width: 22%;
         border: 3px solid rgb(96, 71, 123);
-        padding: 5px;
+        padding: 3px;
         background-color: rgb(180, 180, 180);
         border-radius: 5px;
 
-        .plan_box {
+        .plan-box {
             height: 100%;
             border-radius: 5px;
             background-color: rgb(242, 242, 242);
             border: 2px solid rgb(150, 150, 150);
 
-            .planName {
+            .plan-name {
                 height: 55px;
                 width: 200px;
                 background: linear-gradient(to right, rgb(96, 71, 123), rgb(209, 129, 225));
@@ -122,6 +120,9 @@
 
             .features {
                 margin-left: 1rem;
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: rgb(96, 71, 123);
             }
         }
     }
@@ -132,7 +133,7 @@ hr {
     margin: 4rem auto;
 }
 
-.faq_section {
+.faq-section {
     margin-left: 5rem;
 
     .faqs {
@@ -161,111 +162,205 @@ hr {
     }
 }
 
-@media only screen and (max-width:1270px) {
-    .memberhead {
-        .insidetxt {
-            padding: 1rem;
-
-            .headspan {
-                font-size: 2.3rem;
-                font-weight: bold;
+@media only screen and (max-width:1370px) {
+    .membership-head {
+    
+        .inside-txt {
+    
+            .head-span {
+                font-size: 36px;
+                padding: 5px;
             }
-
-            .txtspan {
-                font-size: 1.3rem;
+    
+            .txt-span {
+                font-size: 19px;
+                padding: 5px;
             }
         }
     }
-
-    .plan_options {
-        margin-top: 2rem;
+    
+    .plans-container {
         display: flex;
+        gap: 1.8rem;
         justify-content: center;
-
-        button {
-            height: 2.3rem;
-            width: 8rem;
-            border: 1px solid rgb(96, 71, 123);
-            font-size: 1rem;
+        margin-top: 3rem;
+        padding: 0.5rem;
+    
+        .plan {
+            height: 50rem;
+            width: 23%;
+            border: 3px solid rgb(96, 71, 123);
+            padding: 5px;
+            background-color: rgb(180, 180, 180);
+            border-radius: 5px;
         }
     }
-
-    .plans_container {
-        padding: 1rem;
-    }
-
 }
 
-@media only screen and (max-width:770px) {
-    .memberhead {
-        .insidetxt {
-            .headspan {
-                font-size: 1.5rem;
-                font-weight: bold;
-            }
-
-            .txtspan {
-                font-size: 1rem;
-            }
-        }
-    }
-
-    .plan_options {
-        margin-top: 2rem;
-        display: flex;
-        justify-content: center;
-
-        button {
-            height: 2.1rem;
-            width: 4.9rem;
-            border: 1px solid rgb(96, 71, 123);
-            font-size: 0.7rem;
-            font-weight: normal;
-        }
-    }
-
-    .plans_container {
-        padding: 1rem;
+@media only screen and (max-width:980px) {
+    .membership-head {
+        margin: 0;
+        height: 350px;
+        width: 100%;
+        background: url(./Mmbrshp.png) no-repeat center center;
+        background-size: cover;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
+    
+        .inside-txt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+    
+            .head-span {
+                font-size: 1.5rem;
+                font-weight: bold;
+                padding: 3px;
+            }
+    
+            .txt-span {
+                font-size: 1rem;
+                padding: 3px;
+            }
+        }
+    }
 
+    .plan-options {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+    
+        button {
+            height: 2.2rem;
+            width: 6rem;
+            border: 1px solid rgb(96, 71, 123);
+            padding: 1px;
+        }
+    
+        .monthly {
+            color: rgb(96, 71, 123);
+            background-color: white;
+            border-radius: 50px 0 0 50px;
+            font-size: 0.8rem;
+
+        }
+    
+        .yearly {
+            color: rgb(96, 71, 123);
+            background-color: white;
+            border-radius: 0 50px 50px 0;
+            font-size: 0.8rem;
+
+        }
+    
+        .active {
+            color: white;
+            background-color: rgb(96, 71, 123);
+            font-size: 0.8rem;
+
+        }
+    }
+    
+    .plans-container {
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 2rem;
+        justify-items: center;
+        margin-top: 3rem;
+        padding: 5px;
+    
         .plan {
             height: auto;
-            width: 70%;
-            padding: 5px;
-
-            .plan_box {
-
-                .planName {
-                    height: 3rem;
+            width: 80%;
+            border: 3px solid rgb(96, 71, 123);
+            padding: 0.5rem;
+            background-color: rgb(180, 180, 180);
+            border-radius: 5px;
+    
+            .plan-box {
+                height: 100%;
+                border-radius: 5px;
+                background-color: rgb(242, 242, 242);
+                border: 2px solid rgb(150, 150, 150);
+    
+                .plan-name {
+                    height: 55px;
                     width: 200px;
-                    font-size: 1.4rem;
+                    background: linear-gradient(to right, rgb(96, 71, 123), rgb(209, 129, 225));
+                    margin-top: 3rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    font-size: 1.2rem;
                     font-weight: bold;
                 }
-
+    
                 .price {
-                    font-size: 1.4rem;
-
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: rgb(96, 71, 123);
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    margin: 3rem 0;
+    
                     .per {
-                        font-size: 1.2rem;
+                        font-size: 1.1rem;
+                        font-weight: normal;
                     }
                 }
-
+    
                 .subscribe {
-
+                    display: flex;
+                    justify-content: center;
+    
                     button {
-                        width: 7rem;
-
+                        width: 50%;
+                        height: 44px;
+                        background-color: rgb(96, 71, 123);
+                        color: white;
+                        border-radius: 7px;
                     }
                 }
-
+    
                 .features {
                     margin-left: 1rem;
                 }
             }
         }
     }
+    
+    hr {
+        width: 90%;
+        margin: 3rem auto;
+    }
+    
+    .faq-section {
+        margin-left: 3rem;
+    
+        .faqs {
+            font-size: 1.8rem;
+        }
+    
+        .q {
+            margin-top: 1rem;
+    
+            span {
+                font-size: 1.1rem;
+            }
+    
+            .a {
 
+    
+                span {
+                    font-size: 1.1rem;
+                }
+            }
+        }
+    }
 }

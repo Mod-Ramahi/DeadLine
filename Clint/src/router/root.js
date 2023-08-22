@@ -6,7 +6,7 @@ import AdminNav from "../administrators/AdminNav";
 
 export default function Root() {
   const { pathname } = useLocation()
-  const admin = false;
+  const admin = true;
   return (
     <>
       {pathname === '/administration' ?

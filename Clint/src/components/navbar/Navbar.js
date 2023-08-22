@@ -32,6 +32,7 @@ export default function Navbar() {
     const msgsRef = useRef(null)
     const ntfRef = useRef(null)
     const userRef = useRef(null);
+    const mobileRef = useRef(null);
     const [notificationsMenu, setNotificationsMenu] = useState(false)
     const [messageMenu, setMessageMenu] = useState(false)
 
@@ -80,6 +81,11 @@ export default function Navbar() {
             if (userRef.current && !userRef.current.contains(event.target)) {
                 if (!event.target.closest('.user-menu')) {
                     setUserOpen(false)
+                }
+            }
+            if(mobileRef.current && !mobileRef.current.contains(event.target)) {
+                if(!event.target.closest('.dropdown')){
+                    setIsOpen(false)
                 }
             }
         };
@@ -167,7 +173,7 @@ export default function Navbar() {
                 <div className='mobile-logo'><Link to='/'><img alt='mhomelogo' src={LogoImg} /></Link></div>
                 <div className='mobile-bar-options'>
                     {languageDiv}
-                    <div className="dropdown">
+                    <div className="dropdown" ref={mobileRef}>
                         <img alt='a' src={DropMenu} className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)} />
                         {isOpen && (
                             <div className="drop-down-menu">
@@ -232,7 +238,7 @@ export default function Navbar() {
                 <div className='logo'>
                     <Link to="/" ><img alt='homelogo' src={LogoImg} /> </Link>
                     <div className='search-on-top'>
-                        <SearchBar />
+                    {pathname !=='/resultssearch' && <SearchBar />}
                     </div>
                 </div>
                 {pathname !== "/" ?
@@ -309,7 +315,7 @@ export default function Navbar() {
                 <div className='mobile-logo'><Link to='/'><img alt='mhomelogo' src={LogoImg} /></Link></div>
                 <div className='mobile-bar-options'>
                     {languageDiv}
-                    <div className="dropdown">
+                    <div className="dropdown" ref={mobileRef}>
                         <img alt='a' src={DropMenu} className="dropdown-toggle" onClick={() => setIsOpen(!isOpen)} />
                         {isOpen && (
                             <div className="drop-down-menu smaller">
@@ -332,7 +338,7 @@ export default function Navbar() {
                 <div className='logo'>
                     <Link to="/" ><img alt='homelogo' src={LogoImg} /> </Link>
                     <div className='search-on-top'>
-                        <SearchBar />
+                    {pathname !=='/resultssearch' && <SearchBar />}
                     </div>
                 </div>
                 <div className='bar-options'>

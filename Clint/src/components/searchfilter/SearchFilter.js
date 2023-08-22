@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import './SearchFilter.scss';
 import { CategoryList } from "../../CategoryList";
 import { useNavigate, useLocation } from "react-router-dom";
+import SearchIcon from "../searchbar/Searchicon.png"
 
-export default function SerachFilter({ category, subCategory }) {
+export default function SerachFilter({ category, subCategory, user, handleTextSearch}) {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedSubCategory, setSelectedSubCategory] = useState("");
     const [searchText, setSearchText] = useState("");
@@ -13,9 +14,12 @@ export default function SerachFilter({ category, subCategory }) {
     const [priceSelect, SetPriceSelect] = useState("");
     const [searchOnline, setSearchOnline] = useState(false);
     const [searchVerified, setSearchVerified] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('all')
 
     const handleSearchText = (event) => {
-        setSearchText(event.target.value);
+        const newTextInput = event.target.value;
+        setSearchText(newTextInput);
+        handleTextSearch(newTextInput);
     }
     const handleCountrySelect = (event) => {
         setCountrySelect(event.target.value);
@@ -46,29 +50,37 @@ export default function SerachFilter({ category, subCategory }) {
             window.removeEventListener("resize", screenSize);
         };
     }, []);
-    
+
     const selectedCategoHandler = (event) => {
+        event.preventDefault();
+
         const selectedCategName = event.target.value;
         setSelectedCategory(selectedCategName);
-
+        setSelectedOption('all')
         navigate(`/resultssearch?category=${selectedCategName}`);
 
     }
 
+    // useEffect (() => {
+    //     setSelectedSubCategory("all")
+    // },[selectedCategory])
+
     const handleSubCategoryCheck = (event) => {
+        // event.preventDefault();
         const selectedSub = event.target.value;
         setSelectedSubCategory(selectedSub);
+        setSelectedOption(selectedSub)
         navigate(`/resultssearch?category=${selectedCategory}&subcategory=${selectedSub}`, { state: { subCategory: selectedSub } });
     }
 
     useEffect(() => {
         if (location.state && location.state.subCategory) {
-          setSelectedSubCategory(location.state.subCategory);
+            setSelectedSubCategory(location.state.subCategory);
         } else {
             setSelectedSubCategory(subCategory);
-          }
-      }, [location.state, subCategory]);
-      useEffect(() => {
+        }
+    }, [location.state, subCategory]);
+    useEffect(() => {
         setSelectedCategory(category);
         setSelectedSubCategory(subCategory)
     }, [category, subCategory])
@@ -81,40 +93,44 @@ export default function SerachFilter({ category, subCategory }) {
     return (
         <>
             {isMobile ?
-                (<div className="mobile_filter">
-                    <div className="mobile_imgbckg">
-                        <div className="Mobile_search_text">
-                            <input type="text" id="mobile_srch_txt" placeholder="search..." onChange={handleSearchText}/>
+                (<div className="mobile-filter">
+                    <div className="mobile-imgbckg">
+                        <div className="Mobile-search-text">
+                            <input type="text" id="mobile-srch-txt" placeholder="search..." onChange={handleSearchText} />
                         </div>
-                        <div className="mobile_categ_select mobile">
-                            <label htmlFor="categoryselect">Select Category </label>
-                            <select id="categoryselect" onChange={selectedCategoHandler}>
-                                <option value="selected">{category ? `${category}` : `All`}</option>
+                        <div className="mobile-categ-select mobile">
+                            <label htmlFor="mobilecategoryselect">Select Category: {selectedCategory} </label>
+                            <select id="mobilecategoryselect" onChange={selectedCategoHandler}>
+                                <option value="not selected">Select</option>
                                 {CategoryList.map((catego, idx) => (
                                     <option key={idx} value={catego.categoryname}>{catego.categoryname}</option>
                                 )
                                 )}
                             </select>
                         </div>
-                        <div className="mobile_sub_select mobile">
-                            <label htmlFor="subcategselect">selecy sub category</label>
-                            <select id="subcategselect" onChange={handleSubCategoryCheck}>
-                                <option value='all'>All</option>
-                                {selectedCategoryData ? (selectedCategoryData.subCategory.map((item, idx) => (
-                                    <option value={item} key={idx}>{item}</option>
-                                ))) : (<option value="select">Select category first</option>)}
+                        <div className="mobile-sub-select mobile">
+                            <label htmlFor="mobilesubcategory" className="select-categ-label">Select Sub Category: {selectedSubCategory}</label>
+                            <select value={selectedOption} id="mobilesubcategory" onChange={handleSubCategoryCheck}>
+                                <option value='all'> All </option>
+                                {selectedCategoryData &&
+                                    (selectedCategoryData.subCategory.map((item, idx) => (
+                                        <option key={idx} value={item}>{item}</option>
+                                    )))
+                                }
                             </select>
                         </div>
-                        <div className="mobile_skills_select mobile">
-                            <label htmlFor="mobileskillsselect">selecy skills</label>
-                            <select id="mobileskillsselect" onChange={handleSubCategoryCheck}>
-                                <option value='all'>All</option>
-                                {selectedCategoryData ? (selectedCategoryData.subCategory.map((item, idx) => (
-                                    <option value={item} key={idx}>{item}</option>
-                                ))) : (<option value="select">Select category first</option>)}
+                        <div className="mobile-skills-select mobile">
+                            <label htmlFor="mobileskills" className="select-categ-label">Select skills: {selectedSubCategory}</label>
+                            <select value={selectedOption} id="mobileskills" onChange={handleSubCategoryCheck}>
+                                <option value='all'> All </option>
+                                {selectedCategoryData &&
+                                    (selectedCategoryData.subCategory.map((item, idx) => (
+                                        <option key={idx} value={item}>{item}</option>
+                                    )))
+                                }
                             </select>
                         </div>
-                        <div className="mobile_country mobile">
+                        <div className="mobile-country mobile">
                             <label htmlFor="mobilecountryselect">Select Country</label>
                             <select id="mobilecountryselect" onChange={handleCountrySelect}>
                                 <option value="all">All</option>
@@ -122,7 +138,7 @@ export default function SerachFilter({ category, subCategory }) {
                                 <option value="USA">USA</option>
                             </select>
                         </div>
-                        <div className="mobile_language mobile">
+                        <div className="mobile-language mobile">
                             <label htmlFor="mobilelanguageselect">Select Language</label>
                             <select id="mobilelanguageselect" onChange={handleLanguageSelect}>
                                 <option value="English">English</option>
@@ -130,7 +146,7 @@ export default function SerachFilter({ category, subCategory }) {
                                 <option value="Arabic">Arabic</option>
                             </select>
                         </div>
-                        <div className="mobile_price mobile">
+                        <div className="mobile-price mobile">
                             <label htmlFor="mobileprice">Select price range per hour</label>
                             <select id="mobileprice" onChange={handlePrice}>
                                 <option value="0-10">0-10 $ per hour</option>
@@ -141,11 +157,11 @@ export default function SerachFilter({ category, subCategory }) {
                                 <option value="50">50 $ and more per hour</option>
                             </select>
                         </div>
-                        <div className="mobile_online_users mobile">
+                        <div className="mobile-online-users mobile">
                             <label htmlFor="mobileonlinecheck">Online Users Only</label>
                             <input type="checkbox" id="mobileonlinecheck" value="online" onChange={handleOnlineSearch}></input>
                         </div>
-                        <div className="mobile_online_users mobile">
+                        <div className="mobile-online-users mobile">
                             <label htmlFor="mobileproverified">verified proffesional</label>
                             <input type="checkbox" id="mobileproverified" value="verified" onChange={handleVerifiedSearch}></input>
                         </div>
@@ -153,50 +169,13 @@ export default function SerachFilter({ category, subCategory }) {
                 </div>)
                 :
                 (<div className="filter">
-                    <div className="imgbckg">
-                        <div className="search_text">
-                            <input type="text" id="srch_txt" placeholder="search..." onChange={handleSearchText}/>
+                    <div className="img-bckg">
+                        <div className="search-text">
+                            <input type="text" id="srch-txt" placeholder="search..." onChange={handleSearchText} />
+                            <img className="search-icon" alt="searchicon" src={SearchIcon} />
                         </div>
-                        <div className="filter_options">
-                            <div className="select_category">
-                                <div style={{ display: "flex", flexDirection: "column" }}>
-                                    <label htmlFor="categoryselect">Select Category </label>
-                                    <select id="categoryselect" onChange={selectedCategoHandler}>
-                                        <option value="selected">{category ? `${category}` : `All`}</option>
-                                        {CategoryList.map((catego, idx) => (
-                                            <option key={idx} value={catego.categoryname}>{catego.categoryname}</option>
-                                        )
-                                        )}
-                                    </select>
-                                </div>
-                                <div className="selected_catego">
-                                    <p>Select Category to see the Sub categories list and  the Skills related</p>
-                                    <div style={{ display: "flex", gap: "2rem" }}>
-                                        <div className="sub_categories">
-                                            <label htmlFor="subcategory" className="select_categ_label">{subCategory ? `${subCategory}` : `All subcategories`}</label>
-                                            {selectedCategoryData ? (selectedCategoryData.subCategory.map((item, idx) => (
-                                                <div key={idx} className="sub_menu">
-                                                    <label htmlFor={idx}>{item}</label>
-                                                    <input type="checkbox" id={idx} value={item} onChange={handleSubCategoryCheck} checked={item === selectedSubCategory}/>
-                                                </div>
-                                            )))
-                                                :
-                                                (<input type="checkbox" id="allsub" checked disabled />)}
-                                        </div>
-                                        <div className="sub_categories">
-                                            <label htmlFor="skills" className="select_categ_label"> All SKills</label>
-                                            {selectedCategoryData ? (selectedCategoryData.subCategory.map((item, idx) => (
-                                                <div key={idx} className="sub_menu">
-                                                    <label htmlFor={idx}>{item}</label>
-                                                    <input type="checkbox" id={idx} value={item} onChange={handleSubCategoryCheck}/>
-                                                </div>
-                                            ))) :
-                                                (<input type="checkbox" id="allskills" checked disabled />)}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="select_country justify">
+                        <div className="other-filters">
+                            <div className="select-country">
                                 <label htmlFor="countryselect">Select Country</label>
                                 <select id="countryselect" onChange={handleCountrySelect}>
                                     <option value="all">All</option>
@@ -204,19 +183,15 @@ export default function SerachFilter({ category, subCategory }) {
                                     <option value="USA">USA</option>
                                 </select>
                             </div>
-                            <div className="select_language justify">
+                            <div className="select-country">
                                 <label htmlFor="languageselect">Select Language</label>
                                 <select id="languageselect" onChange={handleLanguageSelect}>
                                     <option value="English">English</option>
                                     <option value="French">French</option>
                                     <option value="Arabic">Arabic</option>
                                 </select>
-                                <div className="online_users justify">
-                                    <label htmlFor="onlinecheck">Online Users Only</label>
-                                    <input type="checkbox" id="onlinecheck" value="online" onChange={handleOnlineSearch}></input>
-                                </div>
                             </div>
-                            <div className="select_price justify">
+                            <div className="select-country">
                                 <label htmlFor="price">Select price range per hour</label>
                                 <select id="price" onChange={handlePrice}>
                                     <option value="0-10">0-10 $ per hour</option>
@@ -226,9 +201,53 @@ export default function SerachFilter({ category, subCategory }) {
                                     <option value="40-50">40-50 $ per hour</option>
                                     <option value="50">50 $ and more per hour</option>
                                 </select>
-                                <div className="online_users justify">
-                                    <label htmlFor="proverified">verified proffesional</label>
-                                    <input type="checkbox" id="proverified" value="verified" onChange={handleVerifiedSearch}></input>
+                            </div>
+                            <div className="verified-users">
+                                <label htmlFor="proverified">verified profesional</label>
+                                <input type="checkbox" id="proverified" value="verified" onChange={handleVerifiedSearch}></input>
+                            </div>
+                            {user && <div className="verified-users">
+                                <label htmlFor="onlinecheck">Online Users Only</label>
+                                <input type="checkbox" id="onlinecheck" value="online" onChange={handleOnlineSearch}></input>
+                            </div>}
+                        </div>
+                        <div className="filter-options">
+                            <div className="select-category">
+                                <label htmlFor="categoryselect">Select Category: {selectedCategory} </label>
+                                <select id="categoryselect" onChange={selectedCategoHandler}>
+                                    <option value="not selected">Select</option>
+                                    {CategoryList.map((catego, idx) => (
+                                        <option key={idx} value={catego.categoryname}>{catego.categoryname}</option>
+                                    )
+                                    )}
+                                </select>
+                            </div>
+                            <div className="selected-catego">
+                                <span>Select Category to see the Sub categories list and related skills</span>
+                                <hr />
+                                <div className="filter-second-options">
+                                    <div className="sub-categories">
+                                        <label htmlFor="subcategory" className="select_categ_label">Select Sub Category: {selectedSubCategory}</label>
+                                        <select value={selectedOption} id="subcategoryselect" onChange={handleSubCategoryCheck}>
+                                            <option value='all'> All </option>
+                                            {selectedCategoryData &&
+                                                (selectedCategoryData.subCategory.map((item, idx) => (
+                                                    <option key={idx} value={item}>{item}</option>
+                                                )))
+                                            }
+                                        </select>
+                                    </div>
+                                    <div className="sub-categories">
+                                        <label htmlFor="skills" className="select_categ_label">Select Sub Category: {selectedSubCategory} </label>
+                                        <select value={selectedOption} id="skillsselect" onChange={handleSubCategoryCheck}>
+                                            <option value='all'> All </option>
+                                            {selectedCategoryData &&
+                                                (selectedCategoryData.subCategory.map((item, idx) => (
+                                                    <option key={idx} value={item}>{item}</option>
+                                                )))
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>

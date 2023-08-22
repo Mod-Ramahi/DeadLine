@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './MostPopular.scss';
 import Card from '../Card';
 import JobCardResult from '../jobCardResults/JobCardResult';
-import { Jobs } from '../../data/Jobs';
+// import { Jobs } from '../../data/Jobs';
+import { getAllProject } from '../../api';
 
 const MostPopular = ({ title, cards, number }) => {
+    const [jobs, setJobs] = useState([])
     const [jobClicked, setJobClicked] = useState(false);
     const [freelancerClicked, setFreelancerClicked] = useState(true);
     const [selectedCardId, setSelectedCardId] =useState(null);
     const [selectedJob, setSelectedJob]= useState(null)
 
-
+    useEffect (() => {
+        const getProduct = async () => {
+            const response = await getAllProject()
+            setJobs(response)
+        }
+        getProduct()
+    },[])
     const handleJobClicked = () => {
         setJobClicked(true);
         setFreelancerClicked(false)
@@ -24,18 +32,18 @@ const MostPopular = ({ title, cards, number }) => {
         setSelectedCardId(cardId)
         console.log(cardId)
     }
-    const handleIdJob = (JobID)=>{
-        setSelectedJob(JobID)
-    }
+    // const handleIdJob = (JobID)=>{
+    //     setSelectedJob(JobID)
+    // }
 
     const RenderCards = cards.slice(0, number).map((card) => (
         <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/portfoliopage/${card.id}`} key={card.id}>
             <Card card={card}  CardId={handleIdCard} />
         </Link>
     ));
-    const RenderJobs = Jobs.slice(0, number).map((job) => (
-        <Link to={`/jobprofile/${job.id}`} style={{color:'inherit', textDecoration:'none'}} key={job.id}>
-            <JobCardResult  job={job} onJobClick={handleIdJob}/>
+    const RenderJobs = jobs.slice(0, number).map((job) => (
+        <Link to={`/jobprofile/${job._id}`} style={{color:'inherit', textDecoration:'none'}} key={job._id}>
+            <JobCardResult  job={job} />
         </Link>
         
     ))
