@@ -3,13 +3,22 @@ const mongoose = require('mongoose');
 const freelancerSchema = new mongoose.Schema({
   name: {
     type: String,
-    // required: true,
+    required: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
   },
+  membership: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Membership',
+  },
+  country:String,
+  timezone:String,
+  joined: String,
+  countryFlag: String,
+  recommendation: Number ,
   password: {
     type: String,
     required: true,
@@ -30,6 +39,11 @@ const freelancerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Review', // Reference to the Review model
   }],
+  type: {
+    type: String,
+    enum: ['user', 'freelancer'],
+    default: 'user', // Default value is 'user'
+  },
 });
 
 const Freelancer = mongoose.model('Freelancer', freelancerSchema);

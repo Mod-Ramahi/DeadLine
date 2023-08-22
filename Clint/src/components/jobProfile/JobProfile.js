@@ -2,11 +2,10 @@ import React from "react";
 import Joined from './Joined.png'
 import Time from './Time.png'
 import Recommendation from './Recommendation.png'
-import { Users } from "../../data/Users";
 import { Link } from "react-router-dom";
 
 export default function JobProfile({ job }) {
-    const user = Users.find(user => user.id === job.userPostedId)
+    console.log(job,544)
     return (
         <div className="userprofile">
             <div className="uppersection">
@@ -15,53 +14,53 @@ export default function JobProfile({ job }) {
             <div className="lowersection">
                 <div className="leftsection">
                     <div className="profilephoto">
-                        <img className="photo" alt="profilephoto" src={job.jobPhoto} />
-                        <p className="name">{user.name}</p>
+                        <img className="photo" alt="profilephoto" src={job?.jobPhoto} />
+                        <p className="name">{job?.creator?.name}</p>
                     </div>
                     <div className="info">
                         <div className="country">
-                            {/* <img className="countryimage" alt="" src={CountryFlag} /> */}
-                            <p className="countryname">{user.country}</p>
+                            <img className="countryimage" alt="" src={job?.creator?.countryFlag} />
+                            <p className="countryname">{job?.creator?.country}</p>
                         </div>
                         <div className="time">
                             <img className="timeicon" alt="time" src={Time} />
-                            <p className="timezone">TimeZone:{user.timezone}</p>
+                            <p className="timezone">TimeZone:{job?.creator?.timezone}</p>
                         </div>
                         <div className="joined">
                             <img className="joinedicon" alt="" src={Joined} />
-                            <p className="joinedtime">{user.joined}</p>
+                            <p className="joinedtime">{job?.creator?.joined}</p>
                         </div>
                         <div className="recommendation">
                             <img className="recommendationimage" alt="" src={Recommendation} />
-                            <p className="recommendationnumber">recommendation: 5</p>
+                            <p className="recommendationnumber">recommendation: {job?.creator?.recommendation}</p>
                         </div>
                     </div>
                 </div>
                 <div className="middlesection">
                     <div className="nickname">
-                        <p>{job.jobTitle}</p>
-                        <p>{user.nickname}</p>
+                        <p>{job.title}</p>
+                        <p>{job?.creator?.name}</p>
                     </div>
                     <div className="title_review">
                         <div className="review">
-                            <p>{user.avgRate}</p>
-                            <p>(4 reviews)</p>
+                            <p>{job?.creator?.avgRate}</p>
+                            <p>{job?.creator?.reviews?.length} reviews</p>
                         </div>
                     </div>
                     <div className="userstatistic">
                         <div className="stat">
                             <div className="job_complete">
-                                <p className="n">5</p>
+                                <p className="n">{job?.creator?.projectsCompleted?.length}</p>
                                 <p>projects Completed</p>
                             </div>
                         </div>
                     </div>
                     <div className="serviceinfo">
                         <p className="myoffers">
-                            {job.jobDescription}
+                            {job.description}
                         </p>
                         <ul>
-                            {job.jobSkills.map((skill, idx) => {
+                            {job.skills.map((skill, idx) => {
                                 return (
                                     <li key={idx}>{skill}</li>
                                 )
@@ -80,7 +79,7 @@ export default function JobProfile({ job }) {
                             <span>Top Skills</span>
                             <div className="pboxinfo">
                                 <ul>
-                                    {job.jobSkills.map((skill, idx) => {
+                                    {job.skills.map((skill, idx) => {
                                         return (
                                             <li key={idx}>{skill}</li>
                                         )
@@ -89,7 +88,7 @@ export default function JobProfile({ job }) {
                             </div>
                             <span>Category</span>
                             <div className="pboxinfo">
-                                <p>{job.jobCategory}</p>
+                                <p>{job.category}</p>
                             </div>
                         </div>
                     </div>
