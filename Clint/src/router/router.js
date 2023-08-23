@@ -39,6 +39,7 @@ import AdminPayments from "../administrators/adminPayments";
 import AdminChat from "../administrators/adminChat";
 import AdminSingleUser from "../administrators/adminSingleUser";
 import HireFreelancer from "../pages/hireFreelancer";
+import Chat from "../pages/chatpage";
 
 const router = createBrowserRouter([
       {
@@ -150,6 +151,10 @@ const router = createBrowserRouter([
           {
             path:"/hire-freelancer",
             element: <HireFreelancer/>
+          },
+          {
+            path:"/chat",
+            element: <Chat/>
           },
           {
             path:"/administration",

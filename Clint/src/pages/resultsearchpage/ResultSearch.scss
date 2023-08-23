@@ -1,18 +1,21 @@
-.adcards {
+.ad-cards {
     height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+    padding: 1rem;
 
-    p {
-        margin-left: 4rem;
+    span {
         font-size: 40px;
     }
 
-    .memberscards {
+    .members-cards {
         display: flex;
         justify-content: center;
-        align-items: center;
         gap: 2rem;
 
-        .adimg {
+        .ad-img {
             border: 1px solid black;
             border-radius: 5px;
             height: 174px;
@@ -20,94 +23,138 @@
         }
     }
 }
-.mostpopularbtns {
+
+.most-popular-btns {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin:3rem 0;
+    margin: 3rem 0;
+
     button {
         height: 42px;
         width: 168px;
         border: 1px solid rgb(96, 71, 123)
     }
 
-    .jobbtn {
+    .job-btn {
         color: rgb(96, 71, 123);
         background-color: white;
         border-radius: 50px 0 0 50px;
     }
 
-    .freelancerbtn {
+    .freelancer-btn {
         color: rgb(96, 71, 123);
         background-color: white;
         border-radius: 0 50px 50px 0;
     }
-    .active{
+
+    .active {
         color: white;
         background-color: rgb(96, 71, 123);
     }
 }
 
-.results_render {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+.results-render {
+    display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
-}
+    width: 100%;
+    margin: 0;
+    // background-color: black;
 
-@media only screen and (max-width:1130px) {
-
-    .adcards {
-        height: 300px;
-
-        p {
-            margin-left: 4rem;
-            font-size: 30px;
-        }
-
-        .memberscards {
-            gap: 1rem;
-
-            .adimg {
-                height: 154px;
-                width: 200px;
-            }
-        }
-    }
-
-}
-
-@media only screen and (max-width:830px) {
-
-    .adcards {
-        height: auto;
-
-        p {
-            margin-left: 4rem;
-            font-size: 30px;
-        }
-
-        .memberscards {
-            gap: 1rem;
-
-            .adimg {
-                height: 154px;
-                width: 200px;
-            }
-        }
-    }
-
-    .remove{
-        display: none;
-    }
-    
-}
-@media only screen and (max-width: 750px){
-    .results_render {
+    .jobs-render {
         display: grid;
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         justify-content: center;
         align-items: center;
+        row-gap: 4rem;
+        column-gap: 10rem;
+        // background-color: green;
+    }
+
+    .users-render {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+        padding: 1rem;
+        // width: 40rem;
+        // background-color: red;
+    }
+}
+
+@media only screen and (max-width:1120px) {
+
+    .ad-cards {
+        height: auto;
+
+        span {
+            font-size: 1.5rem;
+            margin: 5px 0;
+        }
+
+        .members-cards {
+            .ad-img {
+                width: 200px;
+            }
+            .remove {
+                display: none;
+            }
+        }
+    }
+
+}
+
+@media only screen and (max-width:730px) {
+    .members-cards {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+
+        .remove {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 750px) {
+
+
+    .most-popular-btns {
+        margin: 2rem 0;
+    
+        button {
+            height: 42px;
+            width: 110px;
+            border: 1px solid rgb(96, 71, 123);
+            font-size: 1rem;
+        }
+    
+    }
+}
+
+@media only screen and (max-width:840px){
+    .results-render {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 0;
+        // background-color: black;
+    
+        .jobs-render {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 3rem;
+        }
+    
+        .users-render {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 4rem;
+            padding: 0.5rem;
+            // width: 40rem;
+            // background-color: red;
+        }
     }
 }

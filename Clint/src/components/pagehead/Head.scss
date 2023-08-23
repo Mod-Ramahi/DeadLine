@@ -9,7 +9,7 @@
 
     .head-background {
         top: 0;
-        height: 769px;
+        height: 100%;
         width: 100%;
         background-repeat: no-repeat;
         background-position: center;
@@ -99,7 +99,7 @@
     .head {
 
         .head-background {
-            height: 90%;
+            height: 100%;
 
             .head-text {
                 padding-bottom: 0;
@@ -131,32 +131,36 @@
 
 @media only screen and (max-width: 520px) {
     .head {
-
+        height: 490px;
+    
         .head-background {
-            height: 70%;
+    
+            .head-search {
+                transform: translateY(170%);
+            }
+    
             .head-text {
-                margin-top: 1rem;
-
+                height: 150px;
+                padding: 10rem 1rem;
+                padding-bottom: 0;
+    
                 p {
                     font-size: 1rem;
                 }
-
+    
                 span {
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                 }
-
-
+    
             }
-
+    
             .head-three-btns {
-                gap: 2px;
-                padding-top: 10px;
-
+    
                 .head-btn {
-                    width: 4rem;
-                    height: 2.5rem;
-                    padding: 0.5rem;
-                    font-size: 0.5rem;
+                    height: 3rem;
+                    width: 5.5rem;
+                    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+                    font-size: 0.7rem;
                 }
             }
         }

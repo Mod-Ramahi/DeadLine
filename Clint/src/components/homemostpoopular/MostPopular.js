@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './MostPopular.scss';
 import Card from '../Card';
 import JobCardResult from '../jobCardResults/JobCardResult';
-import { Jobs } from '../../data/Jobs';
 import { getAllProject } from '../../api';
 
 const MostPopular = ({ title, cards, number }) => {

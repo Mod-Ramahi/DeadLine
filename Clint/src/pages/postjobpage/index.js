@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './PostJob.scss';
 import { CategoryList } from "../../CategoryList";
 import { postJobRequest } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 export default function PostJob() {
     const [description, setJobDescription] = useState("");
@@ -12,8 +13,11 @@ export default function PostJob() {
     const [currency, setCurrency] = useState("USdollar");
     const [vipPost, setVipPost] = useState(false);
     const [title, setJobtitle] = useState("");
-    const [payByHour, setPayByHour] = useState(false)
+    const [payByHour, setPayByHour] = useState(false);
+    const [jobSubCateg, setJobSubCateg] = useState([]);
+    const [shortDescription, setShortDescription] = useState("")
 
+    const navigate = useNavigate(); 
     const handleJobTitle = (event) => {
         setJobtitle(event.target.value);
     }
@@ -22,8 +26,16 @@ export default function PostJob() {
         setJobDescription(event.target.value);
     }
 
+    const handleShortDescription = (event) => {
+        setShortDescription(event.target.value)
+    }
+
     const handleJobCategory = (event) => {
         setJobCategory(event.target.value);
+    }
+
+    const handleJobSubCategory = (event) => {
+        setJobSubCateg(event.target.value)
     }
 
     const handleSkillList = (event) => {
@@ -52,7 +64,7 @@ export default function PostJob() {
 
     const handlePaymentMethod = (event) => {
         const payMethod = event.target.value;
-        setPaymentMethod(event.target.value);
+        setPaymentMethod(payMethod);
         if (payMethod === 'ByHour') {
             setPayByHour(!payByHour);
         }
@@ -76,11 +88,15 @@ export default function PostJob() {
             console.log(21)
             const response = await postJobRequest({description,title,salary,Skills,payByHour,paymentMethod,category,currency})
             console.log(response)
+            navigate('/userhome')
         } catch (error) {
             
         }
     }
 
+    const findSubCateg = CategoryList.find((item) => 
+        item.categoryname === category
+    )
     return (
         <form onSubmit={handleSubmit} className="post-job">
             <span className="title">Post Your Project</span>
@@ -90,10 +106,10 @@ export default function PostJob() {
             </div>
             <div className="job-description job-title color-b">
                 <label htmlFor="description">Job Description</label>
-                <textarea className="description-area" placeholder="description . . .(max: 700 letter)" maxLength={700} onChange={handleDescription}></textarea>
+                <textarea className="description-area" placeholder="description . . .(max: 700 letter)" maxLength={700} onChange={handleShortDescription}></textarea>
             </div>
             <div className="job-description job-title color-b">
-                <label htmlFor="description">Short Job Description</label>
+                <label htmlFor="shortdescription">Short Job Description</label>
                 <textarea className="description-area" placeholder="short description . . .(max: 90 letter)" maxLength={90} onChange={handleDescription}></textarea>
             </div>
             <hr />
@@ -104,6 +120,16 @@ export default function PostJob() {
                     {CategoryList.map((catego, idx) => (
                         <option key={idx} value={catego.categoryname}>{catego.categoryname}</option>
                     ))}
+                </select>
+            </div>
+            <div className="select-category job-title color-a">
+                <span>Select the related Sub category:</span>
+                <select id="subcateglist" onChange={handleJobSubCategory}>
+                    <option value='select'>Select</option>
+                    {findSubCateg && findSubCateg.subCategory.map((item, idx) => (
+                        <option key={idx} value={item}>{item}</option>
+                    ))
+                    }
                 </select>
             </div>
             <div className="skills job-title color-b">
@@ -125,8 +151,8 @@ export default function PostJob() {
             <hr />
             <div className="pay-method job-title color-a">
                 <span>Choose the payment method:</span>
-                <select id="method" onChange={handlePaymentMethod}>
-                    <option value='fixed'>Fixed Price</option>
+                <select id="method" onChange={handlePaymentMethod} defaultValue="fixed">
+                    <option value='fixed' >Fixed Price</option>
                     <option value='ByHour' >Pay by hour</option>
                 </select>
             </div>

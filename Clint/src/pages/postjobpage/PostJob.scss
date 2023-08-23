@@ -17,23 +17,19 @@
     }
 
     .job-title {
-        height: 4rem;
-
+        // height: 5rem;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
         #titlejob {
-            height: 75%;
+            height: 2.5rem;
             width: 50%;
             border-radius: 0;
+            padding: 0;
         }
     }
 
-    .color-a {
-        background-color: rgba(96, 71, 123, 0.8);
-        color: #fff;
-    }
 
-    .color-b {
-        background-color: rgba(96, 71, 123, 0.3);
-    }
 
     .job-description {
         display: flex;
@@ -59,7 +55,11 @@
         justify-content: center;
 
         #categlist {
-            height: 75%;
+            height: 2.6rem;
+            width: 50%;
+        }
+        #subcateglist {
+            height: 2.6rem;
             width: 50%;
         }
     }
@@ -69,10 +69,10 @@
         flex-direction: column;
         justify-content: center;
         width: 80%;
-        height: 8rem;
+        // height: 8rem;
 
         #skill {
-            height: 75%;
+            height: 2.6rem;
             width: 50%;
         }
     }
@@ -87,10 +87,10 @@
         flex-direction: column;
         justify-content: center;
         width: 90%;
-        height: 5rem;
+        // height: 5rem;
 
         #method {
-            height: 75%;
+            height: 2.6rem;
             width: 50%;
         }
     }
@@ -113,7 +113,7 @@
             font-weight: bold;
             gap: 0.5rem;
             border-radius: 5px;
-            padding: 0.5rem;
+            padding: 0;
 
             .price-input {
                 width: 80%;
@@ -127,64 +127,77 @@
                 #currency {
                     width: 5%;
                     height: 4rem;
-                    padding: 3px;
+                    padding: 1px;
                     color: white;
                     background-color: rgb(96, 71, 123);
                     border-radius: 5px;
+                    font-weight: bold;
+                    font-size: 1.2rem;
                 }
             }
         }
-
-    }
-
-    .post_type {
-        width: 100%;
-        margin: 2rem 0;
-        font-weight: bold;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-
-        .type {
+        .expected-time{
             display: flex;
             flex-direction: column;
-            border: 4px double rgb(96, 71, 123);
-            border-radius: 5px;
-
-            .vip {
-                border: 3px solid rgb(96, 71, 123);
-                border-radius: 4px;
-                margin: 1rem 0;
+            width: 80%;
+            // height: 5rem;
+            #timeDeliver{
+                width: 40%;
+                    height: 4rem;
+            }
+        }
+    
+        .post_type {
+            width: 100%;
+            margin: 2rem 0;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+    
+            .type {
+                display: flex;
+                flex-direction: column;
+                border: 4px double rgb(96, 71, 123);
+                border-radius: 5px;
+    
+                .vip {
+                    border: 3px solid rgb(96, 71, 123);
+                    border-radius: 4px;
+                    margin: 1rem 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    background-color: rgba(96, 71, 123, 0.7);
+                    ;
+    
+                    #checkbox {
+                        height: 1.5rem;
+                        width: 1.5rem;
+                    }
+                }
+            }
+    
+            .submit {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                background-color: rgb(96, 71, 123);
                 color: white;
-                background-color: rgba(96, 71, 123, 0.7);
-                ;
-
-                #checkbox {
-                    height: 1.5rem;
-                    width: 1.5rem;
-                }
+                width: 450px;
+                height: 76px;
+                font-size: 30px;
+                border-radius: 7px;
             }
+    
         }
-
-        .submit {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgb(96, 71, 123);
-            color: white;
-            width: 450px;
-            height: 76px;
-            font-size: 30px;
-            border-radius: 7px;
-        }
-
+    
     }
 
+    
     input {
         border-radius: 5px;
     }
@@ -202,6 +215,9 @@
     }
 
     font-size: 20px;
+}
+input {
+    height: 2.7rem;
 }
 
 @media only screen and (max-width: 700px) {
@@ -225,7 +241,7 @@
 
         .job-title {
             height: 4rem;
-
+            padding: 0;
             #titlejob {
                 height: 75%;
                 width: 50%;

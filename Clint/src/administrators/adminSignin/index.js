@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './AdminSignin.scss';
 
 export default function AdminSignin() {
     const [userName, setUserName] = useState();
     const [userId, setUserId] = useState();
     const [userPass, setUserPass] = useState();
+    const navigate = useNavigate();
 
     const handleAdminName = (event) => {
         setUserName(event.target.value)
@@ -17,6 +19,7 @@ export default function AdminSignin() {
     }
     const handleAdminSubmit = () => {
         console.log('ok')
+        navigate('/administration/home')
     }
 
     return (
