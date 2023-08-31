@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./BidOnJob.scss"
 import { postProposalRequest } from "../../api";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 export default function BidOnJob() {
     const {id} = useParams()
@@ -12,6 +13,7 @@ export default function BidOnJob() {
     const [milestone, setMilestone] = useState("");
     const [plan, setPlan] = useState("public");
 
+    const navigate = useNavigate()
 
     const handlePrice = (event) => {
         setPrice(event.target.value)
@@ -42,10 +44,16 @@ export default function BidOnJob() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = postProposalRequest({price,description,milestone,plan,deliveryTime,jobId:id})
+            const response = await postProposalRequest({price,description,milestone,plan,deliveryTime,jobId:id})
             console.log(response)
+            if (response.status === 201){
+                navigate('/userhome')
+            }
+            if (response.status === 500){
+                alert("something wen wrong")
+            }
         } catch (error) {
-            
+            console.log(error)
         }
         
     }

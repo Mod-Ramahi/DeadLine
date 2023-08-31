@@ -62,10 +62,10 @@ export default function MyUserProfile({ user }) {
                             </div>
                         </div>
                         <div className="stat">
-                            <div className="job_complete">
+                            {/* <div className="job_complete">
                                 <p className="n">20%</p>
                                 <p>Repeat hire rate</p>
-                            </div>
+                            </div> */}
                             <div className="job_complete">
                                 <p className="n">100%</p>
                                 <p>On Time</p>

@@ -38,7 +38,7 @@ export default function ResultSearch() {
     const subCategory = new URLSearchParams(location.search).get('subCategory');
     const userRender = Users.map((user) => {
         return (
-            <Link to={`/freelancer/${user.id}`} key={user.id} className="link_a">
+            <Link to={`/freelancer/${user.id}`} key={user.id} style={{ color: 'inherit', textDecoration: 'none' }}>
                 <CardsResults user={user}  />
             </Link>)
     })

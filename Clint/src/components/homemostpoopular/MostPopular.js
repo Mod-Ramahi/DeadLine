@@ -30,7 +30,7 @@ const MostPopular = ({ title, cards, number }) => {
         </Link>
     ));
     const RenderJobs = jobs.map((job) => (
-        <Link to={`/jobprofile/${job._id}`} style={{color:'inherit', textDecoration:'none'}} key={job.id}>
+        <Link to={`/jobprofile/${job._id}`} style={{color:'inherit', textDecoration:'none'}} key={job._id}>
             <JobCardResult  job={job} />
         </Link>
         

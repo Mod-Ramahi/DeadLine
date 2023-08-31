@@ -17,6 +17,7 @@ export default function UserProfile({user}){
                         <img alt="profilephoto" src={user.profilephoto} />
                         <p className="name">{user.name}</p>
                     </div>
+                    <hr/>
                     <div className="info">
                         <div className="country">
                             {/* <img className="countryimage" alt="" src={CountryFlag} /> */}
@@ -41,7 +42,6 @@ export default function UserProfile({user}){
                         <p>{user.name}</p>
                         <p>{user.nickname}</p>
                     </div>
-                    <hr/>
                     <div className="title_review">
                         <p>{user.headline}</p>
                         <div className="review">
@@ -49,6 +49,7 @@ export default function UserProfile({user}){
                             <p>(4 reviews)</p>
                         </div>
                     </div>
+                    <hr/>
                     <div className="userstatistic">
                         <div className="stat">
                             <div className="job_complete">
@@ -61,16 +62,17 @@ export default function UserProfile({user}){
                             </div>
                         </div>
                         <div className="stat">
-                            <div className="job_complete">
+                            {/* <div className="job_complete">
                                 <p className="n">20%</p>
                                 <p>Repeat hire rate</p>
-                            </div>
+                            </div> */}
                             <div className="job_complete">
                                 <p className="n">100%</p>
                                 <p>On Time</p>
                             </div>
                         </div>
                     </div>
+                    <hr/>
                     <div className="serviceinfo">
                         <p className="aboutme">
                             {user.maininfo}

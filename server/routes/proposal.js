@@ -5,6 +5,7 @@ const proposalRouter = require("express").Router()
 
 proposalRouter.post("/",authMiddleware, createProposal)
 proposalRouter.get("/:id", getProposalById)
-proposalRouter.get("/", getProposalsForJob)
+// proposalRouter.get("/", getProposalsForJob)
+proposalRouter.get("/job/:jobId", getProposalsForJob);
 
 module.exports =  proposalRouter

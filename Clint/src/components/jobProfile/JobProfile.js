@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Joined from './Joined.png'
 import Time from './Time.png'
 import Recommendation from './Recommendation.png'
 import { Users } from "../../data/Users";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
 export default function JobProfile({ job }) {
+    const [proposal, setProposal] = useState([])
     // const user = Users.find(user => user.id === job.userPostedId)
     const user = Users.find(user => user.id === job.createdBy)
+    const id = useParams();
+    
+    useEffect(() => {
+        async function fetchProposals () {
+        try{
+            const response = await axios.get(`http://localhost:4000/api/v1/proposal/job/${id}`);
+            setProposal(response.data);
+        }catch(error){
+            console.error("Error fetching proposals", error);
+        }
+    }
+    fetchProposals();
+    },[id])
+
     return (
         <div className="userprofile">
             <div className="uppersection">
@@ -76,7 +93,7 @@ export default function JobProfile({ job }) {
                 </div>
                 <div className="rightsection">
                     <div className="upperbox">
-                        <Link to='/bidproposal' style={{ color: 'inherit', textDecoration: 'none' }}>
+                        <Link to={`/bidproposal/${id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                             <div className="hirebtn">
                                 <span>bid On Job</span>
                             </div>
@@ -119,7 +136,7 @@ export default function JobProfile({ job }) {
             <div className="reviewssection">
                 <span>Proposals</span>
                 <div>
-                    {/* {Reviews} */}
+                    {proposal? proposal.map((propose) => (<span key={propose._id}>{propose.description}</span>)):<span>No proposals</span>}
                 </div>
             </div>
         </div>

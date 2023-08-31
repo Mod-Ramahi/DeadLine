@@ -15,7 +15,7 @@
     }
 
     .lowersection {
-        margin: 2.5rem;
+        margin: 2rem;
         display: flex;
         gap: 2rem;
         justify-content: center;
@@ -27,7 +27,7 @@
             align-items: center;
             width: 322px;
             height: 611px;
-            border: 1px solid black;
+            border: 2px solid rgb(96, 71, 123);
             border-radius: 7px;
 
             .profilephoto {
@@ -47,7 +47,13 @@
                     font-size: 25px;
                 }
             }
+            hr{
+                border: 1px solid rgb(96, 71, 123);
+                margin: 0.3rem;
+            }
             .info{
+                font-size: 0.9rem;
+                font-weight: bold;
                 .time{
                     display: flex;
                     gap: 5px;
@@ -79,36 +85,46 @@
         }
 
         .middlesection {
-            border: 1px solid black;
+            border: 2px solid rgb(96, 71, 123);
             display: flex;
             flex-direction: column;
             // justify-content: center;
             align-items: flex-start;
-            padding: 0.7rem;
+            padding: 0.4rem;
             gap: 0.5rem;
             width: 589px;
             min-height: 990px;
             border-radius: 7px;
             .nickname{
+                padding: 0.5rem 0;
+                color: white;
                 display: flex;
-                gap:4px;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                background-color: rgb(96, 71, 123);
                 p{
                     font-size: 34px;
                     margin-bottom: 0;
                 }
             }
-            hr{
-                width: 98%;
-                border: 1px solid rgb(0, 0, 0);
-            }
+           
             .title_review{
-                p{
-                    font-size: 28px;
-                }
+                padding: 1rem;
+                color: rgb(96, 71, 123);
+                font-size: 1.5rem;
+                font-weight: bold;
+        
                 .review{
                     display: flex;
-                    p{font-size: 28px;}
+                    
                 }
+            } 
+            hr{
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                border: 2px solid rgb(96, 71, 123);
             }
             .userstatistic{
                 display: flex;
@@ -121,9 +137,9 @@
                         display: flex;
                         align-items: center;
                         gap:10px;
-                        font-size: 20px;
+                        font-size: 1rem;
                         .n{
-                            font-size: 30px;
+                            font-size: 1.2rem;
                             font-weight: bold;
                             color: rgb(175, 128, 224)
                         }
@@ -141,12 +157,13 @@
         }
 
         .rightsection {
+            
             .upperbox {
                 width: 322px;
-                border: 1px solid black;
+                border: 2px solid rgb(96, 71, 123);
                 border-radius: 7px;
                 .hirebtn{
-                    border-radius: 7px;
+                    border-radius: 5px;
 
                     display: flex;
                     height: 76px;

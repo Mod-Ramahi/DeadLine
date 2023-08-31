@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Job.scss';
 import JobProfile from "../../components/jobProfile/JobProfile";
 import { useParams } from "react-router-dom";
-import { Jobs } from "../../data/Jobs";
+// import { Jobs } from "../../data/Jobs";
 import { getProjectById } from "../../api";
 
 export default function Job (){

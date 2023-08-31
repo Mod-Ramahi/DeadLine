@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Signin.scss"
+import * as Yup from 'yup'
 import { Link, useNavigate } from "react-router-dom";
 import { loginRequest } from "../../api";
 import { setItem } from "../../utils/localStorge";
@@ -7,36 +8,83 @@ import { setItem } from "../../utils/localStorge";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPass, setShowPass] = useState(false)
+
   const [rememberMe, setRememberMe] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({})
   const navigate = useNavigate()
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('invalid email address').required('email is required'),
+    password: Yup.string().required('password is required')
+      .min(8, 'Password must be at least 8 characters')
+      .max(20, 'Password must not exceed 20 characters')
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
+        'Password must include at least one letter and one number'
+      ),
+  })
+
   const handleUsernameChange = (event) => {
-    setEmail(event.target.value);
+    const emailChange = event.target.value
+    setEmail(emailChange);
+    if (validationErrors.email) {
+      setValidationErrors((prevError) => (
+        { ...prevError, email: '' }
+      ))
+    }
   }
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+    const passwordChange = event.target.value;
+    setPassword(passwordChange);
+    if (validationErrors.password) {
+      setValidationErrors((prevError) => ({
+        ...prevError,
+        password: ''
+      }))
+    }
   }
+  const togglePasswordVisibility = () => {
+    setShowPass(!showPass)
+}
 
   const handleRemembermeChange = () => {
-    setRememberMe(!rememberMe);
-    // const newRememberMeValue = !rememberMe;
-    // setRememberMe(newRememberMeValue);
-    // localStorage.setItem('rememberMe', newRememberMeValue);
+    const newRememberMeValue = !rememberMe;
+    setRememberMe(newRememberMeValue);
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await loginRequest({email,password})
-            console.log(response)
-            if(response.status === 200){
-                setItem(response.data.token)
-                navigate('/')
-            }
+      await validationSchema.validate(
+        { email, password },
+        { abortEarly: false }
+      )
+      const response = await loginRequest({ email, password, rememberMe })
+      console.log(response)
+      if (response.status === 200) {
+        setItem(response.data.token)
+        localStorage.setItem('rememberMe', rememberMe);
+        navigate('/userhome')
+      } else if (response.status === 401) {
+        alert('Invalid email or password')
+      } else if (response.status === 400) {
+        alert('something went wrong')
+      }
     } catch (error) {
-      
+      if (error.name = 'ValidationError') {
+        const validationErrors = {}
+        error.inner.forEach((err) => {
+          validationErrors[err.path] = err.message
+        })
+        setValidationErrors(validationErrors)
+      } else {
+        console.log(error)
+        alert('something went wrong')
+      }
     }
-    
+
   }
 
   return (
@@ -51,25 +99,36 @@ const SignIn = () => {
           <label htmlFor="username">
             Email
           </label>
-          <input
-            id="email"
-            type="text"
-            value={email}
-            onChange={handleUsernameChange}
-            required
-          />
+          <div className="handle-input">
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={handleUsernameChange}
+              required
+            />
+            {validationErrors.email && <span className="errors">{validationErrors.email}</span>}
+          </div>
         </div>
         <div className="user_password">
           <label htmlFor="password">
             Password
           </label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-          />
+          <div className="handle-input">
+            <div className="pass-input">
+              <input
+                id="password"
+                type={showPass ? "text" : "password"}
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+              <span className="show" onClick={togglePasswordVisibility}>
+                {showPass ? 'hide' : 'show'}
+              </span>
+            </div>
+            {validationErrors.password && <span className="errors">{validationErrors.password}</span>}
+          </div>
         </div>
         <div className="remember_me">
           <label>

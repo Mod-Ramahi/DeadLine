@@ -106,11 +106,11 @@ export default function PostJob() {
             </div>
             <div className="job-description job-title color-b">
                 <label htmlFor="description">Job Description</label>
-                <textarea className="description-area" placeholder="description . . .(max: 700 letter)" maxLength={700} onChange={handleShortDescription}></textarea>
+                <textarea className="description-area" placeholder="description . . .(max: 700 letter)" maxLength={700} onChange={handleDescription}></textarea>
             </div>
             <div className="job-description job-title color-b">
                 <label htmlFor="shortdescription">Short Job Description</label>
-                <textarea className="description-area" placeholder="short description . . .(max: 90 letter)" maxLength={90} onChange={handleDescription}></textarea>
+                <textarea className="description-area" placeholder="short description . . .(max: 90 letter)" maxLength={90} onChange={handleShortDescription}></textarea>
             </div>
             <hr />
             <div className="select-category job-title color-a">

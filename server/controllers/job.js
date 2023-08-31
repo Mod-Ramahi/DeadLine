@@ -5,11 +5,12 @@ const Proposal = require('../models/proposal');
 
 const postJob = async (req, res) =>{
   try {
-    const { title, description, category, salary, Skills,currency,payByHour,paymentMethod,vipPost } = req.body.data;
+    const { title, description, shortDescription, category, salary, Skills,currency,payByHour,paymentMethod,vipPost } = req.body.data;
     console.log(req.user)
       const newJob = new Job({
       title,
       description,
+      shortDescription,
       salary,
       skills:Skills,
       category,

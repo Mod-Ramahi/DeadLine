@@ -35,37 +35,71 @@
             background-color: rgb(242, 242, 242);
         }
     }
-
+    hr{
+        border: 1px solid rgb(96, 71, 123);
+        margin: 0.5rem;
+    }
     form {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        // align-items: center;
+        align-items: center;
         gap: 2rem;
-        width: 800px;
+        width: 810px;
+        border: 2px solid rgb(96, 71, 123);
+        padding: 0.5rem;
 
         label {
-            font-size: 16px;
+            font-size: 1.2rem;
             font-weight: bold;
+            width: 123px;
         }
 
         input {
-            width: 500px;
+            font-size: 1.1rem;
+            width: 510px;
             height: 60px;
+            padding: 0 4px;
         }
 
         .user_name {
             display: flex;
-            justify-content: space-between;
+            // justify-content: space-between;
             align-items: center;
-            width: 650px;
+            width: 692px;
+
         }
 
         .user_password {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 650px;
+            width: 692px;
+            .pass-input{
+                display: flex;
+                align-items: center;
+                label{
+                    width: 131px;
+                }
+                    .show{
+                        padding: 2px;
+                        font-weight: bold;
+                        width: 39px;
+                        cursor: pointer;
+                    }
+            }
+            
+            
+        }
+
+        .handle-input {
+            display: flex;
+            flex-direction: column;
+
+            .errors {
+                font-size: 1rem;
+                color: rgb(255, 0, 0);
+            }
         }
 
         .remember_me {
@@ -77,6 +111,8 @@
                 display: flex;
                 align-items: center;
                 gap: 15px;
+                width: auto;
+
                 #checkbox {
                     height: 30px;
                     width: 30px;
@@ -84,12 +120,14 @@
             }
         }
     }
-    .submit_links{
+
+    .submit_links {
         display: flex;
         flex-direction: column;
         gap: 15px;
         align-items: center;
-        .sbmtbtn{
+
+        .sbmtbtn {
             width: 200px;
             height: 60px;
             color: white;
@@ -102,23 +140,138 @@
     }
 }
 
-// .signincontainer {
-//     height: 100vh;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     height: 100vh;
-//     .signin {
-//         padding-top: 6rem;
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-//         gap: 2rem;
-//         .signinform{
-//             display: flex;
-//             flex-direction: column;
-//             align-items: center;
-//             gap: 1rem;
-//         }
-//     }
-// }
+
+@media only screen and (max-width:900px) {
+    .sign_in_container {
+        margin-top: 8rem;
+        padding-top: 1rem;
+
+        .links {
+
+            button {
+                height: 3.5rem;
+                width: 15rem;
+                box-shadow: 2px 2px 5px gray;
+                font-size: 1rem;
+                font-weight: bold;
+            }
+
+            span {
+                font-size: 1.2rem;
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            width: 90%;
+
+            label {
+                font-size: 1rem;
+                width: auto;
+            }
+
+            input {
+                font-size: 1rem;
+                width: 100%;
+                height: 60px;
+            }
+
+            .user_name {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 0.7rem;
+                width: 80%;
+
+            }
+            .handle-input {
+                width: 55%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .errors {
+                    font-size: 1rem;
+                    color: rgb(255, 0, 0);
+                }
+            }
+
+            .user_password {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 0.7rem;
+                width: 80%;
+                label {
+                        width: auto;
+                    }
+                .handle-input{
+                    // margin-left: 3.5rem;
+                    width: 100%;
+                    // align-items: flex-start;
+                    // background-color: #843535;
+                    .pass-input{
+                        width: 57%;
+                        // margin-left: 1rem;
+                        justify-content: center;
+                    // width: 89%;
+                    // background-color: aqua;
+                    
+                    input{
+                        // width: 55%;
+                    }
+                    .show{
+                        padding: 2px;
+                        font-weight: bold;
+                        // width: 10%;
+                    }
+                }
+                }
+                
+                
+            }
+
+            
+
+            .remember_me {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                label {
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+
+                    #checkbox {
+                        height: 30px;
+                        width: 30px;
+                    }
+                }
+            }
+        }
+
+        .submit_links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+
+            .sbmtbtn {
+                width: 10rem;
+                height: 60px;
+                color: white;
+                background-color: rgb(96, 71, 123);
+                border: none;
+                border-radius: 10px;
+                box-shadow: 2px 2px 6px gray;
+                font-weight: normal;
+            }
+        }
+    }
+
+}

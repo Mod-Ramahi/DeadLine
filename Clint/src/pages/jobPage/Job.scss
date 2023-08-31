@@ -7,7 +7,14 @@
         background-color: darkgray;
     }
 }
-
+.serviceinfo{
+    .myoffers{
+        font-size: 1.2rem;
+    }
+    ul{
+        font-size: 1.2rem;
+    }
+}
 @media only screen and (max-width:1000px){
     .userprofile {
         margin-top: 7rem;

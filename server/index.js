@@ -8,7 +8,7 @@ const cors = require('cors');
 require("dotenv").config();
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT||4000;
 app.use(cors());
 app.use((req, res, next) => {
   // Enabling CORS
@@ -28,10 +28,10 @@ app.use(morgan("dev"));
 if (process.env.NODE_ENV === "development") {
 }
 // Connect to MongoDB
-mongoose
-  .connect("mongodb+srv://husamkmal94:husamgsggtc@freelancer.a9jjcsg.mongodb.net/?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://dbfreelancer:4Dt8qrkl1p2ZOsXt@freelancerdb.5jr23io.mongodb.net/deadlinedb", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    retryWrites: true,
   })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB:", err));

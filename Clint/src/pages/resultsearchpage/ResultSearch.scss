@@ -67,8 +67,9 @@
         grid-template-columns: repeat(2, 1fr);
         justify-content: center;
         align-items: center;
-        row-gap: 4rem;
-        column-gap: 10rem;
+        gap: 5rem;
+        padding: 0.3rem;
+
         // background-color: green;
     }
 
@@ -78,7 +79,7 @@
         justify-content: center;
         align-items: center;
         gap: 5rem;
-        padding: 1rem;
+        padding: 0.3rem;
         // width: 40rem;
         // background-color: red;
     }

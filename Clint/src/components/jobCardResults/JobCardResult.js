@@ -2,7 +2,7 @@ import React from "react";
 import './JobCardResult.scss'
 
 export default function JobCardResult({ job }) {
-    
+
     return (
         // <div className="job-card" >
         //     <div className="up">
@@ -24,19 +24,24 @@ export default function JobCardResult({ job }) {
         // </div>
         <div className="job-card" >
             <div className="up">
+                <div className="job-image">
+                    <div className="img">job</div>
+                    {/* {job?.createdBy?.image} */}
+                    {/* <img alt="a" src={job?.createdBy?.image} className="img"/> */}
+                </div>
                 <div className="job-title">
                     <span className="j-title">{job.title}</span>
-                </div>
-                <div className="job-price">
-                    <span>{job.salary} $</span>
-                    <span>{job.paymentMethod}</span>
+                    <div className="job-price">
+                        <span>{job.salary} $</span>
+                        <span>{job.paymentMethod}</span>
+                    </div>
                 </div>
             </div>
             <div className="down">
                 <div className="catego-section">
                     <span className="job-category">{job.category}</span>
                 </div>
-                <hr/>
+                <hr />
                 <div className="short-description-section">
                     <span className="job-short-description">Short Description for the posted job to show some main details{job.shortDescriptioncategory}</span>
                 </div>

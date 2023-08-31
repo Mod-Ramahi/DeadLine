@@ -10,23 +10,31 @@ const freelancerSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  membership: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Membership',
-  },
-  country:String,
-  timezone:String,
-  joined: String,
-  countryFlag: String,
-  recommendation: Number ,
   password: {
     type: String,
     required: true,
   },
+  proname: String,
+  // profileID: {
+  //   type: mongoose.Schema.ObjectId,
+  //   ref:'Profile'
+  // },
+  membershipID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Membership',
+  },
+
+  country:String,
+  countryFlag: String,
+  timezone:String,
+  joined: String,
+  // recommendation: Number ,
+  
   avatar: String,
+  category: String,
   skills: [String],
-  hourlyRate: Number,
-  bio: String,
+  // hourlyRate: Number,
+  // bio: String,
   projectsPosted: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',
@@ -35,7 +43,7 @@ const freelancerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',
   }],
-  reviews: [{
+  reviewsID: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Review', // Reference to the Review model
   }],
@@ -46,6 +54,6 @@ const freelancerSchema = new mongoose.Schema({
   },
 });
 
-const Freelancer = mongoose.model('Freelancer', freelancerSchema);
+const Freelancer = mongoose.model('Freelancer', freelancerSchema, 'deadlinedb');
 
 module.exports = Freelancer;
