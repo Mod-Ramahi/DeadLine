@@ -47,13 +47,13 @@ const freelancerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Review', // Reference to the Review model
   }],
-  type: {
+  userType: {
     type: String,
-    enum: ['user', 'freelancer'],
-    default: 'user', // Default value is 'user'
+    enum: ['seller', 'buyer'],
+    default: 'seller', // Default value is 'user'
   },
 });
 
-const Freelancer = mongoose.model('Freelancer', freelancerSchema, 'deadlinedb');
+const Freelancer = mongoose.model('Freelancer', freelancerSchema,);
 
 module.exports = Freelancer;

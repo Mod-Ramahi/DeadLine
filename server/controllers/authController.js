@@ -40,12 +40,14 @@ const signup = async (req, res) => {
   const day = currentDate.getDate();
   try {
     const { name, email, password, rememberMe } = req.body;
-    await registerSchema.validate({ email, password, name });
-    console.log(email)
     const existingFreelancer = await Freelancer.findOne({ email });
     if (existingFreelancer) {
-      return res.status(409).json({ message: 'Email already exists' });
-    }
+      console.log('email exist', res.status)
+      return res.status(409).json({message: "Email already exists" });
+    };
+    await registerSchema.validate({ email, password, name });
+    console.log(email)
+    
     const hashedPassword = await bcrypt.hash(password, 10);
     // Create a new freelancer
     const newFreelancer = new Freelancer({
@@ -53,15 +55,16 @@ const signup = async (req, res) => {
       email,
       password: hashedPassword,
       rememberMe,
-      // skills,
+      // skills:[],
       // hourlyRate,
-      // bio,
+      // category:'',
+      // proname:'',      
       // avatar,
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       joined: `${year}-${month}-${day}`,
       // country,
       // countryFlag,
-      // type
+      // type:'user'
     });
     await newFreelancer.save();
     const user = await Freelancer.findOne({ email });
@@ -77,6 +80,10 @@ const signup = async (req, res) => {
 
 const completeRegister = async (req, res) => {
   try {
+    const token = req.headers.authorization; // Get the JWT token from the Authorization header
+    console.log('Received JWT Token:', token);
+    console.log('req.user:', req.user); // Log the req.user object
+    // console.log('JWT Token:', req.headers.authorization);
     if (!req.user || !req.user.id) {
       return res.status(401).json({ message: 'User authentication failed' });
     }
@@ -89,7 +96,7 @@ const completeRegister = async (req, res) => {
     }
 
     user.proname = proNickname;
-    user.type = businessType;
+    user.userType = businessType;
     user.avatar = profileImg;
     user.category = maincategory;
     user.skills = skillsSelected;

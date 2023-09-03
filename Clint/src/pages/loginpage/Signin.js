@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Signin.scss"
 import * as Yup from 'yup'
+import { useUserContext } from "../../UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { loginRequest } from "../../api";
 import { setItem } from "../../utils/localStorge";
@@ -9,10 +10,11 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false)
-
   const [rememberMe, setRememberMe] = useState(false);
   const [validationErrors, setValidationErrors] = useState({})
   const navigate = useNavigate()
+  const {setUserId} = useUserContext()
+
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('invalid email address').required('email is required'),
@@ -61,16 +63,20 @@ const SignIn = () => {
         { email, password },
         { abortEarly: false }
       )
-      const response = await loginRequest({ email, password, rememberMe })
-      console.log(response)
-      if (response.status === 200) {
-        setItem(response.data.token)
+      const res = await loginRequest({ email, password, rememberMe })
+      console.log(res)
+      if (res.status === 200) {
+        setItem(res.data.token)
         localStorage.setItem('rememberMe', rememberMe);
+        const ApiUserId = res.data.id;
+        setUserId(ApiUserId)
         navigate('/userhome')
-      } else if (response.status === 401) {
+      } else if (res.response.status === 401) {
         alert('Invalid email or password')
-      } else if (response.status === 400) {
+      } else if (res.response.status === 400) {
         alert('something went wrong')
+      }else{
+        alert('something went wrong. status:', res.response.status)
       }
     } catch (error) {
       if (error.name = 'ValidationError') {

@@ -3,8 +3,8 @@ const { verifyToken } = require('../utils/jwtUtils');
 
 const authMiddleware = async (req, res, next) => {
   // Get the token from the request headers
-  const token = req.body.headers.Authorization;
-    // console.log(req.body.headers.authorization,4)
+  const token = req.headers.authorization;
+  // console.log(req.body.headers.authorization,4)
     // const authorizationHeader = req.headers.Authorization;
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized: Missing token' });

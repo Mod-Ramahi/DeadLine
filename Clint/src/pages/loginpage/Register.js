@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Signin.scss"
 import * as Yup from 'yup'
+import { useUserContext } from "../../UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { registerRequest } from "../../api";
 import { setItem } from "../../utils/localStorge";
@@ -15,6 +16,7 @@ const Register = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const [validationErrors, setValidationErrors] = useState({})
     const navigate = useNavigate()
+    const {setUserId} = useUserContext()
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name Required')
@@ -92,19 +94,23 @@ const Register = () => {
                 { abortEarly: false }
             );
 
-            const response = await registerRequest({ email, password, name, rememberMe })
-            console.log(response)
-            if (response.status === 201) {
-                setItem(response.data.token)
+            const res = await registerRequest({ email, password, name, rememberMe })
+            console.log(res)
+            if (res.status === 201) {
+                setItem(res.data.token)
                 localStorage.setItem('rememberMe', rememberMe);
+                const ApiUserId = res.data.id;
+                setUserId(ApiUserId)
                 navigate('/completeregister')
-            } 
-            else if (response.status === 500) {
+            }
+            else if (res.response.status === 409) {
+                alert('Email is Already Exists');
+            }
+            else if (res.response.status === 500) {
                 alert('Something went wrong')
-            } 
-            else if (response.status === 409) {
-                console.log('Email isss Already Exists');
-                alert('email already exists')
+            }
+            else {
+                alert('Something went wrong. status:', res.response.status)
             }
         } catch (error) {
             if (error.name === 'ValidationError') {
@@ -113,8 +119,8 @@ const Register = () => {
                     validationErrors[err.path] = err.message;
                 });
                 setValidationErrors(validationErrors)
-                // console.log(validationErrors);
-            } else {
+            } 
+            else {
                 console.log(error)
                 alert('Something went wrong')
             }

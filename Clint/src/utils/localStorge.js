@@ -5,3 +5,6 @@ export const getItem = () =>{
 export const setItem = (token) =>{
     localStorage.setItem('token', JSON.stringify(token));
 }
+export const removeItem = () => {
+    localStorage.removeItem('token')
+}

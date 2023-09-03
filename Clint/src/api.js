@@ -57,7 +57,7 @@ export const getProjectById = async (id) =>{
 export const completeRegisterRequest = async(data) => {
     const token = getItem()
     try{
-        const response = await axios.post('http://localhost:4000/api/v1/auth/complete-register', { headers: { Authorization: `${token}` },data})
+        const response = await axios.post('http://localhost:4000/api/v1/auth/complete-register', data, { headers: { Authorization: `${token}` }})
         return response
     }catch(error){
         return error
