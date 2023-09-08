@@ -1,29 +1,40 @@
 const Freelancer = require('../models/freeelancer');
 const Job = require('../models/job');
 const Proposal = require('../models/proposal');
+const {postJobSchema} = require('../utils/validation')
 
 
-const postJob = async (req, res) =>{
+const postJob = async (req, res) => {
   try {
-    const { title, description, shortDescription, category, salary, Skills,currency,payByHour,paymentMethod,vipPost } = req.body.data;
-    console.log(req.user)
-      const newJob = new Job({
+    const token = req.headers.authorization; // Get the JWT token from the Authorization header
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: 'User authentication failed' });
+    }
+    const { title, description, shortDescription, category, jobSubCateg, salary, Skills, currency, payByHour, paymentMethod, vipPost } = req.body.data;
+    const userType = req.user.userType;
+    if(userType === 'seller'){
+      return res.status(409).json({message:"the user is seller and cant post a job"})
+    }
+    await postJobSchema.validate({ title, description, shortDescription, category, salary });
+
+    const newJob = new Job({
       title,
       description,
       shortDescription,
       salary,
-      skills:Skills,
+      Skills,
       category,
       currency,
+      jobSubCateg,
       paymentMethod,
       payByHour,
       vipPost,
-      createdBy:req.user.id,
+      createdBy: req.user.id,
     });
 
     await newJob.save();
 
-    res.json({ message: 'Job posted successfully', job: newJob });
+    res.status(200).json({ message: 'Job posted successfully', job: newJob });
   } catch (error) {
     res.status(500).json({ message: 'Error posting job', error: error.message });
   }
@@ -67,7 +78,7 @@ const jobs = async (req, res) => {
     const jobsWithProposals = await Promise.all(
       jobs.map(async (job) => {
         const proposals = await Proposal.find({ jobId: job._id });
-        return { ...job.toObject(), proposals }; 
+        return { ...job.toObject(), proposals };
       })
     );
     res.json(jobsWithProposals);
@@ -111,4 +122,4 @@ const singleJob = async (req, res) => {
 }
 
 
-module.exports = {postJob, jobs, singleJob};
+module.exports = { postJob, jobs, singleJob };

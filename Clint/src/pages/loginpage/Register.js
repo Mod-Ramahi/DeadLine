@@ -26,7 +26,7 @@ const Register = () => {
         password: Yup.string().min(8, 'Password must be at least 8 characters')
             .max(20, 'Password must not exceed 20 characters')
             .matches(
-                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
+                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@]+$/,
                 'Password must include at least one letter and one number'
             ),
         rePassword: Yup.string()
@@ -87,7 +87,6 @@ const Register = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         try {
             await validationSchema.validate(
                 { name, email, password, rePassword },
@@ -125,7 +124,6 @@ const Register = () => {
                 alert('Something went wrong')
             }
         }
-
     }
 
     return (

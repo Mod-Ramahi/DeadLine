@@ -22,7 +22,7 @@ const SignIn = () => {
       .min(8, 'Password must be at least 8 characters')
       .max(20, 'Password must not exceed 20 characters')
       .matches(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@]+$/,
         'Password must include at least one letter and one number'
       ),
   })
@@ -79,7 +79,7 @@ const SignIn = () => {
         alert('something went wrong. status:', res.response.status)
       }
     } catch (error) {
-      if (error.name = 'ValidationError') {
+      if (error.name === 'ValidationError') {
         const validationErrors = {}
         error.inner.forEach((err) => {
           validationErrors[err.path] = err.message

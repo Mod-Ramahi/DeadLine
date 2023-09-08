@@ -21,11 +21,11 @@ export const registerRequest = async (data) =>{
 export const postJobRequest = async (data) =>{
     const token = getItem()
     try {
-        const response= await  axios.post("http://localhost:4000/api/v1/job/addJob",{ headers: { Authorization: `${token}` },
-        data})
+        const response= await  axios.post("http://localhost:4000/api/v1/job/addJob", {data}, {headers: { Authorization: `${token}` }})
         return response
     } catch (error) {
         return error
+        // console.log("auth errorrr", error)
     }
 }
 export const postProposalRequest = async (data) =>{
@@ -58,6 +58,35 @@ export const completeRegisterRequest = async(data) => {
     const token = getItem()
     try{
         const response = await axios.post('http://localhost:4000/api/v1/auth/complete-register', data, { headers: { Authorization: `${token}` }})
+        return response
+    }catch(error){
+        return error
+    }
+}
+
+export const getUserById = async (id) => {
+    try{
+        const response = await axios.get(`http://localhost:4000/api/v1/user/${id}`)
+        return response.data;
+    }catch(error) {
+        return error
+    }
+}
+
+export const postProfileRequest = async(formData) => {
+    const token = getItem()
+    try{
+        const response = await axios.post('http://localhost:4000/api/v1/profile/postProfile', {formData}, {headers:{Authorization: `${token}`}})
+        return response
+    }catch(error){
+        return error
+    }
+}
+
+export const postProjectRequest = async (data) => {
+    const token = getItem()
+    try{
+        const response = await axios.post('http://localhost:4000/api/v1/project/postProject', {data}, {headers: {Authorization: `${token}`}})
         return response
     }catch(error){
         return error

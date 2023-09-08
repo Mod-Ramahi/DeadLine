@@ -1,3 +1,4 @@
+
 .contain {
     display: flex;
     flex-direction: column;
@@ -159,6 +160,34 @@
                 position: relative;
                 display: flex;
                 flex-direction: column;
+                cursor: pointer;
+                // background-color: red;
+                // max-height: 8rem;
+                // width: 2rem;
+                .user-icon{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    .icon-span{
+                        position: relative;
+                        z-index: 1;
+                        color: rgb(0, 0, 0);
+                        font-weight: bold;
+                        font-size: 2.5rem;
+                        padding: 0.2rem;
+                        background-color: rgba($color: #f8d7f4, $alpha: 0.7);
+                        border: none;
+                        border-radius: 50%;
+                        // height: 3.5rem;
+                        // width: 100%;
+                        text-align: center;
+                    }
+                    img{
+                        position: absolute;
+                        height: 4rem;
+                        width: 4rem;
+                    }
+                }
 
                 .main-user-bar-options {
                     box-shadow: 1px 1px 5px black;
@@ -233,7 +262,7 @@
 
             &:hover {
                 .catego-name-span {
-                    color: black;
+                    color: rgb(0, 0, 0);
                 }
 
                 .down-icon {
@@ -400,7 +429,7 @@
 
 p {
     &:hover {
-        color: rgb(96, 71, 123);
+        // color: rgb(96, 71, 123);
     }
 }
 

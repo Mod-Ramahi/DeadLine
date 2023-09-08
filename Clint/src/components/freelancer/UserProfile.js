@@ -80,13 +80,13 @@ export default function UserProfile({user}){
                         <p className="myoffers">
                             {user.servicesinfo}
                         </p>
-                            <ul>
+                            {/* <ul>
                                 {user.skills.map((skill, idx)=>{
                                 return(
                                     <li key={idx}>{skill}</li>
                                 )
                             })}
-                            </ul>
+                            </ul> */}
                     </div>
                 </div>
                 <div className="rightsection">

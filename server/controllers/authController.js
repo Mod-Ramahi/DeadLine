@@ -81,9 +81,6 @@ const signup = async (req, res) => {
 const completeRegister = async (req, res) => {
   try {
     const token = req.headers.authorization; // Get the JWT token from the Authorization header
-    console.log('Received JWT Token:', token);
-    console.log('req.user:', req.user); // Log the req.user object
-    // console.log('JWT Token:', req.headers.authorization);
     if (!req.user || !req.user.id) {
       return res.status(401).json({ message: 'User authentication failed' });
     }

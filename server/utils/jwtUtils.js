@@ -1,9 +1,13 @@
 const jwt = require('jsonwebtoken');
 
 const generateToken = (payload) => new Promise((resolve, reject) => {
+ const generatePayload ={...payload,
+  exp: Math.floor(Date.now() / 1000) + 10800,
+}
   jwt.sign(
-    payload,
+    generatePayload,
     process.env.SECRET_KEY,
+    // { expiresIn: '2d' },
     (err, token) => {
       if (err) {
         reject(err);
@@ -15,10 +19,13 @@ const generateToken = (payload) => new Promise((resolve, reject) => {
 });
 
 const generateLongLivedToken = (payload) => new Promise((resolve, reject) => {
+  const expirationTimeInSeconds = 15 * 24 * 60 * 60;
   jwt.sign(
-    payload,
+    {...payload,
+      exp: Math.floor(Date.now() / 1000) + expirationTimeInSeconds,
+    },
     process.env.SECRET_KEY,
-    { expiresIn: '15d' }, // Set the expiration to a longer time, e.g., 30 days
+    // { expiresIn: '15d' }, 
     (err, token) => {
       if (err) {
         reject(err);

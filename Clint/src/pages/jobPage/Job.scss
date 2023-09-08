@@ -1,20 +1,239 @@
-.nickname{
-    display: flex;
-    flex-direction: column;
-}
-.profilephoto{
-    .photo{
-        background-color: darkgray;
+
+
+.userprofile {
+    margin-top: 10rem;
+    padding-top: 5rem;
+
+    .uppersection {
+        display: flex;
+        justify-content: center;
+        margin: 2rem;
+
+        .upper {
+            font-size: 60px;
+            font-weight: bold;
+            color: rgb(96, 71, 123);
+        }
+    }
+
+    .lowersection {
+        margin: 2rem;
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+
+        .leftsection {
+            display: flex;
+            flex-direction: column;
+            // justify-content: center;
+            align-items: center;
+            width: 322px;
+            height: 611px;
+            border: 2px solid rgb(96, 71, 123);
+            border-radius: 7px;
+            span{
+                font-size: 1.2rem;
+            }
+            .profilephoto {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap:2rem;
+                img {
+                    border: 1px solid;
+                    border-radius: 50%;
+                    height: 161px;
+                    width: 161px;
+                    padding: 3px;
+                }
+                .name{
+                    font-weight: bold;
+                    font-size: 2rem;
+                }
+            }
+            hr{
+                border: 1px solid rgb(96, 71, 123);
+                margin: 0.3rem;
+            }
+            .info{
+                margin-top: 1rem;
+                font-size: 0.9rem;
+                font-weight: bold;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 1rem;                
+                .time{
+                    display: flex;
+                    gap: 5px;
+                    align-items: center;
+                    .timeicon{
+                        height: 27px;
+                        width: 27px;
+                    }
+                }
+                .joined{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    .joinedicon{
+                        height: 27px;
+                        width: 27px;
+                    }
+                }
+                .recommendation{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    .recommendationicon{
+                        height: 27px;
+                        width: 27px;
+                    }
+                }
+            }
+        }
+
+        .middlesection {
+            border: 2px solid rgb(96, 71, 123);
+            display: flex;
+            flex-direction: column;
+            // justify-content: center;
+            align-items: flex-start;
+            padding: 0.4rem;
+            gap: 0.5rem;
+            width: 589px;
+            min-height: 900px;
+            border-radius: 7px;
+            .nickname{
+                padding: 0.5rem 0;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                height: 6rem;
+                gap:1.5rem;
+                background-color: rgb(96, 71, 123);
+                span{
+                    font-size: 2rem;
+                    font-weight: bold;
+                    margin-bottom: 0;
+                }
+                .budget{
+                    font-size: 1.1rem;
+                    border: 1px solid white;
+                }
+            }
+           
+            .title_review{
+                padding: 1rem;
+                color: rgb(96, 71, 123);
+                font-size: 1.5rem;
+                font-weight: bold;
+        
+                .review{
+
+                    display: flex;
+
+                }
+            } 
+            hr{
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                border: 2px solid rgb(96, 71, 123);
+            }
+            .userstatistic{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .stat{
+                    display: flex;
+                    gap:3rem;
+                    .job_complete{
+                        display: flex;
+                        align-items: center;
+                        gap:10px;
+                        .span{
+                            font-size: 1rem;
+                            font-weight: bold;
+                        }
+                        .n{
+                            font-size: 1.2rem;
+                            font-weight: bold;
+                            color: rgb(175, 128, 224)
+                        }
+                    }
+                }
+            }
+            .serviceinfo{
+                display: flex;
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                .myoffers{
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+                .myoffers2{
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+        .rightsection {
+            
+            .upperbox {
+                width: 322px;
+                border: 2px solid rgb(96, 71, 123);
+                border-radius: 7px;
+                .hirebtn{
+                    border-radius: 5px;
+
+                    display: flex;
+                    height: 76px;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    background-color: rgb(96, 71, 123);
+                }
+                .boxinfo{
+                    padding: 15px;
+                    span{
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                    }
+
+                    .pboxinfo{
+                        display: flex;
+                        flex-direction: column;
+                        .maincateg{
+                            font-size: 1.3rem;
+                        }
+                        .subcategspan{
+                            font-size: 1.1rem;
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    .userprojects{
+        .userprojectsimage{
+            display: flex;
+            justify-content: center;
+            gap:7px;
+        img{
+            border:1px;
+            border-radius: 5px;
+            
+        }
+        }
     }
 }
-.serviceinfo{
-    .myoffers{
-        font-size: 1.2rem;
-    }
-    ul{
-        font-size: 1.2rem;
-    }
-}
+
 @media only screen and (max-width:1000px){
     .userprofile {
         margin-top: 7rem;

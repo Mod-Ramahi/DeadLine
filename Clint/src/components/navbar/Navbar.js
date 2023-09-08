@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { CategoryList } from '../../CategoryList';
 import SearchBar from '../searchbar/SearchBar';
 import jwt_decode from 'jwt-decode'
+import { getUserById } from '../../api';
 
 
 export default function Navbar() {
@@ -40,35 +41,63 @@ export default function Navbar() {
     const [notificationsMenu, setNotificationsMenu] = useState(false)
     const [messageMenu, setMessageMenu] = useState(false)
     const [isUser, setisUser] = useState(false)
-    const { userId, setUserId } = useUserContext()
+    const [ userId, setUserId ] = useState()
     const location = useLocation()
+    const [signedUser, setSignedUser] = useState()
+    const [username, setUsername] = useState();
 
     useEffect(() => {
         const checkUser = () => {
             const token = getItem('token')
+            setUserOpen(false)
             // const checkRememberMe = getItem('rememberMe')
             if (token) {
                 const tokenExp = jwt_decode(token)
-                const currentTime = Date.now()
-                if (tokenExp < currentTime) {
+                const currentTime = Date.now() / 1000;
+                const IdUser = tokenExp.id;
+                if (tokenExp.exp < currentTime) {
                     setisUser(false)
                     setUserId(null)
-                } else
+                    removeItem('token')
+                    console.log('expired')
+                    console.log('id from provider:', userId)
+                    // console.log(token)
+                    console.log('tokenexp:', tokenExp, 'expire:', tokenExp.exp, 'current time:', currentTime)
+
+                } else {
                     setisUser(true)
-                console.log('user true')
+                    setUserId(IdUser)
+                    getUserById(IdUser).then((user) => {
+                        const name = user.name
+                        setSignedUser(name)
+                        console.log(user)
+                        if(name){
+                            const iconName = name? name[0]:''
+                            setUsername(iconName)
+                        }
+                    }).catch((error) => {
+                        console.log('error:', error)
+                    });
+                    // const iconName = signedUser?.name;
+                    // const nameIcon= iconName?iconName[0]:''
+                    // setUsername(nameIcon)
+                    // console.log('signed user:', setUsername)
+                    console.log('id from provider:', IdUser)
+                    console.log('user true')
+                    console.log(token)
+                    console.log('tokenexp:', tokenExp, 'expire:', tokenExp.exp, 'current time:', currentTime)
+                }
             } else {
                 setisUser(false)
                 setUserId(null)
+                removeItem('token')
                 console.log('user false')
             }
         };
         checkUser();
         console.log(location.pathname)
-    }, [location.pathname]);
 
-    useEffect(() => {
-        console.log('user id:', userId)
-    }, [userId])
+    }, [location.pathname]);
 
     useEffect(() => {
 
@@ -326,7 +355,10 @@ export default function Navbar() {
                         </div>
                     </div>
                     <div ref={userRef} className='user-menu' style={{ position: "relative", display: "flex", flexDirection: "column" }}>
-                        <img alt='usericon' src={UserIcon} onClick={() => setUserOpen(!userOpen)} />
+                        <div className='user-icon' onClick={() => setUserOpen(!userOpen)}>
+                            <span className='icon-span'>{username ? username : ''}</span>
+                            <img alt='usericon' src={UserIcon} />
+                        </div>
                         {userOpen && (
                             <div className='main-user-bar-options'>
                                 <span onClick={() => { navigate('/myprofile') }}>Profile</span>

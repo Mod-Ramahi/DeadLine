@@ -1,29 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Joined from './Joined.png'
 import Time from './Time.png'
 import Recommendation from './Recommendation.png'
 import { Users } from "../../data/Users";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { getItem } from "../../utils/localStorge";
+import jwt_decode from 'jwt-decode'
+import { getUserById } from "../../api";
+import defaultImage from './Icn1.png'
 
 export default function JobProfile({ job }) {
-    const [proposal, setProposal] = useState([])
-    // const user = Users.find(user => user.id === job.userPostedId)
-    const user = Users.find(user => user.id === job.createdBy)
-    const id = useParams();
-    
+    const [jobUser, setJobUser] = useState()
+    const {id}= useParams()
     useEffect(() => {
-        async function fetchProposals () {
-        try{
-            const response = await axios.get(`http://localhost:4000/api/v1/proposal/job/${id}`);
-            setProposal(response.data);
-        }catch(error){
-            console.error("Error fetching proposals", error);
+        // const createdby =id.createdBy
+        const userIdd = job.createdBy;
+        console.log("user:",userIdd)
+        if (userIdd) {
+            getUserById(userIdd).then((user) => {
+                const jobEmployer = user;
+                setJobUser(jobEmployer)
+                console.log("user:",userIdd,'jobuser:',jobUser)
+            }).catch((error) => {
+                console.log('error', error)
+            })
         }
-    }
-    fetchProposals();
-    },[id])
+        
+    }, [])
 
     return (
         <div className="userprofile">
@@ -33,94 +37,98 @@ export default function JobProfile({ job }) {
             <div className="lowersection">
                 <div className="leftsection">
                     <div className="profilephoto">
-                        {/* <img className="photo" alt="profilephoto" src={job.jobPhoto} /> */}
+                        <img className="photo" alt="profilephoto" src={defaultImage} />
                         {/* <p className="name">{user.name}</p> */}
-                        <p className="name">{job?.createdBy?.email}</p>
+                        <span className="name">{jobUser? jobUser?.name : "avcc"}</span>
                     </div>
+                    <hr />
                     <div className="info">
                         <div className="country">
                             {/* <img className="countryimage" alt="" src={CountryFlag} /> */}
-                            {/* <p className="countryname">{user.country}</p> */}
+                            <span className="countryname">Country</span>
                         </div>
                         <div className="time">
                             <img className="timeicon" alt="time" src={Time} />
-                            {/* <p className="timezone">TimeZone:{user.timezone}</p> */}
+                            <span className="timezone">TimeZone:{jobUser?jobUser.timezone : "a"}</span>
                         </div>
                         <div className="joined">
                             <img className="joinedicon" alt="" src={Joined} />
-                            {/* <p className="joinedtime">{user.joined}</p> */}
+                            <span className="joinedtime">{jobUser?jobUser?.joined : ""}</span>
                         </div>
                         <div className="recommendation">
                             <img className="recommendationimage" alt="" src={Recommendation} />
-                            <p className="recommendationnumber">recommendation: 5</p>
+                            <span className="recommendationnumber">recommendation: 5</span>
                         </div>
                     </div>
                 </div>
                 <div className="middlesection">
                     <div className="nickname">
                         {/* <p>{job.jobTitle}</p> */}
-                        <p>{job.title}</p>
+                        <span>{job.title}</span>
+                        <span className="budget">Budget: {job.salary}$ /{job.paymentMethod}</span>
                         {/* <p>{user.nickname}</p> */}
                     </div>
                     <div className="title_review">
                         <div className="review">
                             {/* <p>{user.avgRate}</p> */}
-                            <p>(4 reviews)</p>
+                            <span>(4 reviews)</span>
                         </div>
                     </div>
+                    <hr />
                     <div className="userstatistic">
                         <div className="stat">
                             <div className="job_complete">
-                                <p className="n">5</p>
-                                <p>projects Completed</p>
+                                <span className="n">5</span>
+                                <span className="span">projects Completed</span>
+                            </div>
+                            <div className="job_complete">
+                                <span className="n">100%</span>
+                                <span className="span">On Budget</span>
                             </div>
                         </div>
                     </div>
+                    <hr />
                     <div className="serviceinfo">
-                        <p className="myoffers">
+                        <span className="myoffers">
+                            {/* {job.jobDescription} */}
+                            {job.shortDescription}
+                        </span>
+                        <span className="myoffers2">
                             {/* {job.jobDescription} */}
                             {job.description}
-                        </p>
-                        <ul>
-                            {/* {job.jobSkills.map((skill, idx) => { */}
-                            {/* {job.Skills.map((skill, idx) => {
-                                return (
-                                    <li key={idx}>{skill}</li>
-                                )
-                            })} */}
-                        </ul> 
+                        </span>
+
                     </div>
                 </div>
                 <div className="rightsection">
                     <div className="upperbox">
-                        <Link to={`/bidproposal/${id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                        <Link to={`/bidproposal/${job.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                             <div className="hirebtn">
                                 <span>bid On Job</span>
                             </div>
                         </Link>
                         <div className="boxinfo">
-                            <span>Top Skills</span>
+                            <span>Top Skills:</span>
                             <div className="pboxinfo">
-                                <ul>
-                                    {/* {job.jobSkills.map((skill, idx) => { */}
-                                    {job.skills.map((skill, idx) => {
-                                        return (
-                                            <li key={idx}>{skill}</li>
-                                        )
-                                    })}
+                                <ul className="maincateg">
+                                    {job.Skills.map((skill, idx) => (
+                                        <li  key={idx}>{skill}</li>
+                                    ))
+                                    }
                                 </ul>
                             </div>
-                            <span>Category</span>
+                            <span>Category:</span>
                             <div className="pboxinfo">
                                 {/* <p>{job.jobCategory}</p> */}
-                                <p>{job.category}</p>
+                                <span className="maincateg">{job.category}</span>
+                                <span className="subcategspan">sub categ{job.subCateg}</span>
                             </div>
                         </div>
                     </div>
                     <div className="lowerads">
                         <div className="imgads">
                             {/* {AdsPhotos} */}
-                            <p>Ads/recommended</p>
+                            <span>Ads/recommended</span>
                         </div>
                     </div>
                 </div>
@@ -136,7 +144,7 @@ export default function JobProfile({ job }) {
             <div className="reviewssection">
                 <span>Proposals</span>
                 <div>
-                    {proposal? proposal.map((propose) => (<span key={propose._id}>{propose.description}</span>)):<span>No proposals</span>}
+                    <span>proposals here</span>
                 </div>
             </div>
         </div>
