@@ -8,6 +8,7 @@ const profileSchema = new mongoose.Schema({
     mainCategory: {type: String, required:true},
     subCategory: {type: String},
     topSkills : [String],
+    hourPrice : {type: Number, required:true},
     createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'Freelancer'},
 }, {timestamps: true});
 

@@ -61,9 +61,8 @@ export default function Navbar() {
                     removeItem('token')
                     console.log('expired')
                     console.log('id from provider:', userId)
-                    // console.log(token)
                     console.log('tokenexp:', tokenExp, 'expire:', tokenExp.exp, 'current time:', currentTime)
-
+                    navigate('/home')
                 } else {
                     setisUser(true)
                     setUserId(IdUser)

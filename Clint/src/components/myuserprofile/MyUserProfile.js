@@ -1,10 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Joined from './Joined.png'
 import Time from './Time.png'
 import Recommendation from './Recommendation.png'
+import { getItem } from "../../utils/localStorge";
+import jwtDecode from "jwt-decode";
+import { getProfileByCreator } from "../../api";
+import UserProfile from "../freelancer/UserProfile";
 
-export default function MyUserProfile({ user }) {
+export default function MyUserProfile() {
+    const [myProfile, setMyProfile] = useState()
+    const [newProfile, setNewProfile] = useState(false)
+    const [signedIn, setSignedIn] = useState(false)
+    const [user, setUser] = useState()
+    useEffect(() => {
+        const checkProfile = () => {
+            const token = getItem('token')
+            if(token){
+                const tokenDecode = jwtDecode(token)
+                const tokenId = tokenDecode.id;
+                console.log("token: ",tokenId)
+                setUser(tokenId)
+                setSignedIn(true)
+                getProfileByCreator(tokenId).then((UserProfile) => {
+                    const profileFound= UserProfile.createdBy;
+                    console.log('userProfileeee:', profileFound)
+                    if(profileFound){
+                        console.log(profileFound)
+                        setMyProfile(UserProfile);
+                    }else{
+                        setMyProfile(null)
+                        setNewProfile(true)
+                    }
+                }).catch((error) => {
+                    console.error(error)
+                })
+                console.log("profile: ", myProfile, "user: ", user)
+            }else{
+                setMyProfile(null)
+                setNewProfile(false)
+                setSignedIn(false)
+            }
+            console.log("profile: ", myProfile, "user: ", user)
+        }
+        checkProfile()
+    },[])
     return (
         <div className="userprofile">
             <div className="uppersection" style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
@@ -13,7 +53,8 @@ export default function MyUserProfile({ user }) {
                     <button>Edit</button>
                 </Link>
             </div>
-            <div className="lowersection">
+            <UserProfile user={myProfile}/>
+            {/* <div className="lowersection">
                 <div className="leftsection">
                     <div className="profilephoto">
                         <img alt="profilephoto" src={user.profilephoto} />
@@ -21,7 +62,6 @@ export default function MyUserProfile({ user }) {
                     </div>
                     <div className="info">
                         <div className="country">
-                            {/* <img className="countryimage" alt="" src={CountryFlag} /> */}
                             <p className="countryname">{user.country}</p>
                         </div>
                         <div className="time">
@@ -62,10 +102,6 @@ export default function MyUserProfile({ user }) {
                             </div>
                         </div>
                         <div className="stat">
-                            {/* <div className="job_complete">
-                                <p className="n">20%</p>
-                                <p>Repeat hire rate</p>
-                            </div> */}
                             <div className="job_complete">
                                 <p className="n">100%</p>
                                 <p>On Time</p>
@@ -126,7 +162,6 @@ export default function MyUserProfile({ user }) {
                     </div>
                     <div className="lowerads">
                         <div className="imgads">
-                            {/* {AdsPhotos} */}
                             <p>Ads/recommended</p>
                         </div>
                     </div>
@@ -135,7 +170,6 @@ export default function MyUserProfile({ user }) {
             <div className="userprojects">
                 <hr />
                 <div className="userprojectsimage">
-                    {/* {PortfolioPhotos} */}
                     <img alt="portfolio" src='../images/assetb' />
                     <img alt="portfolio" src='../images/assetb' />
                     <img alt="portfolio" src='../images/assetb' />
@@ -146,9 +180,8 @@ export default function MyUserProfile({ user }) {
             <div className="reviewssection">
                 <span>Reviews</span>
                 <div>
-                    {/* {Reviews} */}
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

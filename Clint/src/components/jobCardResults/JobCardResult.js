@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './JobCardResult.scss'
 import { getUserById } from "../../api";
+import DefaultPhoto from './defaultPhoto.jpg'
 
 export default function JobCardResult({ job }) {
     
@@ -23,9 +24,9 @@ const [jobPostedBy, setJobPostedBy] = useState()
         <div className="job-card" >
             <div className="up">
                 <div className="job-image">
-                    <div className="img">job</div>
+                    {/* <div className="img">job</div> */}
                     {/* {job?.createdBy?.image} */}
-                    {/* <img alt="a" src={job?.createdBy?.image} className="img"/> */}
+                    <img alt="a" src={DefaultPhoto} className="img"/>
                 </div>
                 <div className="job-title">
                     <span className="j-title">{job.title}</span>
@@ -41,7 +42,7 @@ const [jobPostedBy, setJobPostedBy] = useState()
                 </div>
                 <hr />
                 <div className="short-description-section">
-                    <span className="job-short-description">summary: {job.shortDescription}</span>
+                    <span className="job-short-description"> {job.shortDescription}</span>
                 </div>
             </div>
             <div className="company-name">

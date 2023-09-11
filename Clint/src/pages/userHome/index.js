@@ -7,9 +7,9 @@ export default function UserHome() {
   return (
     <>
         <UserDashboard/>
-        <MostPopular title={"User Interested"} cards={Cards} number={8}/>
+        <MostPopular title={"User Interested"} cards={Cards}/>
         <hr className='hr'></hr>
-        <MostPopular title={"Most Popular"} number={4} cards={Cards}/>
+        <MostPopular title={"Most Popular"} cards={Cards}/>
         <hr className='hr'></hr>
     </>
   )

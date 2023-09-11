@@ -17,11 +17,15 @@ export default function ProfileEdit() {
     const [mainCategory, setMainCategory] = useState('')
     const [subCategory, setsubCategory] = useState()
     const [topSkills, setTopSkills] = useState([])
+    const [hourPrice, setHourPrice] = useState()
     const [portfolioName, setPortfolioName] = useState()
     const [portfolioDescription, setPortfolioDescription] = useState()
     const [notTypePermission, setNotTypePermission] = useState(false)
+    const [signedInUser, setSignedInUser] = useState()
+    const [checkInput, setCheckInput] = useState(false)
     const navigate = useNavigate();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         const checkType = (() => {
             const tokenType = getItem('token');
@@ -29,7 +33,9 @@ export default function ProfileEdit() {
                 const jwtoken = jwt_decode(tokenType)
                 const idOfUser = jwtoken.id;
                 getUserById(idOfUser).then((user) => {
-                    const UserType = user.UserType;
+                    const UserType = user.userType;
+                    setSignedInUser(UserType)
+                    console.log(UserType)
                     if (UserType === 'buyer') {
                         setNotTypePermission(true)
                     } else {
@@ -42,6 +48,7 @@ export default function ProfileEdit() {
             } else {
                 console.log('user may be not signed in')
             }
+            console.log('signed:', signedInUser)
         })
         checkType()
     }, [])
@@ -60,6 +67,7 @@ export default function ProfileEdit() {
             ['', 'select'],
             'please select category'
         ),
+        hourPrice: Yup.number().min(10, 'minimum price is 10$'),
         portfolioName: Yup.string().min(5, 'Project name must be atleast 5 characters')
             .max(30, 'Project name must not exceed 30 characters'),
         portfolioDescription: Yup.string().min(20, 'project description must be atleast 20 characters')
@@ -137,7 +145,10 @@ export default function ProfileEdit() {
         console.log(topSkills)
     };
 
-
+    const handlePrice = (event) => {
+        const price = event.target.value;
+        setHourPrice(price)
+    }
 
     const handlePortfolioName = (event) => {
         const PortfolioName = event.target.value;
@@ -179,14 +190,14 @@ export default function ProfileEdit() {
         } catch (error) {
             if (error.name === 'ValidationError') {
                 const validationErrors = {};
-                console.log('validation errorrrrrs:',validationErrors)
+                console.log('validation errorrrrrs:', validationErrors)
                 error.inner.forEach((err) => {
                     validationErrors[err.path] = err.message;
-                    console.log('validation errrrr:',validationErrors)
+                    console.log('validation errrrr:', validationErrors)
 
                 });
                 setValidationErrors(validationErrors)
-                console.log('validation erroooo:',validationErrors)
+                console.log('validation erroooo:', validationErrors)
 
             } else {
                 console.log('error occured:', error)
@@ -196,6 +207,7 @@ export default function ProfileEdit() {
     }
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setCheckInput(true);
         try {
             await validationSchema.validate(
                 {
@@ -203,7 +215,8 @@ export default function ProfileEdit() {
                     aboutMe,
                     aboutService,
                     serviceSummary,
-                    mainCategory
+                    mainCategory,
+                    hourPrice
                 },
                 { abortEarly: false }
             );
@@ -214,8 +227,10 @@ export default function ProfileEdit() {
                 serviceSummary,
                 mainCategory,
                 subCategory,
-                topSkills
+                topSkills,
+                hourPrice,
             }
+            console.log('formdata :', formData)
             const response = await postProfileRequest(formData)
             if (response.status === 200) {
                 navigate('/userhome')
@@ -231,15 +246,16 @@ export default function ProfileEdit() {
         } catch (error) {
             if (error.name === 'ValidationError') {
                 const validationErrors = {};
-                console.log('validation errrrr:',validationErrors)
+                console.log('validation errrrr:', validationErrors)
                 error.inner.forEach((err) => {
                     validationErrors[err.path] = err.message;
-                    console.log('validation errrrr:',validationErrors)
-
+                    console.log('validation errrrr:', validationErrors)
                 });
-                setValidationErrors(validationErrors)
+                setValidationErrors(validationErrors);
+                setCheckInput(true);
+                
             } else {
-                console.log(error)
+                console.error(error)
                 alert('Something went wrong')
             }
         }
@@ -247,15 +263,15 @@ export default function ProfileEdit() {
 
     return (
         <div className="profile-edit">
-            {notTypePermission && <div className="wrong-window"> <div className="wrong-window-message"><span className="wrong-window-span">Only freelancers and sellers can post a service profile. You can change your business type from the settings</span> <button className="wrong-window-button" onClick={CloseWrongWindow}>Ok</button></div></div>}
             <form className="profile-form" onSubmit={handleSubmit}>
                 <div className="input-div headline">
                     <span>Freelancer Headline:</span>
                     <div className="handle-input">
-                        <input type="text" id="headlinetextarea" placeholder="your service headline. min=10, max=50" onChange={handleHeadline} maxLength={50} />
+                        <input className="input" type="text" id="headlinetextarea" placeholder="your service headline. min=10, max=50" onChange={handleHeadline} maxLength={50} />
                         {validationErrors.headline && <span className="errors">{validationErrors.headline}</span>}
                     </div>
                 </div>
+                <hr className="hr"/>
                 <div className="input-div aboutme">
                     <span>About me:</span>
                     <div className="handle-input">
@@ -263,7 +279,7 @@ export default function ProfileEdit() {
                         {validationErrors.aboutMe && <span className="errors">{validationErrors.aboutMe}</span>}
                     </div>
                 </div>
-                <hr />
+                <hr className="hr"/>
                 <div className="input-div myoffers">
                     <span>About my service:</span>
                     <div className="handle-input">
@@ -271,6 +287,7 @@ export default function ProfileEdit() {
                         {validationErrors.aboutService && <span className="errors">{validationErrors.aboutService}</span>}
                     </div>
                 </div>
+                <hr className="hr"/>
                 <div className="input-div servicesummary">
                     <span>Summary about my service:</span>
                     <div className="handle-input">
@@ -278,11 +295,11 @@ export default function ProfileEdit() {
                         {validationErrors.serviceSummary && <span className="errors">{validationErrors.serviceSummary}</span>}
                     </div>
                 </div>
-                <hr />
+                <hr className="hr-break"/>
                 <div className="input-div maincategory">
                     <span>Select the service's category:</span>
                     <div className="handle-input">
-                        <select id="maincategory" onChange={handleMainCategory}>
+                        <select className="select" id="maincategory" onChange={handleMainCategory}>
                             <option value='select'>Select</option>
                             {CategoryList.map((catego, idx) => (
                                 <option key={idx} value={catego.categoryname}>{catego.categoryname}</option>
@@ -290,12 +307,12 @@ export default function ProfileEdit() {
                         </select>
                         {validationErrors.mainCategory && <span className="errors">{validationErrors.mainCategory}</span>}
                     </div>
-
                 </div>
+                <hr className="hr"/>
                 <div className="input-div subcategory">
                     <span>Select the service's category:</span>
                     <div className="handle-input">
-                        <select id="subcategory" onChange={handleSubCategory}>
+                        <select className="select" id="subcategory" onChange={handleSubCategory}>
                             <option value='select'>Select</option>
                             {findSubCateg && findSubCateg.subCategory.map((item, idx) => (
                                 <option key={idx} value={item}>{item}</option>
@@ -304,11 +321,11 @@ export default function ProfileEdit() {
                         </select>
                         {validationErrors.subCategory && <span className="errors">{validationErrors.subCategory}</span>}
                     </div>
-
                 </div>
+                <hr className="hr"/>
                 <div className="input-div skillsselect">
                     <span>Select your top skills: "you can select 3" </span>
-                    <select id="skilll" onChange={handleTopSkills}>
+                    <select className="select" id="skilll" onChange={handleTopSkills}>
                         <option value="">No specifec Skills</option>
                         <option value="reset">Reset</option>
                         <option value='optionOne'>skill 1</option>
@@ -321,12 +338,21 @@ export default function ProfileEdit() {
                     </select>
                     <span>You selected: {topSkills.join(', ')}</span>
                 </div>
-                <hr />
-                <div className="input-div">
-                    <span className="portfolio-description">(optional)You can showcase your previous work here "Describe your project and attach an image for each text" </span>
+                <hr className="hr"/>
+                <div className="input-div priceset">
+                    <span id='hourprice'>Set your Hourly price</span>
+                    <div className="handle-input">
+                        <input className="input" type="number" min={10} max={500} id="setpriceinput" placeholder="min= 10$" onChange={handlePrice}/>
+                        {validationErrors.hourPrice && <span className="errors">{validationErrors.hourPrice}</span>}
+                    </div>
+                </div>
+                <hr className="hr-break"/>
+                <div className="input-div portfolio">
+                    <span className="portfolio-description-title"> (OPTIONAL / YOU CAN SKIP THIS PART)</span>
+                    <span className="portfolio-description"> You can showcase your previous work here "Describe your project and attach an image for each text" </span>
                     <span className="portfolio-span">Project name:</span>
                     <div className="handle-input">
-                        <input type="text" id="portfolioname" placeholder="min=5. max=30" onChange={handlePortfolioName} maxLength={30} />
+                        <input className="input" type="text" id="portfolioname" placeholder="min=5. max=30" onChange={handlePortfolioName} maxLength={30} />
                         {validationErrors.portfolioName && <span className="errors">{validationErrors.portfolioName}</span>}
                     </div>
                     <span className="portfolio-span">Project description:</span>
@@ -334,13 +360,21 @@ export default function ProfileEdit() {
                         <textarea type="textarea" className="textarea" id="portfolioinput" placeholder="min=20. max=200" onChange={handlePortfolioDescription} maxLength={200} />
                         {validationErrors.portfolioDescription && <span className="errors">{validationErrors.portfolioDescription}</span>}
                     </div>
-                    <span className="portfolio-span">Project cover photo:</span>
-                    <input type="file" id="attach" accept=".jpg, .png, .jpeg" />
-                    <div> <button onClick={handlePortfolio}>Add the project to my portfolio profile</button> <span> you can have 3 projects</span></div>
+                    <div className="file">
+                        <span className="portfolio-span">Project cover photo:</span>
+                        <input type="file" id="attach" accept=".jpg, .png, .jpeg" />
+                    </div>
+                    {signedInUser === 'seller' && <div> <button onClick={handlePortfolio}>Add the project to my portfolio profile</button> <span> you can have 3 projects</span></div>}
                     <span>Your already exist projects: </span>
                 </div>
-                <hr />
+                <hr className="hr-break"/>
+                {signedInUser === 'seller' && 
+                <div className="handle-input">
                 <button type="submit" className="submit-profile">Save & publish</button>
+                {checkInput && (
+                            <span className="errors">Validation: Please Check your inputs and try the "Done button" again to complete your register</span>
+                        )}
+                </div>}
 
                 <span className="last-span">you can change other main info from the settings.</span>
             </form>

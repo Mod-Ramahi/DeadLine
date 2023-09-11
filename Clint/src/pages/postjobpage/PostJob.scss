@@ -1,456 +1,198 @@
-
-.wrong-window{
+.post-job {
+    margin-top: 18rem;
     width: 100%;
-    height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    position:fixed;
-    background-color: rgba(255, 255, 255, 0.5);
-    .wrong-window-message{
-        height:25rem;
-        width: 40rem;
+    align-items: center;
+    gap: 2.2rem;
+
+    .hr {
+        width: 75%;
+        border: 0.5px solid gray;
+    }
+    .hr-break{
+        border: 2px solid rgb(96, 71, 123);
+        margin: 1.5rem;
+        width: 99%;
+    }
+
+    .handle-input {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 1rem;
+
+        .errors {
+            font-size: 1rem;
+            color: rgb(255, 0, 0);
+            font-weight: bold;
+            margin-bottom: 2rem;
+            margin: 10px 0;
+        }
+    }
+
+    .title {
+        font-size: 60px;
+        font-weight: bold;
+        color: rgb(96, 71, 123);
+        margin-bottom: 3rem;
+    }
+    
+    .job-title {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 3rem;
-        background-color: rgb(96, 71, 123);
-        .wrong-window-span{
-            text-align: center;
-            padding: 0.5rem;
-            color: #ffffff;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        .wrong-window-button{
-            width: 50%;
-            height: 4rem;
-        }
+        gap: 1rem;
+        width: 80%;
+        height: 100%;
 
-    }
-}
-.post-job {
-    margin-top: 20rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 99.5%;
-    gap: 2rem;
-    background-color: #fff;
-
-    // padding: 1rem;
-    .title {
-        font-size: 3.8rem;
-        font-weight: bold;
-        color: rgb(96, 71, 123);
-        display: flex;
-        justify-content: center;
-    }
-
-    .job-title {
-        // height: 5rem;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
         #titlejob {
-            height: 2.5rem;
-            width: 50%;
-            border-radius: 0;
-            padding: 0;
+            width: 90%;
+            height: 4rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            padding: 8px;
+            border: 3px solid rgb(96, 71, 123)
         }
-    }
-
-
-
-    .job-description {
-        display: flex;
-        flex-direction: column;
-        height: 10rem;
 
         .description-area {
             width: 90%;
             height: 160px;
             resize: none;
             border-radius: 5px;
+            font-size: 1rem;
+            padding: 8px;
+            border: 3px solid rgb(96, 71, 123);
         }
-    }
 
-    hr {
-        width: 100%;
-        border: 2px solid rgb(96, 71, 123);
-    }
-
-    .select-category {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        #categlist {
-            height: 2.6rem;
-            width: 50%;
-        }
-        #subcateglist {
-            height: 2.6rem;
-            width: 50%;
-        }
-    }
-
-    .skills {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 80%;
-        // height: 8rem;
-
-        #skill {
-            height: 2.6rem;
-            width: 50%;
-        }
-    }
-
-    .file-attach {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .pay-method {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 90%;
-        // height: 5rem;
-
-        #method {
-            height: 2.6rem;
-            width: 50%;
-        }
-    }
-
-    .budget {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 0.5rem;
-        height: auto;
-        width: 100%;
-
-        .budget-options {
-            width: 100%;
-            height: auto;
-            display: flex;
-            // width: 80%;
-            font-size: 1.1rem;
-            font-weight: bold;
-            gap: 0.5rem;
+        .select {
+            width: 80%;
+            height: 4rem;
+            text-align: center;
+            font-size: 1.5rem;
             border-radius: 5px;
-            padding: 0;
+            padding: 8px;
+            border: 3px solid rgb(96, 71, 123);
+            cursor: pointer;
+        }
+        
+        .payment-method {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            gap: 1rem;
 
             .price-input {
-                width: 80%;
-                height: auto;
+                width: 100%;
                 display: flex;
-                gap: 7px;
-                .handle-input{
-                    width: 40%;
+                justify-content: center;
+                align-items: center;
+                gap: 0;
+
+                .handle-input {
+                    width: 73%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
                     #price {
-                    width: 100%;
-                    height: 4rem;
+                        width: 98%;
+                        height: 4rem;
+                        border-radius: 5px;
+                        font-size: 1rem;
+                        padding: 8px;
+                        border: 3px solid rgb(96, 71, 123)
+                    }
                 }
-                }
-                
 
                 #currency {
-                    margin-top: 3px;
-                    width: 5%;
-                    height: 4rem;
-                    padding: 1px;
+                    background-color: rgb(96, 71, 123);
+                    padding: 3px;
+                    color: white;
+                    font-size: 2rem;
+                    // width: 5%;
+                    height: 5.1rem;
+                    margin-bottom: 1rem;
+                    border-radius: 5px;
+                }
+            }
+        }
+
+        .post-type {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .type {
+                border: 3px solid;
+                padding: 5px;
+                border-radius: 5px;
+                font-size: 1.5rem;
+                font-weight: bold;
+                display: flex;
+                flex-direction: column;
+                width: 79%;
+                
+                .vip{
                     color: white;
                     background-color: rgb(96, 71, 123);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 3px;
+                    gap: 2rem;
+                    #checkbox{
+                        height: 1.5rem;
+                        width: 1.5rem;
+                    }
+                }
+            }
+            .handle-input{
+                width: 80%;
+                margin-top: 2rem;
+                color: red;
+                font-size: 2rem;
+                border: 1px solid black;
+                padding: 5px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+                .submit{
+                    background-color: rgb(96, 71, 123);
                     border-radius: 5px;
-                    font-weight: bold;
-                    font-size: 1.2rem;
-                }
-            }
-        }
-        .expected-time{
-            display: flex;
-            flex-direction: column;
-            width: 80%;
-            // height: 5rem;
-            #timeDeliver{
-                width: 40%;
+                    color: white;
+                    font-size: 1.5rem;
+                    padding: 8px;
+                    width:20rem;
                     height: 4rem;
-            }
-        }
-
-        .handle-input {
-            display: flex;
-            flex-direction: column;
-
-            .errors {
-                font-size: 1rem;
-                color: rgb(255, 0, 0);
-            }
-        }
-    
-        .post_type {
-            width: 100%;
-            margin: 2rem 0;
-            font-weight: bold;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-    
-            .type {
-                display: flex;
-                flex-direction: column;
-                border: 4px double rgb(96, 71, 123);
-                border-radius: 5px;
-    
-                .vip {
-                    border: 3px solid rgb(96, 71, 123);
-                    border-radius: 4px;
-                    margin: 1rem 0;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
+                    margin-top: 2rem;
+                }
+                .not-submit{
+                    background-color: rgb(96, 71, 123);
+                    border-radius: 5px;
                     color: white;
-                    background-color: rgba(96, 71, 123, 0.7);
-                    ;
-    
-                    #checkbox {
-                        height: 1.5rem;
-                        width: 1.5rem;
-                    }
+                    font-size: 1.5rem;
+                    padding: 8px;
+                    width:8rem;
+                    height: 3rem;
                 }
             }
-    
-            .submit {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: rgb(96, 71, 123);
-                color: white;
-                width: 450px;
-                height: 76px;
-                font-size: 30px;
-                border-radius: 7px;
-            }
-    
         }
-    
-    }
-
-    
-    input {
-        border-radius: 5px;
-    }
-
-    .job-title {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 80%;
-        font-size: 1.1rem;
-        font-weight: bold;
-        gap: 0.5rem;
-        border-radius: 5px;
-        padding: 0.5rem;
-    }
-
-    font-size: 20px;
-}
-input {
-    height: 2.7rem;
-}
-
-@media only screen and (max-width: 700px) {
-    .post-job {
-        margin-top: 8rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 99%;
-        gap: 1.5rem;
-        background-color: #fff;
-
-        // padding: 1rem;
-        .title {
-            font-size: 1.8rem;
+        span, label {
+            font-size: 1.5rem;
             font-weight: bold;
-            color: rgb(96, 71, 123);
-            display: flex;
-            justify-content: center;
         }
-
-        .job-title {
-            height: 4rem;
-            padding: 0;
-            #titlejob {
-                height: 75%;
-                width: 50%;
-                border-radius: 0;
-            }
-        }
-
-        .color-a {
-            background-color: rgba(96, 71, 123, 0.8);
-            color: #fff;
-        }
-
-        .color-b {
-            background-color: rgba(96, 71, 123, 0.3);
-        }
-
-        .job-description {
-            display: flex;
-            flex-direction: column;
-            height: 10rem;
-
-            .description-area {
-                width: 90%;
-                height: 160px;
-                resize: none;
-                border-radius: 5px;
-            }
-        }
-
-        hr {
-            width: 100%;
-            border: 2px solid rgb(96, 71, 123);
-        }
-
-        .select-category {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-            #categlist {
-                height: 75%;
-                width: 50%;
-            }
-        }
-
-        .skills {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 80%;
-            height: 8rem;
-
-            #skill {
-                height: 75%;
-                width: 50%;
-            }
-        }
-
-        .file-attach {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .pay-method {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 90%;
-            height: 5rem;
-
-            #method {
-                height: 75%;
-                width: 50%;
-            }
-        }
-
-        .budget {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 0.5rem;
-            height: 100%;
-
-            #price {
-                width: 580px;
-                height: 69px;
-            }
-
-            #currency {
-                width: 70px;
-                height: 74px;
-                padding: 3px;
-                color: white;
-                background-color: rgb(96, 71, 123);
-                border-radius: 5px;
-            }
-        }
-
-        .post_type {
-            margin: 2rem 0;
-            font-weight: bold;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-
-            .type {
-                display: flex;
-                flex-direction: column;
-                border: 4px double rgb(96, 71, 123);
-                border-radius: 5px;
-
-                .vip {
-                    border: 3px solid rgb(96, 71, 123);
-                    border-radius: 4px;
-                    margin: 1rem 0;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    color: white;
-                    background-color: rgba(96, 71, 123, 0.7);
-                    ;
-
-                    #checkbox {
-                        height: 1.5rem;
-                        width: 1.5rem;
-                    }
-                }
-            }
-
-            .submit {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: rgb(96, 71, 123);
-                color: white;
-                width: 450px;
-                height: 76px;
-                font-size: 30px;
-                border-radius: 7px;
-            }
-
-        }
-
-        input {
-            border-radius: 5px;
-        }
-
-        .job-title {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 80%;
-            font-size: 1.1rem;
-            font-weight: bold;
-            gap: 0.5rem;
-            border-radius: 5px;
-            padding: 0.5rem;
-        }
-
-        font-size: 20px;
     }
 }

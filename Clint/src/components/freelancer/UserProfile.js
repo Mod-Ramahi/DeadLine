@@ -1,11 +1,30 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Joined from './Joined.png'
 import Time from './Time.png'
 import Recommendation from './Recommendation.png'
 import Asseta from "./Asseta.png"
 import { Link } from "react-router-dom"
+import { getUserById } from "../../api"
+import DefaultPhoto from './defaultPhoto.jpg'
 
-export default function UserProfile({user}){
+export default function UserProfile({ user }) {
+    const [profileUser, setProfileUser] = useState()
+    useEffect(() => {
+        const checkProfile = () => {
+            const profileId = user.createdBy;
+            console.log('user from profile id:', profileId)
+            if (profileId) {
+                getUserById(profileId).then((freelancer) => {
+                    const profileCreator = freelancer;
+                    setProfileUser(profileCreator);
+                    console.log('user found', profileId, "user:", profileUser)
+                }).catch((error) => {
+                    console.error(error)
+                })
+            }
+        }
+        checkProfile()
+    }, [])
     return (
         <div className="userprofile">
             <div className="uppersection">
@@ -14,51 +33,52 @@ export default function UserProfile({user}){
             <div className="lowersection">
                 <div className="leftsection">
                     <div className="profilephoto">
-                        <img alt="profilephoto" src={user.profilephoto} />
-                        <p className="name">{user.name}</p>
+                        <img alt="profilephoto" src={DefaultPhoto}/>
+                        <span className="name">{profileUser ? profileUser.name : "user"}</span>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="info">
                         <div className="country">
                             {/* <img className="countryimage" alt="" src={CountryFlag} /> */}
-                            <p className="countryname">{user.country}</p>
+                            <span className="countryname">{profileUser ? profileUser.country : "N/A"}</span>
                         </div>
                         <div className="time">
                             <img className="timeicon" alt="time" src={Time} />
-                            <p className="timezone">TimeZone:{user.timezone}</p>
+                            <span className="timezone">TimeZone:{profileUser ? profileUser.timezone : "N/A"}</span>
                         </div>
                         <div className="joined">
                             <img className="joinedicon" alt="" src={Joined} />
-                            <p className="joinedtime">{user.joined}</p>
+                            <span className="joinedtime">{profileUser ? profileUser.joined : 'N/A'}</span>
                         </div>
                         <div className="recommendation">
                             <img className="recommendationimage" alt="" src={Recommendation} />
-                            <p className="recommendationnumber">recommendation: 5</p>
+                            <span className="recommendationnumber">recommendation: 5</span>
                         </div>
                     </div>
                 </div>
                 <div className="middlesection">
                     <div className="nickname">
-                        <p>{user.name}</p>
-                        <p>{user.nickname}</p>
+                        <span>{profileUser ? profileUser.proname : "@user"}</span>
+                        <span className="categ-span">{user?.mainCategory}</span>
+                        <span className="budget">{user?.hourPrice ? user.hourPrice : "10$"}</span>
                     </div>
                     <div className="title_review">
-                        <p>{user.headline}</p>
+                        <span>{user?.headline}</span>
                         <div className="review">
-                            <p>{user.avgRate}</p>
-                            <p>(4 reviews)</p>
+                            {/* <span>{user.avgRate}</span> */}
+                            <span>(4 reviews)</span>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="userstatistic">
                         <div className="stat">
                             <div className="job_complete">
-                                <p className="n">5</p>
-                                <p>Jobs Completed</p>
+                                <span className="n">5</span>
+                                <span>Jobs Completed</span>
                             </div>
                             <div className="job_complete">
-                                <p className="n">100%</p>
-                                <p>On Budget</p>
+                                <span className="n">100%</span>
+                                <span>On Budget</span>
                             </div>
                         </div>
                         <div className="stat">
@@ -67,20 +87,24 @@ export default function UserProfile({user}){
                                 <p>Repeat hire rate</p>
                             </div> */}
                             <div className="job_complete">
-                                <p className="n">100%</p>
-                                <p>On Time</p>
+                                <span className="n">100%</span>
+                                <span>On Time</span>
                             </div>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="serviceinfo">
-                        <p className="aboutme">
-                            {user.maininfo}
-                        </p>
-                        <p className="myoffers">
-                            {user.servicesinfo}
-                        </p>
-                            {/* <ul>
+                        <span className="aboutme">
+                            {user?.aboutMe}
+                        </span>
+                        <span className="myoffers">
+                            {user?.serviceSummary}
+                        </span>
+                        <hr />
+                        <span className="myoffers">
+                            {user?.aboutService}
+                        </span>
+                        {/* <ul>
                                 {user.skills.map((skill, idx)=>{
                                 return(
                                     <li key={idx}>{skill}</li>
@@ -92,45 +116,36 @@ export default function UserProfile({user}){
                 <div className="rightsection">
                     <div className="upperbox">
                         <Link to='/hire-freelancer'>
-                        <div className="hirebtn">
-                            <span>Hire</span>
-                        </div>
+                            <div className="hirebtn">
+                                <span>Hire</span>
+                            </div>
                         </Link>
                         <div className="boxinfo">
                             <span>Top Skills</span>
                             <div className="pboxinfo">
                                 <ul>
-                                {user.topSkills.map((topskill, idx)=>{
-                                return(
-                                    <li key={idx}>{topskill}</li>
-                                )
-                            })}
-                                </ul>
-                            </div>
-                            <span>Category</span>
-                            <div className="pboxinfo">
-                                <p>{user.category}</p>
-                            </div>
-                            <span>My expertise</span>
-                            <div className="pboxinfo">
-                            <ul>
-                                {user.experties.map((expert, idx)=>{
-                                return(
-                                    <li key={idx}>{expert}</li>
-                                )
-                            })}
+                                    {user?.topSkills.map((topskill, idx) => {
+                                        return (
+                                            <li key={idx}>{topskill}</li>
+                                        )
+                                    })}
                                 </ul>
                             </div>
                             <span>Clients:</span>
                             <div className="pboxinfo">
-                                <p>5</p>
+                                <span>5</span>
                             </div>
+                            <hr style={{ margin: '0.3rem' }} />
+                            <div className="pboxinfo">
+                                <span>{user?.subCategory}</span>
+                            </div>
+
                         </div>
                     </div>
                     <div className="lowerads">
                         <div className="imgads">
                             {/* {AdsPhotos} */}
-                            <p>Ads/recommended</p>
+                            <span>Ads/recommended</span>
                         </div>
                     </div>
                 </div>
@@ -139,10 +154,10 @@ export default function UserProfile({user}){
                 <hr />
                 <div className="userprojectsimage">
                     {/* {PortfolioPhotos} */}
-                    <img alt="portfolio" src={Asseta}/>
-                    <img alt="portfolio" src={Asseta}/>
-                    <img alt="portfolio" src={Asseta}/>
-                    <img alt="portfolio" src={Asseta}/>
+                    <img alt="portfolio" src={Asseta} />
+                    <img alt="portfolio" src={Asseta} />
+                    <img alt="portfolio" src={Asseta} />
+                    <img alt="portfolio" src={Asseta} />
                 </div>
                 <hr />
             </div>

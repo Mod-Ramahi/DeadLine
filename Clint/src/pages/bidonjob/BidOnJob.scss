@@ -1,111 +1,131 @@
 .bid {
-    margin-top: 20rem;
+    margin-top: 18rem;
     display: flex;
     flex-direction: column;
-    width: 90%;
-    margin-left: 5rem;
-    gap: 2rem;
+    width: 100%;
+    gap: 2.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .handle-input {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        width: 100%;
+        height: 100%;
+
+        .errors {
+            font-size: 1rem;
+            color: rgb(255, 0, 0);
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+    }
 
     .title {
         font-size: 60px;
         font-weight: bold;
         color: rgb(96, 71, 123);
         margin-bottom: 3rem;
-        display: flex;
-        justify-content: center;
     }
 
-    .budget {
+    .text-description {
+        width: 80%;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-start;
-        gap: 7px;
+        align-items: center;
+        gap: 1rem;
+        height: 100%;
 
-        #price {
-            width: 580px;
-            height: 69px;
-        }
-
-        #currency {
-            width: 70px;
-            height: 74px;
-            padding: 3px;
-            color: white;
-            background-color: rgb(96, 71, 123);
-            border-radius: 5px;
-        }
-    }
-
-    .days {
-        display: flex;
-        flex-direction: column;
-
-        #time {
-            width: 642px;
-            height: 69px;
-        }
-    }
-
-    .text_description {
-        display: flex;
-        flex-direction: column;
-
-        .description_area {
+        .description-area {
             width: 90%;
             height: 160px;
             resize: none;
             border-radius: 5px;
+            font-size: 1rem;
+            padding: 8px;
+            border: 3px solid rgb(96, 71, 123);
         }
-    }
 
-    .attachment {
-        display: flex;
-        flex-direction: column;
-    }
+        .select {
+            width: 80%;
+            height: 4rem;
+            text-align: center;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            padding: 8px;
+            border: 3px solid rgb(96, 71, 123);
+            cursor: pointer;
+        }
 
-    .add_milestone {
-        display: flex;
-        flex-direction: column;
-
-        #milestone {
+        .input {
             width: 90%;
-            height: 100px;
+            height: 4rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            padding: 8px;
+            border: 3px solid rgb(96, 71, 123)
         }
     }
 
-    .proposal_plan {
-        display: flex;
-        flex-direction: column;
+    span,
+    label {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 
-        #proposalplan {
-            width: 642px;
+    .hr {
+        width: 75%;
+        border: 0.5px solid gray;
+    }
+
+    .hr-break {
+        border: 2px solid rgb(96, 71, 123);
+        margin: 1.5rem;
+        width: 99%;
+    }
+
+    .div-price {
+        .handle-input {
+            width: 100%;
+
+            #price {
+                width: 90%;
+                height: 4rem;
+                border-radius: 5px;
+                font-size: 1rem;
+                padding: 8px;
+                border: 3px solid rgb(96, 71, 123);
+            }
         }
     }
 
     .submit {
-        display: flex;
-        justify-content: center;
-
-        .sub_btn {
-            background-color: rgb(96, 71, 123);
-            color: white;
-            width: 450px;
-            height: 76px;
-            font-size: 30px;
-            border-radius: 7px;
-        }
+        background-color: rgb(96, 71, 123);
+        border-radius: 5px;
+        color: white;
+        font-size: 1.5rem;
+        padding: 8px;
+        width: 20rem;
+        height: 4rem;
+        margin-top: 2rem;
     }
-}
 
-input {
-    border-radius: 5px;
-}
+    .not-submit {
+        background-color: rgb(96, 71, 123);
+        border-radius: 5px;
+        color: white;
+        font-size: 1.5rem;
+        padding: 8px;
+        width: 8rem;
+        height: 3rem;
+    }
 
-label {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0.2rem;
+    
 }
 
 @media only screen and (max-width: 700px) {
@@ -167,16 +187,18 @@ label {
             }
 
         }
-        .proposal_plan{
-            #proposalplan{
+
+        .proposal_plan {
+            #proposalplan {
                 width: 80%;
             }
         }
-        .submit {    
+
+        .submit {
             .sub_btn {
                 width: 70%;
                 height: 4rem;
-                font-size:15px;
+                font-size: 15px;
                 border-radius: 7px;
             }
         }

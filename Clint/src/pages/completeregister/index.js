@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as Yup from 'yup'
-import {completeRegisterRequest} from "../../api"
+import { completeRegisterRequest } from "../../api"
 import { CategoryList } from "../../CategoryList";
 import { useNavigate } from "react-router-dom";
 import './CompleteRegister.scss'
@@ -12,18 +12,19 @@ export default function CompleteRegister() {
     const [maincategory, setMainCategory] = useState(null)
     const [skillsSelected, setSkillsSelected] = useState([])
     const [validationErrors, setValidationErrors] = useState({})
+    const [checkInput, setCheckInput] = useState(false)
     const navigate = useNavigate()
 
     const validationSchema = Yup.object().shape({
         businessType: Yup.string()
             .oneOf(['seller', 'buyer'], 'please select a valid business type'),
         proNickname: Yup.string().required('professional name is required')
-            .min(3, 'must be atleast  characters')
+            .min(3, 'professional name must be atleast 3 characters')
             .max(25, 'must not exceed 25 characters'),
         maincategory: Yup.string().test('category', 'Please select a category', (value) => {
             return value !== '';
         }),
-        skillsSelected: Yup.array().min(1, 'pleaseselect atleast 1 skill'),
+        skillsSelected: Yup.array().min(1, 'please select atleast 1 skill'),
     })
 
     const handleBusType = (event) => {
@@ -72,20 +73,28 @@ export default function CompleteRegister() {
 
     const handleSkillsSelection = (event) => {
         const selectedskill = (event.target.value);
-        if(selectedskill === ''){
+        if (selectedskill === '') {
             return;
         }
         if (selectedskill !== '' && !skillsSelected.includes(selectedskill)) {
             const skillsArray = [...skillsSelected, selectedskill].slice(0, 3)
             setSkillsSelected(skillsArray)
+            if (validationErrors.skillsSelected) {
+                setValidationErrors((prevErrors) => ({
+                    ...prevErrors,
+                    Skills: ''
+                }))
+            }
         }
         if (selectedskill === 'reset') {
             setSkillsSelected([])
         }
+
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setCheckInput(false)
         // navigate('/userhome')
         try {
             await validationSchema.validate(
@@ -102,7 +111,7 @@ export default function CompleteRegister() {
             const response = await completeRegisterRequest(formData)
             if (response.status === 200) {
                 navigate('/userhome')
-            }  if (response.status === 500){
+            } if (response.status === 500) {
                 console.log('errrrrrorr 500')
             }
         } catch (error) {
@@ -112,6 +121,7 @@ export default function CompleteRegister() {
                     validationErrors[err.path] = err.message
                 });
                 setValidationErrors(validationErrors)
+                setCheckInput(true);
                 console.log(validationErrors)
             } else {
                 alert('somthing went wrong')
@@ -127,7 +137,7 @@ export default function CompleteRegister() {
                 <div className="business_type">
                     <span>Choose your main business type / you can always change it from your settings</span>
                     <div className="handle-input">
-                        <select id="businesstype" onChange={handleBusType}>
+                        <select className="select" id="businesstype" onChange={handleBusType}>
                             <option value=''>Select an option</option>
                             <option value='seller'> I am a freelancer, and I am looking for jobs</option>
                             <option value='buyer'> I am a buyer / company, and looking for freelancers</option>
@@ -135,24 +145,27 @@ export default function CompleteRegister() {
                         {validationErrors.businessType && <span className="errors">{validationErrors.businessType}</span>}
                     </div>
                 </div>
-                <div className="user-nickname">
+                <hr className="hr" />
+                <div className="business_type">
                     <span className='nickname-span'>Your professional name</span>
                     <div className="handle-input">
                         <input type="text" id="nickname" onChange={handleNickname} required />
                         {validationErrors.proNickname && <span className="errors">{validationErrors.proNickname}</span>}
                     </div>
                 </div>
-                <div className="profile-image">
+                <hr className="hr" />
+                <div className="business_type">
                     <span className='profile-img-span'>Profile image <small>(optional) max:3MB</small> </span>
                     <div className="handle-input">
                         <input type="file" id="profileimg" name="profileImage" accept="image/*" onChange={handleProfileImage} />
                         {validationErrors.profileImg && <span className="errors">{validationErrors.profileImg}</span>}
                     </div>
                 </div>
-                <div className="select_category">
+                <hr className="hr-break" />
+                <div className="business_type">
                     <span> Select your preferred business categories </span>
                     <div className="handle-input">
-                        <select id="category" onChange={handleMaincategory} required>
+                        <select className="select" id="category" onChange={handleMaincategory} required>
                             <option value=''>Please select one</option>
                             {CategoryList.map((item, idx) => (
                                 <option key={idx} value={item.categoryname}>{item.categoryname}</option>
@@ -160,33 +173,40 @@ export default function CompleteRegister() {
                         </select>
                         {validationErrors.maincategory && <span className="errors">{validationErrors.maincategory}</span>}
                     </div>
-                    <div className="select_skills">
-                        <span className="add_skills"> Choose at least 1 and up to 4 skills</span>
-                        <div className="handle-input">
-                            <select id="skill" onChange={handleSkillsSelection}>
-                                <option value=''>Select</option>
-                                <option value='reset'>Reset</option>
-                                <option value='skill1'>Skill one</option>
-                                <option value='skill2'>Skill two</option>
-                                <option value='skill3'>Skill three</option>
-                                <option value='skill4'>Skill four</option>
-                                <option value='skill5'>Skill five</option>
-                                <option value='skill6'>Skill six</option>
-                                <option value='skill7'>Skill seven</option>
-                                <option value='skill8'>Skill eight</option>
-                            </select>
-                            {validationErrors.skillsSelected && <span className="errors">{validationErrors.skillsSelected}</span>}
-                        </div>
-                        <div className="skills box">
-                            <span>Your selected skills: </span>
-                            {skillsSelected.map((skill, idx) => (
-                                < span key={idx} > {skill},</span>
-                            ))}
-                        </div>
+                </div>
+                <hr className="hr" />
+                <div className="business_type">
+                    <span className="add_skills"> Choose at least 1 and up to 3 skills</span>
+                    <div className="handle-input">
+                        <select className="select" id="skill" onChange={handleSkillsSelection}>
+                            <option value=''>Select</option>
+                            <option value='reset'>Reset</option>
+                            <option value='skill1'>Skill one</option>
+                            <option value='skill2'>Skill two</option>
+                            <option value='skill3'>Skill three</option>
+                            <option value='skill4'>Skill four</option>
+                            <option value='skill5'>Skill five</option>
+                            <option value='skill6'>Skill six</option>
+                            <option value='skill7'>Skill seven</option>
+                            <option value='skill8'>Skill eight</option>
+                        </select>
+                        {validationErrors.skillsSelected && <span className="errors">{validationErrors.skillsSelected}</span>}
+                    </div>
+                    <div className="skills box">
+                        <span>Your selected skills: </span>
+                        {skillsSelected.map((skill, idx) => (
+                            < span key={idx} > {skill},</span>
+                        ))}
                     </div>
                 </div>
+
                 <div className="submit_links">
-                    <button className="sbmtbtn" type="submit">Done</button>
+                    <div className="handle-input">
+                        <button className="submit" type="submit">Done</button>
+                        {checkInput && (
+                            <span className="errors">Validation: Please Check your inputs and try the "Done button" again to complete your register</span>
+                        )}
+                    </div>
                 </div>
             </form >
 

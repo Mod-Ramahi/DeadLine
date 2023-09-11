@@ -7,14 +7,10 @@ const {postJobSchema} = require('../utils/validation')
 const postJob = async (req, res) => {
   try {
     const token = req.headers.authorization; // Get the JWT token from the Authorization header
-    if (!req.user || !req.user.id) {
+    if (!req.user || !req.user.id || !token) {
       return res.status(401).json({ message: 'User authentication failed' });
     }
     const { title, description, shortDescription, category, jobSubCateg, salary, Skills, currency, payByHour, paymentMethod, vipPost } = req.body.data;
-    const userType = req.user.userType;
-    if(userType === 'seller'){
-      return res.status(409).json({message:"the user is seller and cant post a job"})
-    }
     await postJobSchema.validate({ title, description, shortDescription, category, salary });
 
     const newJob = new Job({

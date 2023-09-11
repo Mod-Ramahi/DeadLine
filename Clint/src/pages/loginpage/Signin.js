@@ -74,7 +74,7 @@ const SignIn = () => {
       } else if (res.response.status === 401) {
         alert('Invalid email or password')
       } else if (res.response.status === 400) {
-        alert('something went wrong')
+        alert('something went wronggggggg')
       }else{
         alert('something went wrong. status:', res.response.status)
       }
@@ -87,7 +87,7 @@ const SignIn = () => {
         setValidationErrors(validationErrors)
       } else {
         console.log(error)
-        alert('something went wrong')
+        alert('something went wrong. Check Your Email/Password ')
       }
     }
 

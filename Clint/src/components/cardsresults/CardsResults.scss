@@ -27,8 +27,6 @@
             padding: 1px;
             background-color: rgb(96, 71, 123);
             border-radius: 5px;
-
-
             img {
                 width: 96%;
                 height: 96%;
@@ -112,6 +110,7 @@
             font-size: 1.3rem;
             color: rgb(96, 71, 123);
             font-weight: bold;
+            word-wrap: break-word;
         }
     }
 

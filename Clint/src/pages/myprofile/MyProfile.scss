@@ -1,0 +1,95 @@
+.not-seller {
+    margin-top: 15rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .not-seller-box {
+        width: 80%;
+        border: 3px solid rgb(96, 71, 123);
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+
+        .not-seller-span {
+            font-size: 1.5rem;
+            color: rgb(96, 71, 123);
+            font-weight: bold;
+
+        }
+
+        .not-seller-button {
+            background-color: rgb(96, 71, 123);
+            border-radius: 5px;
+            color: white;
+            font-size: 1.5rem;
+            padding: 8px;
+            width: 8rem;
+            height: 3rem;
+        }
+    }
+}
+
+hr {
+    border: 2px solid rgb(96, 71, 123);
+    margin: 1.5rem;
+    width: 99%;
+}
+
+.new-profile-container {
+    margin-top: 11rem;
+    padding-top: 7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: -9rem;
+
+    .new-profile {
+        width: 80%;
+        border: 3px solid rgb(96, 71, 123);
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        .new-profile-title{
+            font-size: 4rem;
+            font-weight: bold;
+            color: rgb(96, 71, 123);
+        }
+        .new-profile-span{
+            font-size: 1.5rem;
+            color: rgb(96, 71, 123);
+            font-weight: bold;;
+        }
+        .new-profile-add{
+            background-color: rgb(96, 71, 123);
+            border-radius: 5px;
+            color: white;
+            font-size: 1.5rem;
+            padding: 8px;
+            width: 13rem;
+            height: 5rem;
+            margin: 2rem 0 0 0;
+        }
+    }
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.margin-bottom{
+    margin-bottom: 1.5rem;
+}

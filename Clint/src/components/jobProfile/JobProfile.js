@@ -9,6 +9,7 @@ import { getItem } from "../../utils/localStorge";
 import jwt_decode from 'jwt-decode'
 import { getUserById } from "../../api";
 import defaultImage from './Icn1.png'
+import DefaultPhoto from './defaultPhoto.jpg'
 
 export default function JobProfile({ job }) {
     const [jobUser, setJobUser] = useState()
@@ -37,7 +38,7 @@ export default function JobProfile({ job }) {
             <div className="lowersection">
                 <div className="leftsection">
                     <div className="profilephoto">
-                        <img className="photo" alt="profilephoto" src={defaultImage} />
+                        <img className="photo" alt="profilephoto" src={DefaultPhoto} />
                         {/* <p className="name">{user.name}</p> */}
                         <span className="name">{jobUser? jobUser?.name : "avcc"}</span>
                     </div>
@@ -65,6 +66,8 @@ export default function JobProfile({ job }) {
                     <div className="nickname">
                         {/* <p>{job.jobTitle}</p> */}
                         <span>{job.title}</span>
+                        <hr/>
+                        <span className="maincateg">{job.category}</span>
                         <span className="budget">Budget: {job.salary}$ /{job.paymentMethod}</span>
                         {/* <p>{user.nickname}</p> */}
                     </div>
@@ -102,7 +105,7 @@ export default function JobProfile({ job }) {
                 </div>
                 <div className="rightsection">
                     <div className="upperbox">
-                        <Link to={`/bidproposal/${job.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                        <Link to={`/bidproposal/${job._id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                             <div className="hirebtn">
                                 <span>bid On Job</span>
                             </div>
@@ -117,11 +120,9 @@ export default function JobProfile({ job }) {
                                     }
                                 </ul>
                             </div>
-                            <span>Category:</span>
                             <div className="pboxinfo">
                                 {/* <p>{job.jobCategory}</p> */}
-                                <span className="maincateg">{job.category}</span>
-                                <span className="subcategspan">sub categ{job.subCateg}</span>
+                                <span className="subcategspan">{job.jobSubCateg}</span>
                             </div>
                         </div>
                     </div>
