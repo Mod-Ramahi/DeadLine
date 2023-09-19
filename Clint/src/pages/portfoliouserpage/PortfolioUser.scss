@@ -1,0 +1,120 @@
+.portfolio-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14rem;
+    padding: 1rem;
+    width: 95%;
+    gap:1.3rem;
+    .project-div{
+        width: 64%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        border: 2px solid rgb(96, 71, 123);
+        border-radius: 5px;
+        .portfolio-name{
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem;
+            .name-span{
+                color: rgb(96, 71, 123);
+                font-size: 2.8rem;
+                font-weight: bold;
+            }
+        }
+        .file-attached{
+            width: 90%;
+            .image{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                padding: 1rem;
+                height: 29rem;
+                background-color: rgb(96, 71, 123);
+                border-radius: 5px;
+                .img{
+                    width: 95%;
+                    height: 95%;
+                    border-radius: 4px;
+                }
+            }
+        }
+        .portfolio-description{
+            padding: 1rem;
+            .description-span{
+                font-size: 1rem;
+                font-weight: bold;
+                color: rgb(96, 71, 123);
+            }
+        }
+    }
+    .hr{
+        width: 100%;
+        margin: 0.5rem;
+    }
+    .creator-profile{
+        width: 23%;
+        // border: 2px solid rgb(96, 71, 123);
+        border-radius: 5px;
+        background-color: rgb(96, 71, 123);
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        .service-info{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 5px;
+            .profile-img{
+                width: 99%;
+                height: 12rem;
+                border-radius: 4px;
+            }
+            .headline-span{
+                color: white;
+                font-size: 1.3rem;
+                font-weight: bold;
+            }            
+        }
+        .service-description{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0 0 4px 4px;
+            background-color: white;
+            height: 10rem;
+            width: 100%;
+            padding: 2px;
+            gap: 1rem;
+            .summary-span{
+                color: rgb(96, 71, 123);
+                font-size: 1.3rem;
+            }
+            .go-profile{
+                width: 80%;
+                height: 2rem;
+                background-color: white;
+                color: rgb(96, 71, 123);
+                border: 2px solid rgb(96, 71, 123);
+                border-radius: 6px;
+            }
+        }
+    }
+    .hr-white{
+        border: 1px solid white;
+        margin: 0.5rem;
+    }
+}

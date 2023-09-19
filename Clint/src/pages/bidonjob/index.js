@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./BidOnJob.scss"
-import { postProposalRequest } from "../../api";
+import { bidProposal, getUserById, postProposalRequest } from "../../api";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
+import { getItem } from "../../utils/localStorge";
 import * as Yup from 'yup'
+import jwtDecode from "jwt-decode";
 
 export default function BidOnJob() {
     const { id } = useParams()
@@ -15,7 +17,32 @@ export default function BidOnJob() {
     const [time, setTime] = useState()
     const [milestone, setMilestone] = useState()
     const [plan, setPlan] = useState("public");
+    const [seller, setSeller] = useState(false);
+    const [userIn, setUserIn] = useState(false)
 
+    useEffect(() => {
+        const checUser = () => {
+            const token = getItem('token')
+            const decodeToken = jwtDecode(token)
+            const userId = decodeToken.id
+            if (userId) {
+                setUserIn(true)
+                getUserById(userId).then((user) => {
+                    const type = user.userType
+                    if (type === 'seller') {
+                        setSeller(true)
+                    } else {
+                        setSeller(false)
+                    }
+                }).catch((err) => {
+                    console.error(err)
+                })
+            } else {
+                setUserIn(false)
+            }
+        }
+        checUser()
+    }, [])
     const validationSchema = Yup.object().shape({
         summary: Yup.string().min(20, 'Proposal summary must be atleast 20 characters')
             .max(120, 'Proposal summary must not exceed 120 characters'),
@@ -86,10 +113,17 @@ export default function BidOnJob() {
                 { abortEarly: false }
             );
             console.log('validation test')
-            // const data = {
-            //     summary, description, price, time, milestone, plan
-            // }
-            // const response = await postProposalRequest(data)
+            const data = {
+                summary, description, price, time, milestone, plan
+            }
+            const response = await bidProposal(data, id)
+            if (response.status === 200 || response !== 0) {
+                console.log('success bid')
+                navigate('/userhome')
+            } else {
+                alert('something went wrongg')
+            }
+            console.log(response)
         } catch (error) {
             if (error.name === 'ValidationError') {
                 const validationErrors = {};
@@ -159,14 +193,39 @@ export default function BidOnJob() {
             </div>
             <div className="save">
                 <div className="handle-input">
-                    <button className="submit" type="submit">Submit</button>
-                    {validationErrors && (<ul>
-                        {Object.keys(validationErrors).map((errorName, idx) => (
-                            <li key={idx} className="errors">
-                                {validationErrors[errorName]}
-                            </li>
-                        ))}</ul>
-                    )}
+                    {!userIn ?
+                        (
+                            <div className="not-user">
+                                <span className="not-user-span"> You Need to Sign In</span>
+                            </div>
+                        )
+                        :
+                        (
+                            <>
+                                {seller ?
+                                    (
+                                        <>
+                                            <button className="submit" type="submit">Submit</button>
+                                            {validationErrors && (<ul>
+                                                {Object.keys(validationErrors).map((errorName, idx) => (
+                                                    <li key={idx} className="errors">
+                                                        {validationErrors[errorName]}
+                                                    </li>
+                                                ))}</ul>
+                                            )}
+                                        </>
+                                    )
+                                    :
+                                    (
+                                        <div className="not-user">
+                                            <span className="not-user-span"> Only Freelancers and sellers can bid on job. You can change your type from settings</span>
+                                        </div>
+                                    )
+                                }
+                            </>
+                        )
+                    }
+
                 </div>
             </div>
         </form>

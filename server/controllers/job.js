@@ -36,7 +36,18 @@ const postJob = async (req, res) => {
   }
 };
 
-
+const getJobByCreator = async (req, res) => {
+  try{
+    const id = req.params.id
+    const job = await Job.find({createdBy: id})
+    if(!job){
+      return res.status(404).json({message: 'no jobs founded'})
+    }
+    res.json(job)
+  }catch(error){
+    res.status(500).json({message:'error getting jobs by creator', error:error.message})
+  }
+}
 // Route: GET /jobs
 const jobs = async (req, res) => {
   try {
@@ -116,6 +127,34 @@ const singleJob = async (req, res) => {
     res.status(500).json({ message: 'Error retrieving job', error: error.message });
   }
 }
+const getJobById = async (req, res) => {
+  try{
+    const id =req.params.id
+    const job = await Job.findById(id)
+    if(!job){
+      return res.status(404).json({message:'job not found or deleted'})
+    }
+    res.json(job)
+  }catch(error){
+    res.status(500).json({message:'error getting job post', error: error.message})
+  }
+}
+const deleteJobById = async (req, res) => {
+  try{
+    const token = req.headers.authorization
+    const id = req.params.id;
+    if(!token || !req.user || !req.user.id){
+      return res.status(401).json({message:'User authentication failed'})
+    }
+    const deleted = await Job.findByIdAndDelete(id)
+    if(!deleted){
+      return res.status(404).json({message:'cant find the job'})
+    }
+    res.json(deleted)
+  }catch(error){
+    res.status(500).json({message:'error get or delete job', error: error.message})
+  }
+}
 
 
-module.exports = { postJob, jobs, singleJob };
+module.exports = { postJob, jobs, singleJob, getJobByCreator, deleteJobById, getJobById };

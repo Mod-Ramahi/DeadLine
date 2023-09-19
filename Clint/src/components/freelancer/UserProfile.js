@@ -4,27 +4,52 @@ import Time from './Time.png'
 import Recommendation from './Recommendation.png'
 import Asseta from "./Asseta.png"
 import { Link } from "react-router-dom"
-import { getUserById } from "../../api"
+import { getProfileProjectByCreatorId, getUserById } from "../../api"
 import DefaultPhoto from './defaultPhoto.jpg'
+import Portfolio from "../portfolioCard/Portfolio"
 
 export default function UserProfile({ user }) {
     const [profileUser, setProfileUser] = useState()
+    const [thePortfolio, setThePortfolio] = useState([])
     useEffect(() => {
         const checkProfile = () => {
-            const profileId = user.createdBy;
+            if(user){
+                const profileId = user.createdBy;
             console.log('user from profile id:', profileId)
             if (profileId) {
                 getUserById(profileId).then((freelancer) => {
                     const profileCreator = freelancer;
                     setProfileUser(profileCreator);
-                    console.log('user found', profileId, "user:", profileUser)
+                    if(profileCreator){
+                        getPortfolios(profileCreator)
+                    }
                 }).catch((error) => {
                     console.error(error)
                 })
             }
+            }else {
+                console.log('no profile')
+            }
         }
         checkProfile()
+        const getPortfolios = (profileCreator) => {
+            const useid = profileCreator._id
+            console.log('aaaa',useid)
+            getProfileProjectByCreatorId(useid).then((profile) => {
+                setThePortfolio(profile)
+                console.log('bbbbb',profile)
+            }).catch((error) => {
+                console.error(error)
+            })
+        }
+        console.log("userrrr:", profileUser)
     }, [])
+
+    const RenderPortfolio = thePortfolio.map((project) => (
+        <Link style={{color:'inherit', textDecoration:'none'}} to={`/portfolioProject/${project._id}`} key={project._id}>
+            <Portfolio portfolioProject={project}/>
+        </Link>
+    ))
     return (
         <div className="userprofile">
             <div className="uppersection">
@@ -60,7 +85,7 @@ export default function UserProfile({ user }) {
                     <div className="nickname">
                         <span>{profileUser ? profileUser.proname : "@user"}</span>
                         <span className="categ-span">{user?.mainCategory}</span>
-                        <span className="budget">{user?.hourPrice ? user.hourPrice : "10$"}</span>
+                        <span className="budget">{user?.hourPrice}$</span>
                     </div>
                     <div className="title_review">
                         <span>{user?.headline}</span>
@@ -152,12 +177,10 @@ export default function UserProfile({ user }) {
             </div>
             <div className="userprojects">
                 <hr />
+                <span className="portfolio-projects-span">Protfolio projects:</span>
                 <div className="userprojectsimage">
-                    {/* {PortfolioPhotos} */}
-                    <img alt="portfolio" src={Asseta} />
-                    <img alt="portfolio" src={Asseta} />
-                    <img alt="portfolio" src={Asseta} />
-                    <img alt="portfolio" src={Asseta} />
+                    {/* <Portfolio creator={profileUser}/> */}
+                    {thePortfolio && RenderPortfolio}
                 </div>
                 <hr />
             </div>

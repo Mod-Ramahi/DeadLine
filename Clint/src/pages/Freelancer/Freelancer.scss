@@ -234,15 +234,20 @@
         
     }
     .userprojects{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .portfolio-projects-span{
+                color: rgb(96, 71, 123);
+                font-size: 2rem;
+                font-weight: bold;
+                margin-bottom: 2rem;
+            }
         .userprojectsimage{
             display: flex;
             justify-content: center;
             gap:7px;
-        img{
-            border:1px;
-            border-radius: 5px;
             
-        }
         }
     }
 }

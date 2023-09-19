@@ -2,37 +2,41 @@ import React, { useEffect, useState } from "react";
 import { CategoryList } from "../../CategoryList";
 import './ProfileEdit.scss'
 import * as Yup from 'yup'
-import { getUserById, postProfileRequest, postProjectRequest } from "../../api";
+import { editProfileRequest, getProfileByCreator, getUserById, postProfileRequest, postProjectRequest } from "../../api";
 import { useNavigate } from "react-router-dom";
 import { getItem } from "../../utils/localStorge";
 import jwt_decode from 'jwt-decode';
+import Portfolio from "../../components/portfolioCard/Portfolio";
 
 export default function ProfileEdit() {
     const [validationErrors, setValidationErrors] = useState({})
 
-    const [headline, setHeadline] = useState()
-    const [aboutMe, setAboutMe] = useState()
-    const [aboutService, setAboutService] = useState()
-    const [serviceSummary, setServiceSummary] = useState()
+    const [headline, setHeadline] = useState('')
+    const [aboutMe, setAboutMe] = useState('')
+    const [aboutService, setAboutService] = useState('')
+    const [serviceSummary, setServiceSummary] = useState('')
     const [mainCategory, setMainCategory] = useState('')
-    const [subCategory, setsubCategory] = useState()
+    const [subCategory, setsubCategory] = useState('')
     const [topSkills, setTopSkills] = useState([])
-    const [hourPrice, setHourPrice] = useState()
-    const [portfolioName, setPortfolioName] = useState()
-    const [portfolioDescription, setPortfolioDescription] = useState()
+    const [hourPrice, setHourPrice] = useState(10)
+    const [portfolioName, setPortfolioName] = useState('')
+    const [portfolioDescription, setPortfolioDescription] = useState('')
     const [notTypePermission, setNotTypePermission] = useState(false)
     const [signedInUser, setSignedInUser] = useState()
     const [checkInput, setCheckInput] = useState(false)
+    const [creator, setCreator] = useState()
+    const [oldProfile, setOldProfile] = useState(false)
     const navigate = useNavigate();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        const checkType = (() => {
+        const checkType = ( () => {
             const tokenType = getItem('token');
             if (tokenType) {
                 const jwtoken = jwt_decode(tokenType)
                 const idOfUser = jwtoken.id;
                 getUserById(idOfUser).then((user) => {
+                    setCreator(user)
                     const UserType = user.userType;
                     setSignedInUser(UserType)
                     console.log(UserType)
@@ -40,6 +44,14 @@ export default function ProfileEdit() {
                         setNotTypePermission(true)
                     } else {
                         setNotTypePermission(false)
+                        getProfileByCreator(idOfUser).then((profile) => {
+                            if(profile){
+                                getMyProfile(profile)
+                                setOldProfile(true)
+                            }else{
+                                setOldProfile(false)
+                            }
+                        })
                     }
                 }).catch((error) => {
                     console.log(error)
@@ -50,7 +62,18 @@ export default function ProfileEdit() {
             }
             console.log('signed:', signedInUser)
         })
-        checkType()
+        checkType();
+        const getMyProfile = (profile) => {
+                        setHeadline(profile.headline);
+                        setAboutMe(profile.aboutMe);
+                        setAboutService(profile.aboutService);
+                        setServiceSummary(profile.serviceSummary);
+                        setMainCategory(profile.mainCategory);
+                        setsubCategory(profile.SubCategory);
+                        setTopSkills(profile.topSkills);
+                        setHourPrice(profile.hourPrice);
+                }
+        
     }, [])
 
     const validationSchema = Yup.object().shape({
@@ -180,6 +203,8 @@ export default function ProfileEdit() {
             const response = await postProjectRequest({ portfolioName, portfolioDescription });
             if (response.status === 200) {
                 console.log('project added:', response)
+                setPortfolioName('')
+                setPortfolioDescription('')
             } else {
                 if (response.response.status === 401) {
                     console.log('authentication error:', response)
@@ -237,7 +262,7 @@ export default function ProfileEdit() {
             } else {
                 if (response.response.status === 401) {
                     alert('you need to sign in')
-                    navigate('/home')
+                    navigate('/')
                 } else {
                     alert('somthing went wrong')
                 }
@@ -261,13 +286,54 @@ export default function ProfileEdit() {
         }
     }
 
+    const handleEdit = async (event) => {
+        event.preventDefault();
+        setCheckInput(true);
+        try {
+            await validationSchema.validate(
+                {
+                    headline,
+                    aboutMe,
+                    aboutService,
+                    serviceSummary,
+                    mainCategory,
+                    hourPrice
+                },
+                { abortEarly: false }
+            );
+            const formData = {
+                headline,
+                aboutMe,
+                aboutService,
+                serviceSummary,
+                mainCategory,
+                subCategory,
+                topSkills,
+                hourPrice,
+            }
+            const response = await editProfileRequest(formData);
+            if(response.status === 200){
+                navigate('/myprofile')
+            }else{
+                if(response.response.status === 401){
+                    alert('authentication error. make sure you still signed in')
+                    navigate('/')
+                }else{
+                    alert('something went wrong')
+                }
+            }
+        }catch(error){
+            console.error(error)
+        }
+    }
+
     return (
         <div className="profile-edit">
             <form className="profile-form" onSubmit={handleSubmit}>
                 <div className="input-div headline">
                     <span>Freelancer Headline:</span>
                     <div className="handle-input">
-                        <input className="input" type="text" id="headlinetextarea" placeholder="your service headline. min=10, max=50" onChange={handleHeadline} maxLength={50} />
+                        <input value={headline} className="input" type="text" id="headlinetextarea" placeholder="your service headline. min=10, max=50" onChange={handleHeadline} maxLength={50} />
                         {validationErrors.headline && <span className="errors">{validationErrors.headline}</span>}
                     </div>
                 </div>
@@ -275,7 +341,7 @@ export default function ProfileEdit() {
                 <div className="input-div aboutme">
                     <span>About me:</span>
                     <div className="handle-input">
-                        <textarea type="textarea" className="textarea" id="aboutmetextarea" placeholder="min=40, max=200" onChange={handleAboutMe} maxLength={200} />
+                        <textarea value={aboutMe} type="textarea" className="textarea" id="aboutmetextarea" placeholder="min=40, max=200" onChange={handleAboutMe} maxLength={200} />
                         {validationErrors.aboutMe && <span className="errors">{validationErrors.aboutMe}</span>}
                     </div>
                 </div>
@@ -283,7 +349,7 @@ export default function ProfileEdit() {
                 <div className="input-div myoffers">
                     <span>About my service:</span>
                     <div className="handle-input">
-                        <textarea type="textarea" className="textarea" id="aboutmyservicetextarea" placeholder="tell about you service. min=70, max=600" onChange={handleServiceInfo} maxLength={600} />
+                        <textarea value={aboutService} type="textarea" className="textarea" id="aboutmyservicetextarea" placeholder="tell about you service. min=70, max=600" onChange={handleServiceInfo} maxLength={600} />
                         {validationErrors.aboutService && <span className="errors">{validationErrors.aboutService}</span>}
                     </div>
                 </div>
@@ -291,7 +357,7 @@ export default function ProfileEdit() {
                 <div className="input-div servicesummary">
                     <span>Summary about my service:</span>
                     <div className="handle-input">
-                        <textarea type="textarea" className="textarea" id="summaryaboutmyservicetextarea" placeholder="summary about your service to be shown in your card. min=30, max=100" onChange={handleServiceSummary} maxLength={100} />
+                        <textarea value={serviceSummary} type="textarea" className="textarea" id="summaryaboutmyservicetextarea" placeholder="summary about your service to be shown in your card. min=30, max=100" onChange={handleServiceSummary} maxLength={100} />
                         {validationErrors.serviceSummary && <span className="errors">{validationErrors.serviceSummary}</span>}
                     </div>
                 </div>
@@ -299,7 +365,7 @@ export default function ProfileEdit() {
                 <div className="input-div maincategory">
                     <span>Select the service's category:</span>
                     <div className="handle-input">
-                        <select className="select" id="maincategory" onChange={handleMainCategory}>
+                        <select value={mainCategory} className="select" id="maincategory" onChange={handleMainCategory}>
                             <option value='select'>Select</option>
                             {CategoryList.map((catego, idx) => (
                                 <option key={idx} value={catego.categoryname}>{catego.categoryname}</option>
@@ -310,9 +376,9 @@ export default function ProfileEdit() {
                 </div>
                 <hr className="hr"/>
                 <div className="input-div subcategory">
-                    <span>Select the service's category:</span>
+                    <span>Select the service's Subcategory:</span>
                     <div className="handle-input">
-                        <select className="select" id="subcategory" onChange={handleSubCategory}>
+                        <select value={subCategory} className="select" id="subcategory" onChange={handleSubCategory}>
                             <option value='select'>Select</option>
                             {findSubCateg && findSubCateg.subCategory.map((item, idx) => (
                                 <option key={idx} value={item}>{item}</option>
@@ -342,7 +408,7 @@ export default function ProfileEdit() {
                 <div className="input-div priceset">
                     <span id='hourprice'>Set your Hourly price</span>
                     <div className="handle-input">
-                        <input className="input" type="number" min={10} max={500} id="setpriceinput" placeholder="min= 10$" onChange={handlePrice}/>
+                        <input value={hourPrice} className="input" type="number" min={10} max={500} id="setpriceinput" placeholder="min= 10$" onChange={handlePrice}/>
                         {validationErrors.hourPrice && <span className="errors">{validationErrors.hourPrice}</span>}
                     </div>
                 </div>
@@ -364,13 +430,16 @@ export default function ProfileEdit() {
                         <span className="portfolio-span">Project cover photo:</span>
                         <input type="file" id="attach" accept=".jpg, .png, .jpeg" />
                     </div>
-                    {signedInUser === 'seller' && <div> <button onClick={handlePortfolio}>Add the project to my portfolio profile</button> <span> you can have 3 projects</span></div>}
-                    <span>Your already exist projects: </span>
+                    {signedInUser === 'seller' && <div className="submit-portfolio"> <button className="submit-x" onClick={handlePortfolio}>Add the project to my portfolio profile</button> <span> you can have 3 projects</span></div>}
+                    <span>Projects you already have in your portfolio: <Portfolio creator={creator} classPass='my-page'/></span>
                 </div>
                 <hr className="hr-break"/>
                 {signedInUser === 'seller' && 
                 <div className="handle-input">
-                <button type="submit" className="submit-profile">Save & publish</button>
+                {!oldProfile ? <button type="submit" className="submit-profile">Save & publish</button>
+                :
+                <button onClick={handleEdit} className="submit-profile">Save edits</button>
+                }
                 {checkInput && (
                             <span className="errors">Validation: Please Check your inputs and try the "Done button" again to complete your register</span>
                         )}

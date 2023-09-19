@@ -1,14 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './UserDashboard.scss'
+import { getItem } from "../../utils/localStorge";
+import jwtDecode from "jwt-decode";
+import { getUserById } from "../../api";
 
 export default function UserDashboard() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const navigate = useNavigate();
   const [popTitle, setPopTitle] = useState()
   const [isPopOpen, setIsPopOpen] = useState(false)
+  const [seller, setSeller] = useState(false)
 
   useEffect(() => {
+    const checkType = () => {
+      const token = getItem('token');
+      const decodeToken = jwtDecode(token)
+      const IdUser = decodeToken.id
+      if(IdUser){
+        getUserById(IdUser).then((user) => {
+          const type = user.userType;
+          if(type === 'seller'){
+            setSeller(true)
+          }else{
+            setSeller(false)
+          }
+        }).catch((error) => {
+          console.error(error)
+        })
+      }else{
+        setSeller(false)
+        navigate('/')
+      }
+    }
+    checkType()
     const screenSize = () => {
       setIsSmallScreen(window.innerWidth <= 880)
     }
@@ -21,8 +46,13 @@ export default function UserDashboard() {
   }, [])
 
   const MyJobsClicked = () => {
-    navigate('/myjobs')
     ClosePopUp()
+    navigate('/myjobs')
+  }
+
+  const MyProposalClicked = () => {
+    ClosePopUp()
+    navigate('/myproposals')
   }
 
   const handlePopUp = (event) => {
@@ -38,11 +68,18 @@ export default function UserDashboard() {
 
   const SmallScreenDashboard = (
     <>
+      {
+      seller?
+      <button className="dashboard-button" onClick={MyProposalClicked}>
+        My Proposals
+      </button>
+      :
       <button className="dashboard-button" onClick={MyJobsClicked}>
         My Jobs
       </button>
+      }
       <button className="dashboard-button" onClick={MyJobsClicked}>
-        My proposal/orders
+        My live orders
       </button>
       <button className="dashboard-button" value='Number of following' onClick={handlePopUp}>
         Number of following

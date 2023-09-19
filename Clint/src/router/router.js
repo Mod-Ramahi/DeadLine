@@ -40,6 +40,9 @@ import AdminChat from "../administrators/adminChat";
 import AdminSingleUser from "../administrators/adminSingleUser";
 import HireFreelancer from "../pages/hireFreelancer";
 import Chat from "../pages/chatpage";
+import PortfolioUser from "../pages/portfoliouserpage";
+import { ProposalPage } from "../pages/proposalpage";
+import { MyProposals } from "../pages/myProposals";
 
 const router = createBrowserRouter([
       {
@@ -49,6 +52,10 @@ const router = createBrowserRouter([
           {
             path: "/",
             element: <Home />
+          },
+          {
+            path:'/home',
+            element: <Home/>
           },
           {
             path: "/signIn",
@@ -97,9 +104,13 @@ const router = createBrowserRouter([
             element: <BidOnJob />
           },
           {
-            path: "/portfoliopage/:CardId",
-            element: <Portfolio />
+            path:'/proposalPage/:bidId',
+            element: <ProposalPage/>
           },
+          // {
+          //   path: "/portfoliopage/:CardId",
+          //   element: <Portfolio />
+          // },
           {
             path: "/register",
             element: <Register />
@@ -149,12 +160,20 @@ const router = createBrowserRouter([
             element:<Myjobs/>
           },
           {
+            path:"/myproposals",
+            element: <MyProposals/>
+          },
+          {
             path:"/hire-freelancer",
             element: <HireFreelancer/>
           },
           {
             path:"/chat",
             element: <Chat/>
+          },
+          {
+            path:'/portfolioProject/:id',
+            element: <PortfolioUser/>
           },
           {
             path:"/administration",
@@ -193,12 +212,12 @@ const router = createBrowserRouter([
             element:<AdminChat/>
           },
           {
-            path: "*",
-            element: <Root />,
-          },
-          {
             path: "/administration/single-user",
             element: <AdminSingleUser/>
+          },
+          {
+            path: "*",
+            element: <Home />,
           }
         ]
       },

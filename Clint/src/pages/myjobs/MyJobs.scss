@@ -1,0 +1,107 @@
+.my-jobs{
+    margin: 1rem;
+    margin-top: 15rem;
+    border: 3px solid rgb(96, 71, 123);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    border-radius: 5px;
+
+    .title-span{
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    .no-activities{
+        margin: 5rem;
+        border: 1px solid rgb(96, 71, 123);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:1.5rem;
+        width: 85%;
+        height: 10rem;
+        border-radius: 5px;
+
+        .no-projects-span{
+            color: rgb(96, 71, 123);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .no-activities-button{
+            background-color: rgb(96, 71, 123);
+            color: white;
+            width: 50%;
+            height: 3.5rem;
+            border-radius: 5px;
+            box-shadow: 2px 2px 4px black;
+        }
+    }
+    .my-projects{
+        margin: 5rem;
+        border: 1px solid rgb(96, 71, 123);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:1.5rem;
+        width: 90%;
+        border-radius: 5px;
+        .my-projects-span{
+            color: rgb(96, 71, 123);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .block{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            width: 97%;
+            border: 2px solid rgb(96, 71, 123);
+            border-radius: 5px;
+            padding: 10px;
+            .job{
+                width: 95%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5rem;
+                .my-job-span{
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: rgb(96, 71, 123);
+                }
+                .delete-job-button{
+                    background-color: rgb(96, 71, 123);
+                    color: white;
+                    height: 4rem;
+                    border-radius: 5px;
+                    box-shadow: 2px 2px 4px black;
+                }
+            }
+            .hr{
+                margin: 1px;
+                border: 1px solid rgb(96, 71, 123);
+                width: 90%;
+            }
+            .proposals-span{
+                font-size: 2rem;
+                font-weight: bold;
+                color: rgb(96, 71, 123);
+            }
+            .proposals{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1.5rem;
+            }
+        }
+    }
+}

@@ -7,7 +7,6 @@ import { getItem } from "../../utils/localStorge";
 import jwt_decode from 'jwt-decode';
 import * as Yup from 'yup'
 
-
 export default function PostJob() {
     const [description, setJobDescription] = useState("");
     const [category, setJobCategory] = useState("");
@@ -38,11 +37,11 @@ export default function PostJob() {
                     setSignedInUser(type);
                     console.log(type)
                     if (type === 'seller') {
-                        setWrongWindow(true)
+                        setWrongWindow(false)
                         console.log("signed seller", type)
                     } else {
                         console.log("signed buyer", type)
-                        setWrongWindow(false)
+                        setWrongWindow(true)
                     }
                 }).catch((error) => {
                     console.error('error', error)
@@ -52,7 +51,6 @@ export default function PostJob() {
                 console.log('else else');
                 setWrongWindow(false)
                 setNotSigned(true)
-
             }
         })
         checkType()
@@ -363,12 +361,12 @@ export default function PostJob() {
                                     <><span className="submit-error">
                                         Only users with business type "Buyer / Company" can post a job. You can check or change your business type from settings
                                     </span>
-                                        <button className="not-submit" onClick={() => navigate('userhome')}> Ok</button></>
+                                        <button className="not-submit" onClick={() => navigate('/userhome')}> Ok</button></>
                                     :
                                     <><span className="submit-error">
                                         please sign-in or register. Only registered users can post a job.
                                     </span>
-                                        <button className="not-submit" onClick={() => navigate('home')}> Ok</button></>
+                                        <button className="not-submit" onClick={() => navigate('/')}> Ok</button></>
                                 )}
                         </div>
 

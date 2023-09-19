@@ -111,13 +111,12 @@
                 flex-direction: column;
                 align-items: center;
                 width: 100%;
-                height: 9rem;
+                height: 10rem;
                 gap:0.5rem;
                 background-color: rgb(96, 71, 123);
                 span{
                     font-size: 2rem;
                     font-weight: bold;
-                    margin-bottom: 0;
                 }
                 hr{
                     margin: 0.2rem;
@@ -128,8 +127,10 @@
                     font-size: 1.6rem;
                 }
                 .budget{
+                    padding: 4px;
                     font-size: 1.3rem;
                     border: 2px solid white;
+                    margin-bottom: 1rem;
                 }
             }
            
@@ -231,6 +232,23 @@
         }
         
     }
+
+    .proposals-section{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .proposal-span{
+            font-size: 2rem;
+            font-weight: bold;
+            color: rgb(96, 71, 123);
+        }
+        .proposals{
+            padding: 10px;
+
+        }
+    }
+
     .userprojects{
         .userprojectsimage{
             display: flex;

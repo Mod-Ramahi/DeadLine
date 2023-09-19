@@ -24,7 +24,35 @@ const postProfile = async (req, res) => {
         res.status(500).json({message:'error posting profile', error: error.message});
     }
 }
-
+const editProfileRequest = async (req,res) => {
+    try{
+        const token = req.headers.authorization;
+        if (!req.user || !token) {
+            return res.status(401).json({message: 'User authentication failed'});
+        }
+        const {headline, aboutMe, aboutService, serviceSummary, mainCategory, subCategory, topSkills, hourPrice } = req.body.formData;
+        const creator = req.user.id;
+        const profile = await Profile.findOne({createdBy: creator});
+        if(!profile){
+            return res.status(404).json({message: 'profile not found'})
+        }
+        profile.headline= headline;
+        profile.aboutMe=aboutMe;
+        profile.aboutService= aboutService;
+        profile.serviceSummary= serviceSummary;
+        profile.mainCategory= mainCategory;
+        profile.subCategory= subCategory;
+        profile.topSkills= topSkills;
+        profile.hourPrice= hourPrice;
+        // profile={...profile, headline, aboutMe, aboutService, serviceSummary, mainCategory, subCategory, topSkills, hourPrice}
+        await profile.save()
+        res.status(200).json({message: 'profile successully updated'})
+    }catch (error){
+        console.error(error)
+        res.status(500).json({message:'failed to find and update profile', error: error.message})
+    }
+}
+  
 const profile = async (req, res) => {
     try{
         const profiles = await Profile.find()
@@ -57,10 +85,10 @@ const getProfileByCreator = async (req, res) => {
         if(!profile){
            return res.status(404).json({message:'profile not found'})
         }
-        res.json(profile)
+        res.status(200).json(profile)
     }catch(error){
         res.status(500).json({message:"error fetching profile",error: error.message})
     }
 }
 
-module.exports = {postProfile, profile, getProfileById, getProfileByCreator};
+module.exports = {postProfile, profile, getProfileById, getProfileByCreator, editProfileRequest};

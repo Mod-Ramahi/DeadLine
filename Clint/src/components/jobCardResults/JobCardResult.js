@@ -29,20 +29,20 @@ const [jobPostedBy, setJobPostedBy] = useState()
                     <img alt="a" src={DefaultPhoto} className="img"/>
                 </div>
                 <div className="job-title">
-                    <span className="j-title">{job.title}</span>
+                    <span className="j-title">{job?.title}</span>
                     <div className="job-price">
-                        <span>{job.salary}$</span>
-                        <span>{job.paymentMethod}</span>
+                        <span>{job?.salary}$</span>
+                        <span>{job?.paymentMethod}</span>
                     </div>
                 </div>
             </div>
             <div className="down">
                 <div className="catego-section">
-                    <span className="job-category">{job.category}</span>
+                    <span className="job-category">{job?.category}</span>
                 </div>
                 <hr />
                 <div className="short-description-section">
-                    <span className="job-short-description"> {job.shortDescription}</span>
+                    <span className="job-short-description"> {job?.shortDescription}</span>
                 </div>
             </div>
             <div className="company-name">

@@ -54,7 +54,7 @@
         padding: 8px;
         border: 3px solid rgb(96, 71, 123);
     }
-    
+
 
     .profile-form {
         display: flex;
@@ -100,6 +100,7 @@
         }
 
     }
+
     .hr {
         width: 75%;
         border: 0.5px solid gray;
@@ -110,6 +111,7 @@
         margin: 1.5rem;
         width: 99%;
     }
+
     .handle-input {
         display: flex;
         flex-direction: column;
@@ -122,31 +124,75 @@
             color: rgb(255, 0, 0);
         }
     }
-    .portfolio{
+    
+
+    .portfolio {
         border: 2px solid rgb(96, 71, 123);
         background-color: rgba(96, 71, 123, 0.2);
         padding: 10px;
         margin: 5rem;
-        .portfolio-description-title{
+        // .file{
+            input[type=file]::file-selector-button{
+                background-color: rgb(96, 71, 123);
+                color: white;
+                cursor: pointer;
+
+            }
+                #attach{
+                    #file-upload-button{
+                font-size: 1rem;
+                background-color: rgb(96, 71, 123);
+                    }
+            }
+            #file-upload{
+                display: none;
+            }
+        // }
+        
+
+        .portfolio-description-title {
             font-size: 2rem;
             color: rgb(96, 71, 123);
         }
+
+        .submit-portfolio {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+
+            .submit-x {
+                background-color: rgb(96, 71, 123);
+                border-radius: 5px;
+                color: white;
+                font-size: 1.2rem;
+                font-weight: bold;
+                width: 60%;
+                height: 4rem;
+                margin: 1.3rem 0;
+                box-shadow: 3px 3px 5px rgb(0, 0, 0);
+            }
+        }
+
     }
-    .file{
+
+    .file {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        #attach{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        justify-self: center;
-        align-self: center;
+
+        #attach {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            justify-self: center;
+            align-self: center;
+        }
     }
-    }
-    
+
 }
 
 @media only screen and (max-width:650px) {

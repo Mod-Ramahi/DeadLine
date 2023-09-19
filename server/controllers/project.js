@@ -23,4 +23,30 @@ const postProject = async (req, res) => {
     }
 }
 
-module.exports = {postProject};
+const getProfileProjectByCreatorId = async (req, res) => {
+    const CreatedBy = req.params.id
+    try {
+        const project = await Project.find({createdBy: CreatedBy})
+        if(!project) {
+            return res.status(404).json({message:'No Project / Portfolio found'})
+        }
+        res.json(project)
+    }catch(error){
+        res.status(500).json({message:'error fetching portfolio', error:error.message})
+    }
+}
+
+const getPortfolioById = async (req,res) => {
+    const Id = req.params.id;
+    try{
+        const portfolio = await Project.findById(Id)
+        if(!portfolio) {
+            res.status(404).json({message:'NO portfolio / project found'})
+        }
+        res.json(portfolio)
+    }catch(error){
+        res.status(500).json({message:'error get portfolio', error: error.message})
+    }
+}
+
+module.exports = {postProject, getProfileProjectByCreatorId, getPortfolioById};

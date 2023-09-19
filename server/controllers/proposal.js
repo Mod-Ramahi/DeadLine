@@ -1,60 +1,80 @@
 const Proposal = require('../models/proposal');
 
-// Controller for creating a proposal
-exports.createProposal = async (req, res) => {
+
+const bidOnJob = async (req, res) => {
   try {
-    const { jobId, description, price, deliveryTime, file, milestone, plan } = req.body.data;
-    const {id} = req.user
-    console.log(req.body.data,3)
-    console
-    // Create a new proposal instance
-    const newProposal = new Proposal({
-      jobId,
-      userId:id,
-      description,
-      price:parseInt(price),
-      deliveryTime:parseInt(deliveryTime),
-      file,
-      milestone,
-      plan,
-    });
-
-    // Save the proposal to the database
-    await newProposal.save();
-
-    res.status(201).json({ message: 'Proposal created successfully', proposal: newProposal });
-  } catch (error) {
-    res.status(500).json({ message: 'Error creating proposal', error: error.message });
-  }
-};
-
-// Controller for fetching a proposal by ID
-exports.getProposalById = async (req, res) => {
-  try {
-    const proposalId = req.params.id;
-
-    // Find the proposal in the database by ID
-    const proposal = await Proposal.findById(proposalId);
-
-    if (!proposal) {
-      return res.status(404).json({ message: 'Proposal not found' });
+    const token = req.headers.authorization;
+    const id = req.params.id;
+    if (!req.user || !req.user.id || !token) {
+      return res.status(401).json({ message: 'User authentication failed' })
     }
-
-    res.json(proposal);
+    const { summary, description, price, time, milestone, plan } = req.body.data;
+    const newProposal = new Proposal({
+      summary, description, price, time, milestone, plan,
+      createdBy: req.user.id,
+      forJobId: id,
+    });
+    await newProposal.save()
+    res.status(200).json({ message: 'successful proposal', proposal: newProposal });
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching proposal', error: error.message });
+    res.status(500).json({ message: 'error posting the proposal', error: error.message })
   }
-};
+}
 
-exports.getProposalsForJob = async (req, res) => {
+const getProposalByJob = async (req, res) => {
   try {
-    const jobId = req.params.jobId;
-
-    // Find all proposals for the specified job in the database
-    const proposals = await Proposal.find({ jobId });
-
-    res.json(proposals);
+    const id = req.params.id
+    const proposal = await Proposal.find({ forJobId: id });
+    if (!proposal) {
+      return res.status(404).json({ message: "no proposals found" })
+    }
+    res.json(proposal)
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching proposals', error: error.message });
+    res.status(500).json({ message: 'error getting proposals', error: error.message })
   }
-};
+}
+
+const getProposalById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const proposal = await Proposal.findById(id);
+    if (!proposal) {
+      res.status(404).json({ message: 'no proposal found' })
+    }
+    res.json(proposal)
+  } catch (error) {
+    res.status(500).json({ message: 'error getting proposals', error: error.message })
+  }
+}
+const getProposalByCreatorId = async (req, res) => {
+  try {
+    const id = req.params.id
+    const proposal = await Proposal.find({ createdBy: id });
+    if (!proposal) {
+      return res.status(404).json({ message: 'no proposal found' })
+    }
+    res.json(proposal)
+  } catch (error) {
+    res.status(500).json({ message: 'error getting proposals', error: error.message })
+  }
+}
+const deleteProposalById = async (req, res) => {
+  try {
+    const token = req.headers.authorization
+    const id = req.params.id
+    if (!token || !req.user.id || !req.user) {
+      return res.status(401).json({ message: 'User authentication error' })
+    }
+    const deleted = await Proposal.findByIdAndDelete(id)
+    if (!deleted) {
+      return res.status.json({ message: 'Failed get/delete proposal. please try again' })
+    }
+    res.json(deleted)
+  }catch(error){
+    res.status(500).json({message:'error while trying get and delete proposal', error:error.message})
+  }
+}
+
+
+
+module.exports = { bidOnJob, getProposalByJob, getProposalById, getProposalByCreatorId, deleteProposalById }

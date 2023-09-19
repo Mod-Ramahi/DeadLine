@@ -36,17 +36,32 @@ export default function MyProfile() {
                 }).catch((error) => {
                     console.error('error', error)
                 });
-                getProfileByCreator(user).then((freelaner) => {
-                    const profile = freelaner;
-                    if (profile) {
-                        setMyProfile(profile);
-                        console.log('profilllll:', profile)
-                    } else {
-                        setMyProfile(null)
-                    }
-                })
+                getProfile(user)
+                // getProfileByCreator(user).then((freelaner) => {
+                //     const profile = freelaner;
+                //     if (profile) {
+                //         setMyProfile(profile);
+                //         console.log('profilllll:', profile)
+                //     } else {
+                //         setMyProfile(null)
+                //         console.log('no profile yet')
+                //     }
+                // })
             }
         })
+        const getProfile = async (id) => {
+                    try {
+                        const response = await getProfileByCreator(id)
+                        if(!response || response.status === 404){
+                            return setMyProfile(null)
+                        }
+                        if(response.status === 200 || response.length !==0){
+                            setMyProfile(response)
+                        }
+                    }catch (error) {
+                        console.error(error)
+                    }
+                }
         typeCheck()
     }, [])
     return (
