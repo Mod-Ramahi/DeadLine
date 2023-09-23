@@ -29,7 +29,24 @@ export const completeRegisterRequest = async(data) => {
         // throw new Error('Failed to complete register. Please try again.');
     }
 }
-
+export const changeEmailRequest = async (newEmail) => {
+    const token = getItem ()
+    try{
+        const response = await axios.put('http://localhost:4000/api/v1/auth/emailchange', {newEmail} , {headers: {Authorization:`${token}`}})
+        return response
+    }catch(error){
+        console.error(error)
+    }
+}
+export const SettingsRequest = async (data) => {
+    const token = getItem()
+    try{
+        const response = await axios.put('http://localhost:4000/api/v1/auth/settings', data, {headers:{Authorization:`${token}`}})
+        return response
+    }catch(error){
+        console.error(error)
+    }
+}
 export const postJobRequest = async (data) =>{
     const token = getItem()
     try {

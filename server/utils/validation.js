@@ -25,6 +25,14 @@ const registerSchema = yup.object().shape({
     ),
 });
 
+const emailSchema = yup.object().shape({
+  newEmail: yup.string().email()
+})
+const newPassSchema = yup.object().shape({
+  newPassword: yup.string().min(8,"password can't be less than 8 characters")
+  .max(20, "password can't be more than 20 characters")
+})
+
 const postJobSchema = yup.object().shape({
   title: yup.string().min(4, 'Title must be at least 4 characters')
       .max(30, 'Title must not exceed 10 characters'),
@@ -38,4 +46,4 @@ const postJobSchema = yup.object().shape({
       .max(50000, 'max value is 50,000 $')
 })
 
-module.exports = { loginSchema, registerSchema, postJobSchema }
+module.exports = { loginSchema, registerSchema, postJobSchema, newPassSchema, emailSchema}

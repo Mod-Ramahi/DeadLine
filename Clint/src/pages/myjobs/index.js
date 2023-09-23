@@ -31,7 +31,7 @@ export default function Myjobs() {
             if (userId) {
                 const id = userId;
                 getProjectByCreatorId(id).then((job) => {
-                    if (!job) {
+                    if (!job || job.length === 0) {
                         setNoActivities(true);
                         setReset(true)
                         navigate('/myjobs')

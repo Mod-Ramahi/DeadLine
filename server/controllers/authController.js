@@ -1,6 +1,6 @@
 const Freelancer = require('../models/freeelancer');
 const jwtUtils = require('../utils/jwtUtils');
-const { loginSchema, registerSchema } = require('../utils/validation');
+const { loginSchema, registerSchema, emailSchema, newPassSchema } = require('../utils/validation');
 const bcrypt = require('bcryptjs');
 
 const login = async (req, res) => {
@@ -43,11 +43,11 @@ const signup = async (req, res) => {
     const existingFreelancer = await Freelancer.findOne({ email });
     if (existingFreelancer) {
       console.log('email exist', res.status)
-      return res.status(409).json({message: "Email already exists" });
+      return res.status(409).json({ message: "Email already exists" });
     };
     await registerSchema.validate({ email, password, name });
     console.log(email)
-    
+
     const hashedPassword = await bcrypt.hash(password, 10);
     // Create a new freelancer
     const newFreelancer = new Freelancer({
@@ -88,8 +88,8 @@ const completeRegister = async (req, res) => {
     console.log('userID:', UserId);
     const { businessType, proNickname, profileImg, maincategory, skillsSelected } = req.body;
     const user = await Freelancer.findById(UserId);
-    if(!user){
-      return res.status(404).json({message:'user not found'});
+    if (!user) {
+      return res.status(404).json({ message: 'user not found' });
     }
 
     user.proname = proNickname;
@@ -100,11 +100,60 @@ const completeRegister = async (req, res) => {
 
     await user.save();
 
-    res.status(200).json({message: 'registration complete'});
-  } catch (error){
-    console.error('Error',error);
-    res.status(500).json({message: 'error completing registration', error:error.message})
+    res.status(200).json({ message: 'registration complete' });
+  } catch (error) {
+    console.error('Error', error);
+    res.status(500).json({ message: 'error completing registration', error: error.message })
+  }
+}
+const editEmail = async (req, res) => {
+  const token = req.headers.authorization;
+  try{
+    if(!token || !req.user || !req.user.id){
+      return res.status(401).json({message:'authintication error'})
+    }
+    const user = await Freelancer.findById(req.user.id)
+    if(!user){
+      return res.status(404).json({message:'user not found'})
+    }
+    const newEmail = req.body.newEmail
+    await emailSchema.validate({newEmail})
+    if(newEmail){
+      user.email = newEmail
+    }
+    await user.save()
+    res.status(200).json({message:'email updated successfully'})
+  }catch(error){
+    res.status(500).json({message:'updating email failed', error:error.message})
+  }
+}
+const editUser = async (req, res) => {
+  try {
+    const token = req.headers.authorization;
+    if (!token || !req.user || !req.user.id) {
+      return res.status(401).json({ message: 'authintication error' })
+    }
+    const user = await Freelancer.findById(req.user.id)
+    if (!user) {
+      return res.status(404).json({ message: 'user not found' })
+    }
+
+    const {newPassword, currentPass } = req.body;
+    if (newPassword && currentPass) {
+      await newPassSchema.validate({password:newPassword})
+      const isPasswordValid = await bcrypt.compare(currentPass, user.password)
+      if (isPasswordValid) {
+        const hashedPassword = await bcrypt.hash(newPassword, 10)
+        user.password = hashedPassword
+        await user.save();
+        res.status(200).json({ message: 'successfull update' })
+      } else {
+        return res.status(400).json({ message: 'password does not match' })
+      }
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'error updating user info', error: error.message })
   }
 }
 
-module.exports = { login, signup, completeRegister };
+module.exports = { login, signup, completeRegister, editUser, editEmail };
