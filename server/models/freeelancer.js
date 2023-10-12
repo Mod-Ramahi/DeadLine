@@ -10,9 +10,16 @@ const freelancerSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  provider: {
+    type: String,
+    enum: ['email', 'google'],
+    default:'email'
+  },
   password: {
     type: String,
-    required: true,
+    required: function(){
+      return this.provider === 'email'
+    },
   },
   proname: String,
   // profileID: {
@@ -23,13 +30,18 @@ const freelancerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Membership',
   },
+  balance: {type: Number, default:0},
+  bidCounter:{type: Number, default:0},
+  privateCounter:{type: Number, default:0},
+  followingCounter:{type: Number, default:0},
+  skillsCounter:{type: Number, default:0},
+  endDate:{type: Number, default:0},
 
   country:String,
   countryFlag: String,
   timezone:String,
   joined: String,
   // recommendation: Number ,
-  
   avatar: String,
   category: String,
   skills: [String],

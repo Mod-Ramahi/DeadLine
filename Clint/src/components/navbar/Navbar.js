@@ -50,11 +50,14 @@ export default function Navbar() {
         const checkUser = () => {
             const token = getItem('token')
             setUserOpen(false)
+            // removeItem('token')
+
             // const checkRememberMe = getItem('rememberMe')
             if (token) {
                 const tokenExp = jwt_decode(token)
                 const currentTime = Date.now() / 1000;
                 const IdUser = tokenExp.id;
+
                 if (tokenExp.exp < currentTime) {
                     setisUser(false)
                     setUserId(null)
@@ -75,6 +78,7 @@ export default function Navbar() {
                             setUsername(iconName)
                         }
                     }).catch((error) => {
+                        removeItem('token')
                         console.log('error:', error)
                     });
                     // const iconName = signedUser?.name;
@@ -89,11 +93,11 @@ export default function Navbar() {
             } else {
                 setisUser(false)
                 setUserId(null)
-                removeItem('token')
                 console.log('user false')
             }
         };
         checkUser();
+
         console.log(location.pathname)
 
     }, [location.pathname]);

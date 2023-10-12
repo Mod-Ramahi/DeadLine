@@ -1,5 +1,5 @@
 .membership-head {
-    margin: 0;
+    margin-top: 14rem;
     height: 545px;
     width: 100%;
     background: url(./Mmbrshp.png) no-repeat center center;
@@ -57,11 +57,12 @@
     }
 }
 
-.plans-container {
+.plans-container-user {
     display: flex;
-    gap: 1.7rem;
+    gap: 8rem;
     justify-content: center;
     margin-top: 3rem;
+    width: 100%;
 
     .plan {
         height: 45rem;
@@ -128,9 +129,9 @@
     }
 }
 
-hr {
-    width: 90%;
-    margin: 4rem auto;
+.hr-plans {
+    // width: %;
+    margin: 3rem 0;
 }
 
 .faq-section {

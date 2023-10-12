@@ -5,30 +5,34 @@ import { getItem } from "../../utils/localStorge";
 import jwtDecode from "jwt-decode";
 import { getUserById } from "../../api";
 
+
 export default function UserDashboard() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const navigate = useNavigate();
   const [popTitle, setPopTitle] = useState()
   const [isPopOpen, setIsPopOpen] = useState(false)
   const [seller, setSeller] = useState(false)
+  const [balance, setBalance] = useState()
 
   useEffect(() => {
     const checkType = () => {
       const token = getItem('token');
       const decodeToken = jwtDecode(token)
       const IdUser = decodeToken.id
-      if(IdUser){
+      if (IdUser) {
         getUserById(IdUser).then((user) => {
           const type = user.userType;
-          if(type === 'seller'){
+          const balance = user.balance;
+          setBalance(balance)
+          if (type === 'seller') {
             setSeller(true)
-          }else{
+          } else {
             setSeller(false)
           }
         }).catch((error) => {
           console.error(error)
         })
-      }else{
+      } else {
         setSeller(false)
         navigate('/')
       }
@@ -45,6 +49,7 @@ export default function UserDashboard() {
     }
   }, [])
 
+
   const MyJobsClicked = () => {
     ClosePopUp()
     navigate('/myjobs')
@@ -55,33 +60,34 @@ export default function UserDashboard() {
     navigate('/myproposals')
   }
 
-  const handlePopUp = (event) => {
-    const title = (event.target.value)
-    setPopTitle(title)
-    setIsPopOpen(!isPopOpen)
-    ClosePopUp()
-  }
 
+  // const handlePopUp = (event) => {
+  //   const title = (event.target.value)
+  //   setPopTitle(title)
+  //   setIsPopOpen(!isPopOpen)
+  //   ClosePopUp()
+  // }
   const ClosePopUp = () => {
     setIsPopOpen(!isPopOpen)
   }
 
+
   const SmallScreenDashboard = (
     <>
       {
-      seller?
-      <button className="dashboard-button" onClick={MyProposalClicked}>
-        My Proposals
-      </button>
-      :
-      <button className="dashboard-button" onClick={MyJobsClicked}>
-        My Jobs
-      </button>
+        seller ?
+          <button className="dashboard-button" onClick={MyProposalClicked}>
+            My Proposals
+          </button>
+          :
+          <button className="dashboard-button" onClick={MyJobsClicked}>
+            My Jobs
+          </button>
       }
       <button className="dashboard-button" onClick={MyJobsClicked}>
         My live orders
       </button>
-      <button className="dashboard-button" value='Number of following' onClick={handlePopUp}>
+      <button className="dashboard-button" value='Number of following' >
         Number of following
       </button>
       <button className="dashboard-button" onClick={MyJobsClicked}>
@@ -93,9 +99,10 @@ export default function UserDashboard() {
       <button className="dashboard-button" onClick={MyJobsClicked}>
         My favorite list
       </button>
-      <button className="dashboard-button" value='Balance' onClick={handlePopUp}>
-        Balance
+      <button className="dashboard-button" value='Balance' onClick={()=>navigate('/payment')}>
+        Balance: {balance}
       </button>
+
     </>
   )
   return (
@@ -126,7 +133,8 @@ export default function UserDashboard() {
           </div>
         )
       }
-      {isPopOpen &&
+      {/* {isPopOpen &&
+      <div className="modal-div">
         <div className="pop-up2">
           <div className='close-pop-up2'>
             <button className='btn-closepopup2' onClick={ClosePopUp}>X</button>
@@ -136,8 +144,11 @@ export default function UserDashboard() {
             <span>0</span>
           </div>
         </div>
+      </div>
+        
 
-      }
+      } */}
+
     </>
   )
 }

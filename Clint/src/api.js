@@ -19,6 +19,14 @@ export const loginRequest = async (data) =>{
         // throw new Error('Failed to login. Please try again.');
     }
 }
+export const googleLogIn = async (data) => {
+    try{
+        const response = await axios.post("http://localhost:4000/api/v1/auth/google", data)
+        return response
+    } catch (error) {
+        console.error(error)
+    }
+}
 export const completeRegisterRequest = async(data) => {
     const token = getItem()
     try{
@@ -227,7 +235,31 @@ export const getAndDeleteProposal = async (id) => {
         const response = await axios.delete(`http://localhost:4000/api/v1/proposal/delete/${id}`, {headers: {Authorization: `${token}`}})
         return response.data
     }catch(error){
-        console.log(error)
+        console.error(error)
         // throw new Error('Failed to get / delete proposal. please try again')
+    }
+}
+
+export const getPlans = async (searchTerm) => {    
+    try{
+        let url = 'http://localhost:4000/api/v1/administration/membership'
+        if(searchTerm){
+            url += `?searchTerm=${searchTerm}`
+        }
+        const response = await axios.get(url)
+        return response
+    }catch (error) {
+        console.error(error)
+    }
+}
+export const editPlan = async (data, id) => {
+    // const token = getItem()
+    try{
+        const response = await axios.put(`http://localhost:4000/api/v1/administration/membership/${id}`, {data}
+        // {headers: {Authorization: `${token}`}}
+        )
+        return response
+    }catch(error){
+        console.error(error)
     }
 }

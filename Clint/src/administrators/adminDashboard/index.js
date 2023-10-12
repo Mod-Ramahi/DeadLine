@@ -1,8 +1,9 @@
 import React from "react";
 import './AdminDashboard.scss'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminDashnoard() {
+    const navigate = useNavigate()
     return (
         <>
             <div className="admin-dashboard">
@@ -43,11 +44,11 @@ export default function AdminDashnoard() {
                 </div>
                 <div className="management-section">
                     <div className="management-options">
-                        <p className="users-box">Users</p>
-                        <p className="users-box">Jobs</p>
-                        <p className="users-box">Proposals</p>
-                        <p className="users-box">Memberships</p>
-                        <p className="users-box">Admin actions</p>
+                        <p className="mngmnt-option">Users</p>
+                        <p className="mngmnt-option">Jobs</p>
+                        <p className="mngmnt-option">Proposals</p>
+                        <p className="mngmnt-option" onClick={() => navigate('/administration/membershipedit')}>Memberships</p>
+                        <p className="mngmnt-option">Admin actions</p>
                     </div>
                 </div>
             </div>

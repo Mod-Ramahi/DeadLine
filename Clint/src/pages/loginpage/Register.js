@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Signin.scss"
+import jwtDecode from "jwt-decode";
+import { googleLogIn } from "../../api";
 import * as Yup from 'yup'
 import { useUserContext } from "../../UserContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +9,7 @@ import { registerRequest } from "../../api";
 import { setItem } from "../../utils/localStorge";
 
 const Register = () => {
+    const [user, setUser] = useState()
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
@@ -16,7 +19,17 @@ const Register = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const [validationErrors, setValidationErrors] = useState({})
     const navigate = useNavigate()
-    const {setUserId} = useUserContext()
+    const { setUserId } = useUserContext()
+
+    useEffect(() => {
+
+        /* global google */
+        google.accounts.id.initialize({
+            client_id: '995840348989-reo2s285mklbg9lehsmhhq23gaev327f.apps.googleusercontent.com',
+            callback: handleCallBackResponse
+        })
+
+    }, [])
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name Required')
@@ -33,6 +46,33 @@ const Register = () => {
             .required('Please re-enter your password')
             .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     })
+    const handleCallBackResponse = (response) => {
+        console.log('google sign in response', response)
+        const userObject = jwtDecode(response.credential)
+        console.log(userObject)
+        setUser(userObject)
+        handleGoogleLogIn(userObject)
+    }
+    const handleGoogleLogIn = async (userObject) => {
+        const googleUser = userObject
+        try {
+            console.log('test google user', googleUser.name)
+            const response = await googleLogIn(googleUser)
+            if (response.status === 200) {
+                setItem(response.data.token)
+                localStorage.setItem('token', response.data.token);
+                navigate('/userhome')
+            }
+            if (response.status === 201) {
+                setItem(response.data.token)
+                localStorage.setItem('token', response.data.token);
+                navigate('/completeregister')
+            }
+        } catch (error) {
+            console.log(error)
+            alert("something went wrong")
+        }
+    }
 
     const handleUserEmailChange = (event) => {
         const userEmail = event.target.value;
@@ -118,7 +158,7 @@ const Register = () => {
                     validationErrors[err.path] = err.message;
                 });
                 setValidationErrors(validationErrors)
-            } 
+            }
             else {
                 console.log(error)
                 alert('Something went wrong')
@@ -133,7 +173,7 @@ const Register = () => {
                     <button>Already user? sign in</button>
                 </Link>
                 <span>Or</span>
-                <button className="google_button">Continue with Google</button>
+                <button className="google_button" onClick={handleGoogleLogIn}>Continue with Google</button>
             </div>
             {/* <hr/> */}
             <form onSubmit={handleSubmit}>

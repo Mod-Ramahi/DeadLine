@@ -1,11 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Membership.scss";
 import MembershipImg from "./Mmbrshp.png"
 import UserDashboard from "../../components/userDashboard/UserDashboard";
+import { getPlans } from "../../api";
+import PlanCard from "../../components/planCard/PlanCard";
 
 export default function Membership() {
     const [monthlyClicked, setMonthlyClicked] = useState(true)
     const [annualClicked, setAnnualClicked] = useState(false)
+    const [monthPlans, setMonthPlans] = useState([])
+    const [yearPlans, setYearPlans] = useState([])
+
+    useEffect(() => {
+        const getplansApi = async () => {
+            try {
+                const response = await getPlans('year')
+                if (response.status === 200) {
+                    console.log('Monthly plans are:', response.data)
+                    setMonthPlans(response.data)
+                } else {
+                    console.log('cant get monthly plans', response.status)
+                }
+            } catch (error) {
+                console.error('error get monthly plans', error)
+            }
+        }
+        getplansApi()
+        const getYearPlans = async () => {
+            try {
+                const response = await getPlans('month')
+                if (response.status === 200) {
+                    console.log('Annual plans are:', response.data)
+                    setYearPlans(response.data)
+                }
+                else {
+                    console.log('cant get annual plans')
+                }
+            } catch (error) {
+                console.error('error get annual plans', error)
+            }
+        }
+        getYearPlans()
+    }, [])
 
     const handleMonthlyCost = () => {
         setMonthlyClicked(true);
@@ -15,9 +51,16 @@ export default function Membership() {
         setAnnualClicked(true)
         setMonthlyClicked(false)
     }
+
+    const renderPlans = monthPlans.map((p) => (
+        <PlanCard p={p} duration='Month' key={p._id}/>
+    ))
+    const renderYearPlans = yearPlans.map((p) => (
+        <PlanCard p={p} duration='Year' key={p._id}/>
+    ))
     return (
         <>
-            <UserDashboard />
+            {/* <UserDashboard /> */}
 
             <div className="membership-head" >
                 <div className="inside-txt">
@@ -25,122 +68,17 @@ export default function Membership() {
                     <span className="txt-span">Designed to maximise your freelancer success and earnings! Save up to 20% on annual plans. Change plans anytime, conditions apply see FAQ.</span>
                 </div>
             </div>
+            {/* <div style={{ width: '100%', height: '15rem', backgroundColor: 'red' }}>
+                {renderPlans}
+            </div> */}
             <div className="plan-options">
                 <button className={`monthly ${monthlyClicked ? "active" : ""}`} onClick={handleMonthlyCost}>Monthly plans</button>
                 <button className={`yearly ${annualClicked ? "active" : ""}`} onClick={handleAnnualCost}>Annual plans</button>
             </div>
-            <div className="plans-container">
-                <div className="plan">
-                    <div className="plan-box">
-                        <div className="plan-name">
-                            <span>Trial</span>
-                        </div>
-                        <div className="price">
-                            <span>Free</span>
-                            <span className="per">/one time</span>
-                        </div>
-                        <div className="subscribe">
-                            <button>Subscribe</button>
-                        </div>
-                        <div className="features">
-                            <p>* 4 bids</p>
-                            <p>* 5 skills</p>
-                            <p>* 3 followings</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="plan">
-                    <div className="plan-box">
-                        <div className="plan-name">
-                            <span>Basic</span>
-                        </div>
-                        <div className="price">
-                            {monthlyClicked ? (
-                                <>
-                                    <span>19.99$</span>
-                                    <span className="per">/Month</span>
-                                </>
-                            ) : (
-                                <>
-                                    <span>189.99$</span>
-                                    <span className="per">/Year</span>
-                                </>
-                            )}
-                        </div>
-                        <div className="subscribe">
-                            <button>Subscribe</button>
-                        </div>
-                        <div className="features">
-                            <p>* 20 bids</p>
-                            <p>* 10 skills</p>
-                            <p>* 2 private bids</p>
-                            <p>* 7 followings</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="plan">
-                    <div className="plan-box">
-                        <div className="plan-name">
-                            <span>Plus</span>
-                        </div>
-                        <div className="price">
-                        {monthlyClicked ? (
-                                <>
-                                    <span>27.99$</span>
-                                    <span className="per">/Month</span>
-                                </>
-                            ) : (
-                                <>
-                                    <span>279.99$</span>
-                                    <span className="per">/Year</span>
-                                </>
-                            )}
-                        </div>
-                        <div className="subscribe">
-                            <button>Subscribe</button>
-                        </div>
-                        <div className="features">
-                            <p>* 30 bids</p>
-                            <p>* 15 skills</p>
-                            <p>* 5 private bids</p>
-                            <p>* 15 followings</p>
-                            <p>* Verified professional</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="plan">
-                    <div className="plan-box">
-                        <div className="plan-name">
-                            <span>Premier</span>
-                        </div>
-                        <div className="price">
-                        {monthlyClicked ? (
-                                <>
-                                    <span>39.99$</span>
-                                    <span className="per">/Month</span>
-                                </>
-                            ) : (
-                                <>
-                                    <span>389.99$</span>
-                                    <span className="per">/Year</span>
-                                </>
-                            )}
-                        </div>
-                        <div className="subscribe">
-                            <button>Subscribe</button>
-                        </div>
-                        <div className="features">
-                            <p>* 60 bids</p>
-                            <p>* 20 skills</p>
-                            <p>* unlimeted private bids</p>
-                            <p>* 50 followings</p>
-                            <p>* Verified Professional</p>
-                            <p>* Show your profile as a recommended freelancer</p>
-                        </div>
-                    </div>
-                </div>
+            <div className="plans-container-user">
+                {monthlyClicked ? (renderPlans) : (renderYearPlans)}
             </div>
-            <hr />
+            <hr className="hr-plans" />
             <div className="faq-section">
                 <span className="faqs">FAQs</span>
                 <div className="q">

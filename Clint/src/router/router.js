@@ -43,6 +43,7 @@ import Chat from "../pages/chatpage";
 import PortfolioUser from "../pages/portfoliouserpage";
 import { ProposalPage } from "../pages/proposalpage";
 import { MyProposals } from "../pages/myProposals";
+import MembershipsEdit from "../administrators/adminMembershipEdit";
 
 const router = createBrowserRouter([
       {
@@ -214,6 +215,10 @@ const router = createBrowserRouter([
           {
             path: "/administration/single-user",
             element: <AdminSingleUser/>
+          },
+          {
+            path: '/administration/membershipedit',
+            element: <MembershipsEdit/>
           },
           {
             path: "*",
