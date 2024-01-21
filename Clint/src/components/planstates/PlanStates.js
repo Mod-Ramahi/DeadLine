@@ -51,10 +51,10 @@ export default function PlanState() {
     }, [])
     return (
         <div className="plans-states">
-            {!isBuyer ?
+            {isBuyer ?
                 (<div className="states-box">
                     <div className="box-row">
-                        <span className="title-span">You must be a freelancer and subscribed user to see the plan states. you can change to a freelancer yser from settings</span>
+                        <span className="title-span">You must be a freelancer and subscribed user to see the plan stats. you can change to a freelancer yser from settings</span>
                     </div>
                 </div>
                 )

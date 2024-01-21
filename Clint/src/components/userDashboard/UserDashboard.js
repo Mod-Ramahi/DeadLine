@@ -94,7 +94,7 @@ export default function UserDashboard() {
         Number of following
       </button> */}
       <button className="dashboard-button" onClick={MyStatesClicked}>
-        My plan states
+        My plan stats
       </button>
       <button className="dashboard-button" onClick={() => navigate('/myfollowing')}>
         My following
