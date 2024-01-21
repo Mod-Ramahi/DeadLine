@@ -179,7 +179,7 @@ const editUser = async (req, res) => {
       return res.status(404).json({ message: 'user not found' })
     }
 
-    const { newPassword, currentPass, userBalance, planId } = req.body;
+    const { newPassword, currentPass, userBalance, planId, counter, plan, futureDate, planPrice, companyId } = req.body;
     if (newPassword && currentPass) {
       await newPassSchema.validate({ password: newPassword })
       const isPasswordValid =  bcrypt.compare(currentPass, user.password)
@@ -198,10 +198,36 @@ const editUser = async (req, res) => {
       await user.save()
       res.status(200).json({message: 'balance edited successfully'})
     }
-    if(planId) {
+    const planPriceParse = parseFloat(planPrice)
+    if(!isNaN(planPriceParse) && planPriceParse > 0){
+      user.balance -= planPriceParse
+      await user.save()
+      res.status(200).json({message: 'balance cut successfully'})
+    }
+    if(planId && futureDate) {
       user.membershipID = planId
+      user.bidCounter = 0
+      user.privateCounter = 0
+      user.followingCounter = 0
+      user.endDate = futureDate
       await user.save()
       res.status(200).json({message:'successfully subscribed to the membership'})
+    }
+    if(counter){
+      user.bidCounter += 1;
+      await user.save()
+      res.status(200).json({message:'successfully bids counter increased'})
+    }
+    if(plan){
+      user.privateCounter += 1
+      await user.save()
+      res.status(200).json({messsage: 'successfully private counter increased'})
+    }
+    if(companyId){
+      user.following = companyId;
+      user.followingCounter += 1;
+      await user.save()
+      res.status(200).json({message:'successfully following process'})
     }
   } catch (error) {
     res.status(500).json({ message: 'error updating user info', error: error.message })

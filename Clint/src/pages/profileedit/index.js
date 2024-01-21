@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CategoryList } from "../../CategoryList";
 import './ProfileEdit.scss'
 import * as Yup from 'yup'
-import { editProfileRequest, getProfileByCreator, getUserById, postProfileRequest, postProjectRequest } from "../../api";
+import { editProfileRequest, getPlanById, getProfileByCreator, getUserById, postProfileRequest, postProjectRequest } from "../../api";
 import { useNavigate } from "react-router-dom";
 import { getItem } from "../../utils/localStorge";
 import jwt_decode from 'jwt-decode';
@@ -26,11 +26,12 @@ export default function ProfileEdit() {
     const [checkInput, setCheckInput] = useState(false)
     const [creator, setCreator] = useState()
     const [oldProfile, setOldProfile] = useState(false)
+    const [userSkills, setUserSkills] = useState (0)
     const navigate = useNavigate();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        const checkType = ( () => {
+        const checkType = (() => {
             const tokenType = getItem('token');
             if (tokenType) {
                 const jwtoken = jwt_decode(tokenType)
@@ -45,16 +46,21 @@ export default function ProfileEdit() {
                     } else {
                         setNotTypePermission(false)
                         getProfileByCreator(idOfUser).then((profile) => {
-                            if(profile){
+                            if (profile) {
                                 getMyProfile(profile)
                                 setOldProfile(true)
-                            }else{
+                            } else {
                                 setOldProfile(false)
                             }
                         })
                     }
+                    if (!user.membershipID) {
+                        navigate('/membership')
+                    } else {
+                        checkUser(user.membershipID)
+                    }
                 }).catch((error) => {
-                    console.log(error)
+                    console.error(error)
                     alert("something went wrong")
                 })
             } else {
@@ -64,16 +70,25 @@ export default function ProfileEdit() {
         })
         checkType();
         const getMyProfile = (profile) => {
-                        setHeadline(profile.headline);
-                        setAboutMe(profile.aboutMe);
-                        setAboutService(profile.aboutService);
-                        setServiceSummary(profile.serviceSummary);
-                        setMainCategory(profile.mainCategory);
-                        setsubCategory(profile.SubCategory);
-                        setTopSkills(profile.topSkills);
-                        setHourPrice(profile.hourPrice);
-                }
-        
+            setHeadline(profile.headline);
+            setAboutMe(profile.aboutMe);
+            setAboutService(profile.aboutService);
+            setServiceSummary(profile.serviceSummary);
+            setMainCategory(profile.mainCategory);
+            setsubCategory(profile.SubCategory);
+            setTopSkills(profile.topSkills);
+            setHourPrice(profile.hourPrice);
+        }
+        const checkUser = (planId) => {
+            getPlanById(planId).then((plan) => {
+                const skillsAllowed = plan.skillsNumber
+                setUserSkills(skillsAllowed)
+                // console.log('plan skills number:', skillsAllowed)
+            }).catch((error) => {
+                console.error(error)
+            })
+        }
+
     }, [])
 
     const validationSchema = Yup.object().shape({
@@ -159,7 +174,7 @@ export default function ProfileEdit() {
         const TopSkills = event.target.value
 
         if (TopSkills !== '' && !topSkills.includes(TopSkills)) {
-            const skillsArray = [...topSkills, TopSkills].slice(0, 3)
+            const skillsArray = [...topSkills, TopSkills].slice(0, userSkills)
             setTopSkills(skillsArray)
         }
         if (TopSkills === 'reset') {
@@ -278,7 +293,7 @@ export default function ProfileEdit() {
                 });
                 setValidationErrors(validationErrors);
                 setCheckInput(true);
-                
+
             } else {
                 console.error(error)
                 alert('Something went wrong')
@@ -312,17 +327,17 @@ export default function ProfileEdit() {
                 hourPrice,
             }
             const response = await editProfileRequest(formData);
-            if(response.status === 200){
+            if (response.status === 200) {
                 navigate('/myprofile')
-            }else{
-                if(response.response.status === 401){
+            } else {
+                if (response.response.status === 401) {
                     alert('authentication error. make sure you still signed in')
                     navigate('/')
-                }else{
+                } else {
                     alert('something went wrong')
                 }
             }
-        }catch(error){
+        } catch (error) {
             console.error(error)
         }
     }
@@ -337,7 +352,7 @@ export default function ProfileEdit() {
                         {validationErrors.headline && <span className="errors">{validationErrors.headline}</span>}
                     </div>
                 </div>
-                <hr className="hr"/>
+                <hr className="hr" />
                 <div className="input-div aboutme">
                     <span>About me:</span>
                     <div className="handle-input">
@@ -345,7 +360,7 @@ export default function ProfileEdit() {
                         {validationErrors.aboutMe && <span className="errors">{validationErrors.aboutMe}</span>}
                     </div>
                 </div>
-                <hr className="hr"/>
+                <hr className="hr" />
                 <div className="input-div myoffers">
                     <span>About my service:</span>
                     <div className="handle-input">
@@ -353,7 +368,7 @@ export default function ProfileEdit() {
                         {validationErrors.aboutService && <span className="errors">{validationErrors.aboutService}</span>}
                     </div>
                 </div>
-                <hr className="hr"/>
+                <hr className="hr" />
                 <div className="input-div servicesummary">
                     <span>Summary about my service:</span>
                     <div className="handle-input">
@@ -361,7 +376,7 @@ export default function ProfileEdit() {
                         {validationErrors.serviceSummary && <span className="errors">{validationErrors.serviceSummary}</span>}
                     </div>
                 </div>
-                <hr className="hr-break"/>
+                <hr className="hr-break" />
                 <div className="input-div maincategory">
                     <span>Select the service's category:</span>
                     <div className="handle-input">
@@ -374,7 +389,7 @@ export default function ProfileEdit() {
                         {validationErrors.mainCategory && <span className="errors">{validationErrors.mainCategory}</span>}
                     </div>
                 </div>
-                <hr className="hr"/>
+                <hr className="hr" />
                 <div className="input-div subcategory">
                     <span>Select the service's Subcategory:</span>
                     <div className="handle-input">
@@ -388,9 +403,9 @@ export default function ProfileEdit() {
                         {validationErrors.subCategory && <span className="errors">{validationErrors.subCategory}</span>}
                     </div>
                 </div>
-                <hr className="hr"/>
+                <hr className="hr" />
                 <div className="input-div skillsselect">
-                    <span>Select your top skills: "you can select 3" </span>
+                    <span>Select your top skills: "you can select {userSkills}" </span>
                     <select className="select" id="skilll" onChange={handleTopSkills}>
                         <option value="">No specifec Skills</option>
                         <option value="reset">Reset</option>
@@ -404,15 +419,15 @@ export default function ProfileEdit() {
                     </select>
                     <span>You selected: {topSkills.join(', ')}</span>
                 </div>
-                <hr className="hr"/>
+                <hr className="hr" />
                 <div className="input-div priceset">
                     <span id='hourprice'>Set your Hourly price</span>
                     <div className="handle-input">
-                        <input value={hourPrice} className="input" type="number" min={10} max={500} id="setpriceinput" placeholder="min= 10$" onChange={handlePrice}/>
+                        <input value={hourPrice} className="input" type="number" min={10} max={500} id="setpriceinput" placeholder="min= 10$" onChange={handlePrice} />
                         {validationErrors.hourPrice && <span className="errors">{validationErrors.hourPrice}</span>}
                     </div>
                 </div>
-                <hr className="hr-break"/>
+                <hr className="hr-break" />
                 <div className="input-div portfolio">
                     <span className="portfolio-description-title"> (OPTIONAL / YOU CAN SKIP THIS PART)</span>
                     <span className="portfolio-description"> You can showcase your previous work here "Describe your project and attach an image for each text" </span>
@@ -431,19 +446,19 @@ export default function ProfileEdit() {
                         <input type="file" id="attach" accept=".jpg, .png, .jpeg" />
                     </div>
                     {signedInUser === 'seller' && <div className="submit-portfolio"> <button className="submit-x" onClick={handlePortfolio}>Add the project to my portfolio profile</button> <span> you can have 3 projects</span></div>}
-                    <span>Projects you already have in your portfolio: <Portfolio creator={creator} classPass='my-page'/></span>
+                    <span>Projects you already have in your portfolio: <Portfolio creator={creator} classPass='my-page' /></span>
                 </div>
-                <hr className="hr-break"/>
-                {signedInUser === 'seller' && 
-                <div className="handle-input">
-                {!oldProfile ? <button type="submit" className="submit-profile">Save & publish</button>
-                :
-                <button onClick={handleEdit} className="submit-profile">Save edits</button>
-                }
-                {checkInput && (
+                <hr className="hr-break" />
+                {signedInUser === 'seller' &&
+                    <div className="handle-input">
+                        {!oldProfile ? <button type="submit" className="submit-profile">Save & publish</button>
+                            :
+                            <button onClick={handleEdit} className="submit-profile">Save edits</button>
+                        }
+                        {checkInput && (
                             <span className="errors">Validation: Please Check your inputs and try the "Done button" again to complete your register</span>
                         )}
-                </div>}
+                    </div>}
 
                 <span className="last-span">you can change other main info from the settings.</span>
             </form>

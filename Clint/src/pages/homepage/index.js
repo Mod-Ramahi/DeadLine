@@ -9,7 +9,7 @@ export default function Home () {
     return(
         <>
             <Head backgroundImg={HeadBg}/>
-            <MostPopular title={"Most Popular"} cards={Cards} number={8}/>
+            <MostPopular title={"Most Popular"} number={8} />
             <SmallAboutUs/>
             <AllcategoryHome/>
         </>

@@ -1,0 +1,33 @@
+.plans-states{
+    margin-top: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .states-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap:2rem;
+        padding: 2rem;
+        .box-row{
+            border: 1px solid black;
+            width: 90%;
+            padding: 2rem;
+            display: flex;
+            justify-content: flex-start;
+            gap: 1rem;
+            background-color: rgb(96, 71, 123);
+            .title-span{
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: white;
+            }
+            .value-span{
+                font-size: 1.5rem;
+                // font-weight: bold;
+                color: white;
+            }
+        }
+    }
+}

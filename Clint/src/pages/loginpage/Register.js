@@ -189,7 +189,7 @@ const Register = () => {
                             onChange={handleEnterNameChange}
                             required
                         />
-                        {validationErrors.name && <span className="errors">{validationErrors.changedName}</span>}
+                        {validationErrors.name && <span className="errors">{validationErrors.name}</span>}
                     </div>
 
                 </div>

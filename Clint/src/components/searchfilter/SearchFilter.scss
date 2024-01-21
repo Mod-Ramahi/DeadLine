@@ -13,8 +13,10 @@
             align-items: center;
             margin: 1rem 0;
             height: 2.8rem;
-            margin: 2px;
-            padding: 2px;
+            margin: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            background-color: rgb(96, 71, 123);
 
             input {
                 width: 35%;
@@ -135,6 +137,68 @@
 
 }
 
+.most-popular-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0;
+
+    button {
+        height: 42px;
+        width: 168px;
+        border: 1px solid rgb(96, 71, 123)
+    }
+
+    .job-btn {
+        color: rgb(96, 71, 123);
+        background-color: white;
+        border-radius: 50px 0 0 50px;
+    }
+
+    .freelancer-btn {
+        color: rgb(96, 71, 123);
+        background-color: white;
+        border-radius: 0 50px 50px 0;
+    }
+
+    .active {
+        color: white;
+        background-color: rgb(96, 71, 123);
+    }
+}
+
+.results-render {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    // background-color: black;
+
+    .jobs-render {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+        padding: 0.3rem;
+
+        // background-color: green;
+    }
+
+    .users-render {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+        padding: 0.3rem;
+        // width: 40rem;
+        // background-color: red;
+    }
+}
+
+
 @media only screen and (max-width:1200px) {
     .filter {
         .img-bckg {
@@ -226,6 +290,30 @@
         select {
             width: 50%;
             height: 2rem;
+        }
+    }
+}
+
+@media only screen and (max-width:840px){
+    .results-render {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 0;
+        // background-color: black;
+    
+        .jobs-render {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 3rem;
+        }
+    
+        .users-render {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 4rem;
+            padding: 0.5rem;
+            // width: 40rem;
+            // background-color: red;
         }
     }
 }

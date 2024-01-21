@@ -21,6 +21,19 @@ const getPlans = async (req, res) => {
     }
 }
 
+const getPlanById = async (req, res) => {
+    try{
+        const id = req.params.id
+        const plan = await Membership.findById(id)
+        if(!plan){
+            return res.status(404).json({message: 'cannot get the plan'})
+        }
+        res.status(200).json(plan)
+    } catch (error) {
+        res.status(500).json({message:'Error recieving membership plan', error: error.message })
+    }
+}
+
 const editPlans = async (req, res) => {
     try {
         // const token = req.headers.authorization;
@@ -48,4 +61,5 @@ const editPlans = async (req, res) => {
     }
 }
 
-module.exports = { getPlans, editPlans };
+
+module.exports = { getPlans, editPlans, getPlanById };

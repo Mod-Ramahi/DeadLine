@@ -35,27 +35,58 @@ const PlanCard = ({ p, duration }) => {
                 const currentDate = new Date();
                 const futureDate = new Date(currentDate)
                 const userBalance = user.balance;
+                const controlBalance = async (planPrice) => {
+                    try {
+                        const data = { planPrice }
+                        const res = await SettingsRequest(data)
+                        if (res.status === 200) {
+                            console.log('success and navigate to home page')
+                            navigate('/userhome')
+                        }
+                    } catch (error) {
+                        console.error(error)
+                    }
+                }
                 if (p.name !== 'Free trial') {
-                    const data =  {planId} 
                     if (userBalance > p.price + 1) {
                         if (duration === 'Month') {
                             futureDate.setMonth(currentDate.getMonth() + 1)
+                            const data = { planId, futureDate: futureDate.toISOString() }
                             const response = await SettingsRequest(data)
                             if (response.status === 200) {
                                 console.log('future:', p.name)
                                 console.log('test', user.membershipID)
+                                controlBalance(p.price)
                             }
                             console.log(response)
-                            
+                            navigate(-1)
                         } else {
                             futureDate.setFullYear(currentDate.getFullYear() + 1)
-                            console.log('future:', futureDate)
+                            const data = { planId, futureDate }
+                            const response = await SettingsRequest(data)
+                            if (response.status === 200) {
+                                console.log('future:', p.name)
+                                console.log('test', user.membershipID)
+                                controlBalance(p.price)
+                            }
+                            console.log(response)
+                            navigate(-1)
                         }
                     } else {
                         navigate('/payment')
                     }
                 } else {
+                    futureDate.setMonth(currentDate.getMonth() + 1)
+                    const data = { planId, futureDate: futureDate.toISOString() }
+                    const response = await SettingsRequest(data)
+                    if (response.status === 200) {
+                        console.log('future:', p.name)
+                        console.log('test', user.membershipID)
+                        controlBalance(p.price)
+                    }
+                    console.log(response)
                     console.log('its free plan')
+                    navigate(-3)
                 }
 
             } else {

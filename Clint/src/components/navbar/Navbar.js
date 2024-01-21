@@ -297,7 +297,7 @@ export default function Navbar() {
                                         {item.subCategory.map((subc, idx) => (
                                             <Link className='link-box' style={{ textDecoration: 'none', color: 'inherit' }} to={{
                                                 pathname: '/resultssearch',
-                                                search: `category=${item.categoryname}&subCategory=${subc}`,
+                                                search: `category=${encodeURIComponent(item.categoryname)}&subcategory=${encodeURIComponent(subc)}`,
                                             }} key={idx}><span className='link'>{subc}</span></Link>
                                         ))}
                                     </div>

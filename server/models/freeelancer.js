@@ -35,7 +35,7 @@ const freelancerSchema = new mongoose.Schema({
   privateCounter:{type: Number, default:0},
   followingCounter:{type: Number, default:0},
   skillsCounter:{type: Number, default:0},
-  endDate:{type: Number, default:0},
+  endDate:{type: Date},
 
   country:String,
   countryFlag: String,
@@ -47,6 +47,10 @@ const freelancerSchema = new mongoose.Schema({
   skills: [String],
   // hourlyRate: Number,
   // bio: String,
+  following : [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'Freelancer'
+  }],
   projectsPosted: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',

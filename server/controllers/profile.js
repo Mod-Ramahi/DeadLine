@@ -1,3 +1,4 @@
+const Job = require('../models/job');
 const Profile = require('../models/profile');
 
 const postProfile = async (req, res) => {
@@ -53,15 +54,138 @@ const editProfileRequest = async (req,res) => {
     }
 }
   
+// const profile = async (req, res) => {
+//     try{
+//         const profiles = await Profile.find()
+//         if(!profiles || profiles.length === 0){
+//             return res.status(404).json({message: 'no profiles found'})
+//         }
+//         res.json(profiles);
+//     } catch (error){
+//         res.status(500).json({message:'Error recieving profiles', error: error.message})
+//     }
+// }
+const filterProfiles = async (req, res) => {
+    try{
+      const{sortBy, order,pageSize, data} = req.query
+      const sort = sortBy
+      const sortOrder = order
+      const limit = pageSize
+  
+      let query = Profile.find().sort({[sort]: sortOrder})
+      if('selectedCategory' in data && data.selectedCategory){
+        query = query.where('mainCategory').equals(data.selectedCategory)
+      }
+      if('selectedSubCategory' in data && data.selectedSubCategory){
+        query = query.where('subCategory').equals(data.selectedSubCategory)
+      }
+      if('searchText' in data && data.searchText && data.searchText !==''){
+        const searchTextRegex = new RegExp(data.searchText, 'i')
+        query = query.or([
+          {'headline': {$regex: searchTextRegex}},
+          {'aboutService': {$regex : searchTextRegex}}
+        ])
+      }
+      if('priceSelect' in data && data.priceSelect && data.priceSelect !== ''){
+        const [minPrice, maxPrice] = data.priceSelect.split('-').map(Number)
+        if(!isNaN(minPrice) && !isNaN(maxPrice)){
+          query =  query.where('hourPrice').gte(minPrice).lte(maxPrice)
+        }else if(!isNaN(minPrice)){
+          query = query.where('hourPrice').gte(minPrice)
+        } else if(!isNaN(maxPrice)){
+          query = query.where('hourPrice').lte(maxPrice)
+        }
+      }
+      if('userCateg' in data && data.useCateg){
+        query = query.where('mainCategory').equals(data.userCateg)
+      }
+      if('defaultResult' in data && data.defaultResult){
+        query = query.find().sort({[sort]: sortOrder}).limit(limit)
+      }
+      query = query.limit(limit)
+      const profiles = await query
+      res.json(profiles)
+    } catch (error) {
+      res.status(500).json({message:'error getting profiles', error:error.message})
+    }
+  }
 const profile = async (req, res) => {
     try{
-        const profiles = await Profile.find()
-        if(!profiles || profiles.length === 0){
-            return res.status(404).json({message: 'no profiles found'})
+        const {pageSize, category} = req.query;
+
+        const limit = parseInt(pageSize)
+        // const sort = sortBy
+        // const sortOrder = order
+        let aggregationStages = []
+
+        aggregationStages.push({
+            $lookup: {
+                from:'freelancers',
+                localField:'createdBy',
+                foreignField:'_id',
+                as:'user'
+            }
+        })
+        aggregationStages.push({
+            $unwind:'$user'
+        })
+        aggregationStages.push({
+            $lookup:{
+                from:'membership',
+                localField:'user.membershipID',
+                foreignField:'_id',
+                as:'membership'
+            }
+        })
+        aggregationStages.push({
+            $unwind:{
+                path:'$membership',
+                preserveNullAndEmptyArrays:true
+            }
+        })
+        aggregationStages.push({
+            $addFields:{
+                sortBy:{
+                    $ifNull: ['$membership.rank', '$createdAt'],
+                    // $cond:{
+                    //     if:{$gt:['$membership', null]},
+                    //     then:'$membership.rank',
+                    //     else:'$createdAt'
+                    // }
+                }
+            }
+        })
+        aggregationStages.push({
+            $sort:{
+                sortBy:-1
+            }
+        })
+        console.log(category)
+        // let query = Profile.find()
+        // .sort({[sort] : sortOrder})
+        if(category){
+            // query = query.where('mainCategory').equals(category)
+            aggregationStages.push({
+                $match:{
+                    'mainCategory':category
+                }
+            })
         }
-        res.json(profiles);
+        aggregationStages.push({
+            $limit:limit
+        })
+        // query = query.limit(limit)
+        const profiles = await Profile.aggregate(aggregationStages)
+        res.json(profiles)
+        // if(!profiles || profiles.length === 0 ){
+        //     query = Profile.find().sort({[sort] : sortOrder}).limit(limit)
+        //     const updatedProfiles = await query
+        //     res.json(updatedProfiles)
+        // }else{
+        //     res.json(profiles)
+        // }
     } catch (error){
-        res.status(500).json({message:'Error recieving profiles', error: error.message})
+        res.status(500).json({message: 'Error recieving profiles', error: error.message})
     }
 }
 
@@ -91,4 +215,4 @@ const getProfileByCreator = async (req, res) => {
     }
 }
 
-module.exports = {postProfile, profile, getProfileById, getProfileByCreator, editProfileRequest};
+module.exports = {postProfile, profile, getProfileById, getProfileByCreator, editProfileRequest, filterProfiles};

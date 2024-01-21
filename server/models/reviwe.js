@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const reviewSchema = new mongoose.Schema({
   client: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Reference to the client (User model)
+    ref: 'Freelancer', // Reference to the client (User model)
     required: true,
   },
   rating: {

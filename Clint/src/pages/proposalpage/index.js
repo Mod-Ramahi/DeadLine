@@ -38,8 +38,8 @@ export function ProposalPage () {
         }
         getProposal()
     },[])
-    const GoProfile = () => {
-        
+    const handleAccept = () => {
+        //we here
     }
     return(
         <div className="proposal-container">
@@ -69,6 +69,7 @@ export function ProposalPage () {
             </div>
             <hr className="soft-hr"/>
             <button className="go-profile" onClick={() => navigate(`/freelancer/${creator}`)}>Freelancer profile</button>
+            <button className="go-profile" onClick={handleAccept}>Accept</button>
         </div>
     )
 }

@@ -6,24 +6,32 @@ import JobCardResult from '../jobCardResults/JobCardResult';
 import { getAllProject, getallProfiles } from '../../api';
 import CardsResults from '../cardsresults/CardsResults';
 
-const MostPopular = ({ title, cards }) => {
+const MostPopular = ({ title, category, number }) => {
     const [jobs, setJobs] = useState([])
     const [profiles, setProfiles] = useState([])
     const [jobClicked, setJobClicked] = useState(false);
     const [freelancerClicked, setFreelancerClicked] = useState(true)
-    useEffect(()=>{
+    useEffect(() => {
+        
         const getProfiles = async () => {
-            const response = await getallProfiles()
+            // const catego = category
+            const pageSize = number
+            const response = await getallProfiles(pageSize, category)
             setProfiles(response)
             console.log(response)
+            console.log('category get category:', category)
         }
         getProfiles()
-        const getProduct = async () =>{
-            const response = await getAllProject()
+        const getProduct = async () => {
+            // const catego = category
+            const pageSize = number
+            const response = await getAllProject(pageSize, category)
             setJobs(response)
+            console.log('category get category:', category)
         }
         getProduct()
-    },[])
+
+    }, [])
     const handleJobClicked = () => {
         setJobClicked(true);
         setFreelancerClicked(false)
@@ -34,14 +42,14 @@ const MostPopular = ({ title, cards }) => {
     }
     const RenderCards = profiles.map((card) => (
         <Link style={{ color: 'inherit', textDecoration: 'none' }} to={`/freelancer/${card._id}`} key={card._id}>
-            <CardsResults user={card}/>
+            <CardsResults user={card} />
         </Link>
     ));
     const RenderJobs = jobs.map((job) => (
-        <Link to={`/jobprofile/${job._id}`} style={{color:'inherit', textDecoration:'none'}} key={job._id}>
-            <JobCardResult  job={job} />
+        <Link to={`/jobprofile/${job._id}`} style={{ color: 'inherit', textDecoration: 'none' }} key={job._id}>
+            <JobCardResult job={job} />
         </Link>
-        
+
     ))
 
 

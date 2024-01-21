@@ -65,18 +65,42 @@ export const postJobRequest = async (data) =>{
         // throw new Error('Failed to post job. Please try again.');
     }
 }
-export const getAllProject = async () =>{
-    try {
-        const response = await axios.get("http://localhost:4000/api/v1/job")
+export const getAllProject = async (pageSize, category) => {
+    try{
+        const response = await axios.get("http://localhost:4000/api/v1/job",
+         {
+            params:{
+                sortBy:'createdAt',
+                order:'desc',
+                pageSize:pageSize,
+                category: category
+            }
+        }
+        )
         return response.data
-    } catch (error) {
+    }catch (error) {
         console.error(error)
-        // throw new Error('Failed to get job. Please try again.');
     }
 }
+export const getFilteredJobs = async (pageSize, filterData) => {
+    try{
+        const response = await axios.get("http://localhost:4000/api/v1/job/filter",
+        {params:{
+            sortBy:'createdAt',
+            order:'desc',
+            pageSize:pageSize,
+            data:filterData
+        }}
+        )
+        return response.data
+    } catch (error){
+        console.error(error)
+    }
+}
+
 export const getProjectById = async (id) =>{
     try {
-        const response = await axios.get(`http://localhost:4000/api/v1/job/${id}`)
+        const response = await axios.get(`http://localhost:4000/api/v1/job/jobId/${id}`)
         return response.data
     } catch (error) {
         console.error(error)
@@ -133,18 +157,39 @@ export const editProfileRequest = async(formData) => {
         // throw new Error('Failed to edit profile. Please try again.');
     }
 }
-export const getallProfiles = async () => {
+export const getallProfiles = async (pageSize, category) => {
     try{
-        const response = await axios.get('http://localhost:4000/api/v1/profile')
+        const response = await axios.get('http://localhost:4000/api/v1/profile',
+        {params:{
+            // sortBy:'createdAt',
+            // order:'desc',
+            pageSize:pageSize,
+            category: category
+        }})
         return response.data
     }catch (error) {
         console.error(error)
         // throw new Error('Failed to get profile. Please try again.');
     }
 }
+export const getFilteredProfiles = async (pageSize, filterData) => {
+    try{
+        const response = await axios.get('http://localhost:4000/api/v1/profile/filter',
+        {params:{
+            sortBy:'createdAt',
+            order:'desc',
+            pageSize:pageSize,
+            data:filterData
+        }}
+        )
+        return response.data
+    } catch (error){
+        console.error(error)
+    }
+}
 export const getProfileById = async (id) => {
     try{
-        const response = await axios.get(`http://localhost:4000/api/v1/profile/${id}`);
+        const response = await axios.get(`http://localhost:4000/api/v1/profile/profileId/${id}`);
         return response.data
     }catch(error){
         console.error(error)
@@ -249,6 +294,14 @@ export const getPlans = async (searchTerm) => {
         const response = await axios.get(url)
         return response
     }catch (error) {
+        console.error(error)
+    }
+}
+export const getPlanById = async (id) => {
+    try{
+        const response = await axios.get(`http://localhost:4000/api/v1/administration/findmembership/${id}`)
+        return response.data
+    } catch(error) {
         console.error(error)
     }
 }

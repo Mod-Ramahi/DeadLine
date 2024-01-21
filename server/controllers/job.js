@@ -49,50 +49,124 @@ const getJobByCreator = async (req, res) => {
   }
 }
 // Route: GET /jobs
-const jobs = async (req, res) => {
-  try {
-    const { title, company, salary, location, experience, skills } = req.query;
-
-    // Build the filter object based on the provided query parameters
-    const filter = {};
-
-    if (title) {
-      filter.title = { $regex: new RegExp(title, 'i') };
+const filterJobs = async (req, res) => {
+  try{
+    const {sortBy, order,pageSize, data} = req.query
+    const sort = sortBy
+    const sortOrder = order
+    const limit = pageSize
+    console.log(data)
+    let query = Job.find().sort({[sort]: sortOrder})
+    if('selectedCategory' in data && data.selectedCategory ){
+      query = query.where('category').equals(data.selectedCategory)
     }
-
-    if (company) {
-      filter.company = { $regex: new RegExp(company, 'i') };
+    if('selectedSubCategory' in data && data.selectedSubCategory && data.selectedSubCategory !== 'all'){
+      query = query.where('jobSubCateg').equals(data.selectedSubCategory)
     }
-
-    if (salary) {
-      filter.salary = { $gte: parseFloat(salary) };
+    if('searchText' in data && data.searchText && data.searchText !== ""){
+      const searchTextRegex = new RegExp(data.searchText, 'i')
+      query = query.or([
+        {'title': {$regex: searchTextRegex}},
+        {'shortDescription': {$regex : searchTextRegex}}
+      ])
     }
-
-    if (location) {
-      filter.location = { $regex: new RegExp(location, 'i') };
+    if('priceSelect' in data && data.priceSelect && data.priceSelect !== ''){
+      const [minPrice, maxPrice] = data.priceSelect.split('-').map(Number)
+      if(!isNaN(minPrice) && !isNaN(maxPrice)){
+        query =  query.where('salary').gte(minPrice).lte(maxPrice)
+      }else if(!isNaN(minPrice)){
+        query = query.where('salary').gte(minPrice)
+      } else if(!isNaN(maxPrice)){
+        query = query.where('salary').lte(maxPrice)
+      }
     }
-
-    if (experience) {
-      filter.experience = { $regex: new RegExp(experience, 'i') };
+    if('userCateg' in data && data.userCateg){
+      query = query.where('category').equals(data.userCateg)
     }
-
-    if (skills) {
-      filter.skills = { $all: skills.split(',') };
+    if('defaultResult' in data && data.defaultResult){
+      query = query.find().sort({[sort]: sortOrder}).limit(limit)
     }
-
-    // Fetch jobs from the database based on the filter
-    const jobs = await Job.find(filter).populate('createdBy', 'name email');
-    const jobsWithProposals = await Promise.all(
-      jobs.map(async (job) => {
-        const proposals = await Proposal.find({ jobId: job._id });
-        return { ...job.toObject(), proposals };
-      })
-    );
-    res.json(jobsWithProposals);
+    query = query.limit(limit)
+    const jobs = await query
+    res.json(jobs)
   } catch (error) {
-    res.status(500).json({ message: 'Error retrieving jobs', error: error.message });
+    res.status(500).json({message:'error getting jobs', error:error.message})
   }
-};
+}
+const jobs = async (req, res) => {
+  try{
+    const {sortBy, order, pageSize, category} = req.query;
+    
+    const sort = sortBy
+    const sortOrder = order
+    const limit = pageSize
+    console.log(category)
+    let query = Job.find().sort({[sort]: sortOrder})
+    if(category){
+      query = query.where('category').equals(category)
+    }
+    query = query.limit(limit)
+    const jobs = await query
+    // const jobs = await Job.find()
+    // .sort({[sort]: sortOrder})
+    // .limit(limit)
+
+    if(!jobs || jobs.length === 0){
+      query = Job.find().sort({[sort]: sortOrder}).limit(limit)
+      const updatedJobs = await query
+      res.json(updatedJobs)
+    }else {
+      res.json(jobs)
+    }
+    // res.json(jobs)
+  } catch (error) {
+    res.status(500).json({message:'error getting jobs', error:error.message})
+  }
+}
+// const jobs = async (req, res) => {
+//   try {
+//     const { title, company, salary, location, experience, skills } = req.query;
+
+//     // Build the filter object based on the provided query parameters
+//     const filter = {};
+
+//     if (title) {
+//       filter.title = { $regex: new RegExp(title, 'i') };
+//     }
+
+//     if (company) {
+//       filter.company = { $regex: new RegExp(company, 'i') };
+//     }
+
+//     if (salary) {
+//       filter.salary = { $gte: parseFloat(salary) };
+//     }
+
+//     if (location) {
+//       filter.location = { $regex: new RegExp(location, 'i') };
+//     }
+
+//     if (experience) {
+//       filter.experience = { $regex: new RegExp(experience, 'i') };
+//     }
+
+//     if (skills) {
+//       filter.skills = { $all: skills.split(',') };
+//     }
+
+//     // Fetch jobs from the database based on the filter
+//     const jobs = await Job.find(filter).populate('createdBy', 'name email');
+//     const jobsWithProposals = await Promise.all(
+//       jobs.map(async (job) => {
+//         const proposals = await Proposal.find({ jobId: job._id });
+//         return { ...job.toObject(), proposals };
+//       })
+//     );
+//     res.json(jobsWithProposals);
+//   } catch (error) {
+//     res.status(500).json({ message: 'Error retrieving jobs', error: error.message });
+//   }
+// };
 
 const singleJob = async (req, res) => {
   try {
@@ -157,4 +231,4 @@ const deleteJobById = async (req, res) => {
 }
 
 
-module.exports = { postJob, jobs, singleJob, getJobByCreator, deleteJobById, getJobById };
+module.exports = { postJob, jobs, singleJob, getJobByCreator, deleteJobById, getJobById, filterJobs };

@@ -54,7 +54,10 @@ export default function UserDashboard() {
     ClosePopUp()
     navigate('/myjobs')
   }
-
+  const MyStatesClicked = () => {
+    ClosePopUp()
+    navigate('/myplanstates')
+  }
   const MyProposalClicked = () => {
     ClosePopUp()
     navigate('/myproposals')
@@ -87,14 +90,14 @@ export default function UserDashboard() {
       <button className="dashboard-button" onClick={MyJobsClicked}>
         My live orders
       </button>
-      <button className="dashboard-button" value='Number of following' >
+      {/* <button className="dashboard-button" value='Number of following' >
         Number of following
+      </button> */}
+      <button className="dashboard-button" onClick={MyStatesClicked}>
+        My plan states
       </button>
-      <button className="dashboard-button" onClick={MyJobsClicked}>
-        My reportst
-      </button>
-      <button className="dashboard-button" onClick={MyJobsClicked}>
-        My follow Post's
+      <button className="dashboard-button" onClick={() => navigate('/myfollowing')}>
+        My following
       </button>
       <button className="dashboard-button" onClick={MyJobsClicked}>
         My favorite list

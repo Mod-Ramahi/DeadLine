@@ -1,9 +1,28 @@
-
-
 .userprofile {
     margin-top: 10rem;
     padding-top: 5rem;
-
+    .follow-error{
+        margin: 10%;
+        width: 80%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:1rem;
+        background-color: rgb(96, 71, 123);
+        span{
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+        }
+        .follow-error-button{
+            background-color: white;
+            color: rgb(96, 71, 123);
+            border-radius: 5px;
+            min-width: 13rem;
+        }
+    }
     .uppersection {
         display: flex;
         justify-content: center;
@@ -31,14 +50,17 @@
             height: 611px;
             border: 2px solid rgb(96, 71, 123);
             border-radius: 7px;
-            span{
+
+            span {
                 font-size: 1.2rem;
             }
+
             .profilephoto {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap:2rem;
+                gap: 2rem;
+
                 img {
                     border: 1px solid;
                     border-radius: 50%;
@@ -46,46 +68,55 @@
                     width: 161px;
                     padding: 3px;
                 }
-                .name{
+
+                .name {
                     font-weight: bold;
                     font-size: 2rem;
                 }
             }
-            hr{
+
+            hr {
                 border: 1px solid rgb(96, 71, 123);
                 margin: 0.3rem;
             }
-            .info{
+
+            .info {
                 margin-top: 1rem;
                 font-size: 0.9rem;
                 font-weight: bold;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                gap: 1rem;                
-                .time{
+                gap: 1rem;
+
+                .time {
                     display: flex;
                     gap: 5px;
                     align-items: center;
-                    .timeicon{
+
+                    .timeicon {
                         height: 27px;
                         width: 27px;
                     }
                 }
-                .joined{
+
+                .joined {
                     display: flex;
                     align-items: center;
                     gap: 5px;
-                    .joinedicon{
+
+                    .joinedicon {
                         height: 27px;
                         width: 27px;
                     }
                 }
-                .recommendation{
+
+                .recommendation {
                     display: flex;
                     align-items: center;
                     gap: 5px;
-                    .recommendationicon{
+
+                    .recommendationicon {
                         height: 27px;
                         width: 27px;
                     }
@@ -104,7 +135,8 @@
             width: 589px;
             min-height: 900px;
             border-radius: 7px;
-            .nickname{
+
+            .nickname {
                 padding: 0.5rem 0;
                 color: white;
                 display: flex;
@@ -112,63 +144,72 @@
                 align-items: center;
                 width: 100%;
                 height: 10rem;
-                gap:0.5rem;
+                gap: 0.5rem;
                 background-color: rgb(96, 71, 123);
-                span{
+
+                span {
                     font-size: 2rem;
                     font-weight: bold;
                 }
-                hr{
+
+                hr {
                     margin: 0.2rem;
                     width: 99%;
                     border: 1px solid white
                 }
-                .maincateg{
+
+                .maincateg {
                     font-size: 1.6rem;
                 }
-                .budget{
+
+                .budget {
                     padding: 4px;
                     font-size: 1.3rem;
                     border: 2px solid white;
                     margin-bottom: 1rem;
                 }
             }
-           
-            .title_review{
+
+            .title_review {
                 padding: 1rem;
                 color: rgb(96, 71, 123);
                 font-size: 1.5rem;
                 font-weight: bold;
-        
-                .review{
+
+                .review {
 
                     display: flex;
 
                 }
-            } 
-            hr{
+            }
+
+            hr {
                 margin: 0;
                 padding: 0;
                 width: 100%;
                 border: 2px solid rgb(96, 71, 123);
             }
-            .userstatistic{
+
+            .userstatistic {
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
 
-                .stat{
+                .stat {
                     display: flex;
-                    gap:3rem;
-                    .job_complete{
+                    gap: 3rem;
+
+                    .job_complete {
                         display: flex;
                         align-items: center;
-                        gap:10px;
-                        .span{
+                        gap: 10px;
+
+                        .span {
                             font-size: 1rem;
                             font-weight: bold;
                         }
-                        .n{
+
+                        .n {
                             font-size: 1.2rem;
                             font-weight: bold;
                             color: rgb(175, 128, 224)
@@ -176,18 +217,21 @@
                     }
                 }
             }
-            .serviceinfo{
+
+            .serviceinfo {
                 display: flex;
                 flex-direction: column;
                 padding: 1rem;
                 gap: 1rem;
-                width:97%;
-                .myoffers{
+                width: 97%;
+
+                .myoffers {
                     font-size: 1.5rem;
                     font-weight: bold;
                     word-wrap: break-word;
                 }
-                .myoffers2{
+
+                .myoffers2 {
                     font-size: 1.5rem;
                     word-wrap: break-word;
                 }
@@ -195,14 +239,16 @@
         }
 
         .rightsection {
-            
+
             .upperbox {
                 width: 322px;
                 border: 2px solid rgb(96, 71, 123);
                 border-radius: 7px;
-                .hirebtn{
-                    border-radius: 5px;
+                display: flex;
+                flex-direction: column;
 
+                .hirebtn {
+                    border-radius: 5px;
                     display: flex;
                     height: 76px;
                     justify-content: center;
@@ -210,195 +256,246 @@
                     color: white;
                     background-color: rgb(96, 71, 123);
                 }
-                .boxinfo{
+
+                .follow-span {
+                    font-size: 1rem;
+                    font-weight: bold;
+                    padding: 0.5rem;
+                }
+
+                .follow-button {
+                    margin: 0.5rem;
+                    background-color: rgb(96, 71, 123);
+                    border-radius: 5px;
+                    color: white;
+
+                }
+
+                .boxinfo {
                     padding: 15px;
-                    span{
+
+                    span {
                         font-size: 1.5rem;
                         font-weight: bold;
                     }
 
-                    .pboxinfo{
+                    .pboxinfo {
                         display: flex;
                         flex-direction: column;
-                        .maincateg{
+
+                        .maincateg {
                             font-size: 1.3rem;
                         }
-                        .subcategspan{
+
+                        .subcategspan {
                             font-size: 1.1rem;
                         }
                     }
                 }
             }
         }
-        
+
     }
 
-    .proposals-section{
+    .proposals-section {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        .proposal-span{
+
+        .proposal-span {
             font-size: 2rem;
             font-weight: bold;
             color: rgb(96, 71, 123);
         }
-        .proposals{
+
+        .proposals {
             padding: 10px;
 
         }
     }
 
-    .userprojects{
-        .userprojectsimage{
+    .userprojects {
+        .userprojectsimage {
             display: flex;
             justify-content: center;
-            gap:7px;
-        img{
-            border:1px;
-            border-radius: 5px;
-            
+            gap: 7px;
+
+            img {
+                border: 1px;
+                border-radius: 5px;
+
+            }
         }
-        }
+    }
+
+    .job-page-hr {
+        width: 97%;
     }
 }
 
-@media only screen and (max-width:1150px){
+@media only screen and (max-width:1150px) {
     .userprofile {
         margin-top: 5rem;
         padding-top: 1rem;
         display: flex;
         flex-direction: column;
-    
+
+        .job-page-hr {
+            width: 92%;
+        }
+
         .uppersection {
-    
+
             .upper {
                 font-size: 2rem;
             }
         }
-    
+
         .lowersection {
             margin: 1rem;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 2rem;
             justify-content: center;
-    
+
             .leftsection {
-                width: 65%;   
-                height: auto;             
-                span{
+                width: 65%;
+                height: auto;
+
+                span {
                     font-size: 1rem;
                 }
+
                 .profilephoto {
-                    gap:1rem;
+                    gap: 1rem;
+
                     img {
                         height: 110px;
                         width: 110px;
                         padding: 1px;
                     }
-                    .name{
+
+                    .name {
                         font-size: 1.5rem;
                     }
                 }
-                hr{
+
+                hr {
                     border: 1px solid rgb(96, 71, 123);
                     margin: 0.3rem;
                 }
-                .info{
-                    gap: 1.2rem;                
+
+                .info {
+                    gap: 1.2rem;
                 }
             }
-    
+
             .middlesection {
                 width: 95%;
                 height: auto;
-                .nickname{
+
+                .nickname {
                     min-height: 11rem;
 
-                    span{
+                    span {
                         font-size: 1.6rem;
 
                     }
-                    .maincateg{
+
+                    .maincateg {
                         font-size: 1.3rem;
                     }
-                    .budget{
+
+                    .budget {
                         font-size: 1rem;
                     }
                 }
-               
-                .title_review{
-                    font-size: 1.1rem;
-            
-                } 
-                .userstatistic{
-    
-                    .stat{
-                        .job_complete{
 
-                            .span{
+                .title_review {
+                    font-size: 1.1rem;
+
+                }
+
+                .userstatistic {
+
+                    .stat {
+                        .job_complete {
+
+                            .span {
                                 font-size: 1rem;
                             }
-                            .n{
+
+                            .n {
                                 font-size: 1.1rem;
                             }
                         }
                     }
                 }
-                .serviceinfo{
+
+                .serviceinfo {
                     display: flex;
                     flex-direction: column;
                     padding: 1rem;
                     gap: 1rem;
-                    .myoffers{
+
+                    .myoffers {
                         font-size: 1.5rem;
                         font-weight: bold;
                     }
-                    .myoffers2{
+
+                    .myoffers2 {
                         font-size: 1.5rem;
                     }
                 }
             }
-    
+
             .rightsection {
                 width: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+
                 .upperbox {
                     width: 65%;
-                    .hirebtn{
+
+                    .hirebtn {
                         display: flex;
                     }
-                    .boxinfo{
-                        span{
+
+                    .boxinfo {
+                        span {
                             font-size: 1.2rem;
                         }
-    
-                        .pboxinfo{
-                            .maincateg{
+
+                        .pboxinfo {
+                            .maincateg {
                                 font-size: 1rem;
                             }
-                            .subcategspan{
+
+                            .subcategspan {
                                 font-size: 1rem;
                             }
                         }
                     }
                 }
             }
-            
+
         }
-        .userprojects{
-            .userprojectsimage{
+
+        .userprojects {
+            .userprojectsimage {
                 display: flex;
                 justify-content: center;
-                gap:7px;
-            img{
-                border:1px;
-                border-radius: 5px;
-                
-            }
+                gap: 7px;
+
+                img {
+                    border: 1px;
+                    border-radius: 5px;
+
+                }
             }
         }
     }

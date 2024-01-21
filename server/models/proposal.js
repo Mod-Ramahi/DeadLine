@@ -8,7 +8,10 @@ const proposalSchema = new mongoose.Schema({
   milestone : {type:String},
   plan: {type:String},
   forJobId: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true }, // Reference to the Job model
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } // Reference to the User model who posts the proposal
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Freelancer', required: true }, // Reference to the User model who posts the proposal
+  promoted: {type: Boolean, default: false},
+  verified: {type:Boolean, default:false},
+  status: {type: String, default:'On hold'}
 }, { timestamps: true });
 
 const Proposal = mongoose.model('Proposal', proposalSchema);

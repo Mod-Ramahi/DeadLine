@@ -38,7 +38,7 @@ export default function Payment() {
                 const data = { userBalance }
                 const res = await SettingsRequest(data)
                 console.log(res, userBalance)
-
+                navigate('/userhome')
             } catch (error) {
                 console.error(error)
             }

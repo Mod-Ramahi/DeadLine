@@ -13,7 +13,7 @@ export default function Job (){
         const getProject = async () =>{
 
             const response = await getProjectById(JobID)
-            console.log(response)
+            console.log('clicked job',response)
             setClickedJob(response)
         }
         getProject();
@@ -30,8 +30,8 @@ export default function Job (){
     
 
     return (
-        <>
-        <JobProfile job={clickedJob} />
+        <>{clickedJob &&
+        <JobProfile job={clickedJob} />}
         </>
     )
 }

@@ -10,6 +10,7 @@ import './MyProposals.scss'
 export function MyProposals() {
     const [proposals, setProposals] = useState([])
     const [isProposals, setIsProposals] = useState(false)
+    const [bidStatus, setBidStatus] = useState('')
     const navigate = useNavigate()
     useEffect(() => {
         const getBids = () => {
@@ -46,7 +47,7 @@ export function MyProposals() {
     const renderProposals = proposals.map((bid) => (
         <div className="bid-block" key={bid._id}>
             <div className="bid">
-                <span className="bid-span">Proposal Status</span>
+                <span className="bid-span">Proposal Status: {bid.status}</span>
                 <Link to={`/proposalPage/${bid._id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                     <Proposal bid={bid} />
                 </Link>

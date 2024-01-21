@@ -8,9 +8,9 @@ const bidOnJob = async (req, res) => {
     if (!req.user || !req.user.id || !token) {
       return res.status(401).json({ message: 'User authentication failed' })
     }
-    const { summary, description, price, time, milestone, plan } = req.body.data;
+    const { summary, description, price, time, milestone, plan, bidVerified, bidPromoted } = req.body.data;
     const newProposal = new Proposal({
-      summary, description, price, time, milestone, plan,
+      summary, description, price, time, milestone, plan, verified:bidVerified, promoted:bidPromoted, 
       createdBy: req.user.id,
       forJobId: id,
     });

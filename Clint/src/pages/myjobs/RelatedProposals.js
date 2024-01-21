@@ -12,7 +12,7 @@ export default function RelatedProposals({ jobId }) {
                 console.log("lolololololololo:", jobId)
                 try {
                     const response = await getProposalByJobId(jobId)
-                    if (response.status === 200 || response.legth !==0) {
+                    if (response.status === 200 || response.legth !== 0) {
                         setBids(response)
                         setFound(true)
                     } else {
@@ -34,7 +34,7 @@ export default function RelatedProposals({ jobId }) {
     ))
     return (
         <>{found && <>
-            { proposalsRender }</>
+            {proposalsRender}</>
         }
 
         </>

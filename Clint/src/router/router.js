@@ -44,6 +44,8 @@ import PortfolioUser from "../pages/portfoliouserpage";
 import { ProposalPage } from "../pages/proposalpage";
 import { MyProposals } from "../pages/myProposals";
 import MembershipsEdit from "../administrators/adminMembershipEdit";
+import PlanState from "../components/planstates/PlanStates";
+import MyFollowing from "../pages/followingpage";
 
 const router = createBrowserRouter([
       {
@@ -141,6 +143,10 @@ const router = createBrowserRouter([
             element: <Settings />
           },
           {
+            path: "/myplanstates",
+            element: <PlanState/>
+          },
+          {
             path: "/help",
             element: <Help />
           },
@@ -159,6 +165,10 @@ const router = createBrowserRouter([
           {
             path:"/myjobs",
             element:<Myjobs/>
+          },
+          {
+            path: "/myfollowing",
+            element: <MyFollowing/>
           },
           {
             path:"/myproposals",
